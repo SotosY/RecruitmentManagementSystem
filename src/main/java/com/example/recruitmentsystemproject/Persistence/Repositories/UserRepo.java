@@ -18,6 +18,7 @@ public class UserRepo {
         this.repository = repository;
     }
 
+
     public List<User> findAll() {
         return repository.findAll();
     }
