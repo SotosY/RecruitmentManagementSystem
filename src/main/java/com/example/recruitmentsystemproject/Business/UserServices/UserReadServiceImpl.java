@@ -1,7 +1,7 @@
 package com.example.recruitmentsystemproject.Business.UserServices;
 
 import com.example.recruitmentsystemproject.Model.User;
-import com.example.recruitmentsystemproject.Persistence.Repositories.UserRepo;
+import com.example.recruitmentsystemproject.Persistence.UserRepositories.UserRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

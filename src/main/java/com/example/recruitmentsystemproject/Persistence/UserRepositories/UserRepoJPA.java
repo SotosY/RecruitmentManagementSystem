@@ -1,4 +1,4 @@
-package com.example.recruitmentsystemproject.Persistence.JpaRepositories;
+package com.example.recruitmentsystemproject.Persistence.UserRepositories;
 
 import com.example.recruitmentsystemproject.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

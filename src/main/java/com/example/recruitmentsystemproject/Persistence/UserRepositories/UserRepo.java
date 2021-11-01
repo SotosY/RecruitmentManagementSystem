@@ -1,7 +1,6 @@
-package com.example.recruitmentsystemproject.Persistence.Repositories;
+package com.example.recruitmentsystemproject.Persistence.UserRepositories;
 
 import com.example.recruitmentsystemproject.Model.User;
-import com.example.recruitmentsystemproject.Persistence.JpaRepositories.UserRepoJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
