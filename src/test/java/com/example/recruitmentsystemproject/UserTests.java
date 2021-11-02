@@ -10,8 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
@@ -52,7 +50,7 @@ public class UserTests {
         User user2 = userReadService.findById(1L).get();
 
         assertNotNull(user);
-        Assertions.assertEquals(user2.getUserID(), user.getUserID());
+        Assertions.assertEquals(user2.getUserId(), user.getUserId());
     }
 
     @Test

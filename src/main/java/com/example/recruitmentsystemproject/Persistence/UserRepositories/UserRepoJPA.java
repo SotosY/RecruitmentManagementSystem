@@ -13,7 +13,7 @@ public interface UserRepoJPA extends JpaRepository<User, Long> {
      * @param id
      * @return user
      */
-    Optional<User> findByUserID (Long id);
+    Optional<User> findByUserId (Long id);
 
     /**
      * Find a User by email
@@ -24,7 +24,7 @@ public interface UserRepoJPA extends JpaRepository<User, Long> {
 
     /**
      * Find a list of all users
-     * @return users
+     * @return a list of all users
      */
     List<User> findAll();
 }

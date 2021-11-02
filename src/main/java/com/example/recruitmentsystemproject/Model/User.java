@@ -6,23 +6,23 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ *Represents a User.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
-/**
- *Represents a user.
- */
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
      * An ID that will identify the user.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long userID;
+    private Long userId;
 
 
     /**
