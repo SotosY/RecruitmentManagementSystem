@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
@@ -47,19 +49,23 @@ public class UserTests {
         user.setRoles("APPLICANT");
         userCreateService.saveUser(user);
 
-        User user2 = userReadService.findById(1L).get();
+        Long id = user.getUserId();
+        User user2 = userReadService.findById(id).get();
 
         assertNotNull(user);
-        Assertions.assertEquals(user2.getUserId(), user.getUserId());
+        Assertions.assertEquals(user, user2);
     }
 
     @Test
-    public void create_multiple_users_and_find_all(){
-        User user_1 = new User(1L,"george@outlook.com","kkjsasfsafhjkkdepass",true, "APPLICANT");
-        User user_2 = new User(2L,"sotos@outlook.com","sasjhgfsafdsaddepass",true, "APPLICANT");
-        User user_3 = new User(3L,"chris@outlook.com","sasfsadgghysafdepass",true, "APPLICANT");
-        User user_4 = new User(4L,"hampis@outlook.com","sasfsafdepass",true, "APPLICANT");
-        User user_5 = new User(5L,"dionisis@outlook.com","sasfsjkliafdepass",true, "APPLICANT");
+    public void create_5_users_and_find_all(){
+
+        Integer allUsersBefore = userReadService.findAll().size();
+
+        User user_1 = new User("george@outlook.com","kkjsasfsafhjkkdepass",true, "APPLICANT");
+        User user_2 = new User("sotos@outlook.com","sasjhgfsafdsaddepass",true, "APPLICANT");
+        User user_3 = new User("chris@outlook.com","sasfsadgghysafdepass",true, "APPLICANT");
+        User user_4 = new User("hampis@outlook.com","sasfsafdepass",true, "APPLICANT");
+        User user_5 = new User("dionisis@outlook.com","sasfsjkliafdepass",true, "APPLICANT");
 
         userCreateService.saveUser(user_1);
         userCreateService.saveUser(user_2);
@@ -69,6 +75,6 @@ public class UserTests {
 
         Integer allUsersSize = userReadService.findAll().size();
 
-        Assertions.assertEquals(allUsersSize, 5);
+        Assertions.assertEquals(allUsersSize, allUsersBefore + 5);
     }
 }

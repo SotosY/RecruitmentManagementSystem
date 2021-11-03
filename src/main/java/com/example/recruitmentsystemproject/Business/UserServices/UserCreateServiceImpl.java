@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 public class UserCreateServiceImpl implements UserCreateService{
 
     @Autowired
-    private final UserRepo repository;
+    private final UserRepo userRepo;
 
-    public UserCreateServiceImpl(UserRepo repository) {
-        this.repository = repository;
+    public UserCreateServiceImpl(UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
 
     @Override
     public void saveUser(User user) {
-        repository.saveUser(user);
+        userRepo.saveUser(user);
     }
 }
