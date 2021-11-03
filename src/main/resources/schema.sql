@@ -51,3 +51,25 @@ CREATE TABLE IF NOT EXISTS `employer` (
     PRIMARY KEY (`employer_id`),
     CONSTRAINT `fk_user_id_to_employer` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
     );
+
+CREATE TABLE IF NOT EXISTS `job` (
+    `job_id` bigint(20) AUTO_INCREMENT,
+    `employer_id` bigint(20) DEFAULT NULL,
+    `status` varchar(255) DEFAULT NULL,
+    `title` varchar(255) DEFAULT NULL,
+    `department` varchar(255) DEFAULT NULL,
+    `managed_by` varchar(255) DEFAULT NULL,
+    `location` varchar(255) DEFAULT NULL,
+    `salary` varchar(255) DEFAULT NULL,
+    `post_date` varchar(255) DEFAULT NULL,
+    `active_date` varchar(255) DEFAULT NULL,
+    `expiry_date` varchar(255) DEFAULT NULL,
+    `starting_date` varchar(255) DEFAULT NULL,
+    `description` varchar(255) DEFAULT NULL,
+    `requirements` varchar(255) DEFAULT NULL,
+    `essential_criteria` varchar(255) DEFAULT NULL,
+    `desirable_criteria` varchar(255) DEFAULT NULL,
+    `salary_and_benefits` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`job_id`),
+    CONSTRAINT `fk_employer_id_to_job` FOREIGN KEY (`employer_id`) REFERENCES `employer` (`employer_id`)
+    );

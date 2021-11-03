@@ -12,24 +12,24 @@ import java.util.Optional;
 public class UserReadServiceImpl implements UserReadService {
 
     @Autowired
-    private final UserRepo repository;
+    private final UserRepo userRepo;
 
     public UserReadServiceImpl(UserRepo repository) {
-        this.repository = repository;
+        this.userRepo = repository;
     }
 
     @Override
     public List<User> findAll() {
-        return repository.findAll();
+        return userRepo.findAll();
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return repository.findById(id);
+        return userRepo.findById(id);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return repository.findByEmail(email);
+        return userRepo.findByEmail(email);
     }
 }

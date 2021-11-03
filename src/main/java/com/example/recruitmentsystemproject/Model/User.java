@@ -51,4 +51,11 @@ public class User {
      */
     @Column(name = "roles")
     private String roles;
+
+    public User(String email, String password, boolean isActive, String roles) {
+        this.email = email;
+        this.password = password;
+        this.isActive = isActive;
+        this.roles = roles;
+    }
 }
