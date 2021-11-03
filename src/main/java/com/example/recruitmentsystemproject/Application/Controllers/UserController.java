@@ -10,13 +10,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/careers")
 public class UserController {
 
     @Autowired
     private UserReadService userService;
 
-    @GetMapping
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.findAll();
     }

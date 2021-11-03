@@ -17,7 +17,6 @@ public class UserRepo {
         this.repository = repository;
     }
 
-
     public List<User> findAll() {
         return repository.findAll();
     }
@@ -27,7 +26,7 @@ public class UserRepo {
     }
 
     public Optional<User> findById(Long id) {
-        return repository.findByUserID(id);
+        return repository.findByUserId(id);
     }
 
     public Optional<User> findByEmail(String email) {
