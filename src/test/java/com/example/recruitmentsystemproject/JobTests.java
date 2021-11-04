@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("dev")
 public class JobTests {
 
     @Autowired
@@ -148,7 +150,7 @@ public class JobTests {
     }
 
     @Test
-    public void create_3_jobs_and_find_by_status() {
+    public void create_jobs_and_find_by_status() {
 
         User user = new User();
         user.setEmail("george@outlook.com");
@@ -232,8 +234,32 @@ public class JobTests {
         job3.setSalaryAndBenefits("These are the salary and benefits");
         jobCreateService.saveJob(job3);
 
-        int getJobsByStatus = jobReadService.findByStatus("Entered").size();
+        Job job4= new Job();
+        job4.setJobId(4L);
+        job4.setEmployer(employer);
+        job4.setStatus("Accepted");
+        job4.setTitle("Senior Software Engineer");
+        job4.setDepartment("Programming");
+        job4.setManagedBy("Renos Panteli");
+        job4.setLocation("Nicosia");
+        job4.setSalary("23000");
+        job4.setPostDate("15/11/2021");
+        job4.setActiveDate("20/11/2021");
+        job4.setExpiryDate("20/12/2021");
+        job4.setStartingDate("01/01/2022");
+        job4.setDescription("This is the description");
+        job4.setRequirements("These are the requirements");
+        job4.setEssentialCriteria("These are the essential criteria");
+        job4.setDesirableCriteria("These are the desirable criteria");
+        job4.setSalaryAndBenefits("These are the salary and benefits");
+        jobCreateService.saveJob(job4);
 
-        Assertions.assertEquals(getJobsByStatus, 3);
+        int getJobsWhereStatusIsEntered = jobReadService.findByStatus("Entered").size();
+        int getJobsWhereStatusIsAccepted= jobReadService.findByStatus("Accepted").size();
+        int getJobsWhereStatusIsRejected= jobReadService.findByStatus("Rejected").size();
+
+        Assertions.assertEquals(getJobsWhereStatusIsEntered, 3);
+        Assertions.assertEquals(getJobsWhereStatusIsAccepted,1);
+        Assertions.assertEquals(getJobsWhereStatusIsRejected, 0);
     }
 }

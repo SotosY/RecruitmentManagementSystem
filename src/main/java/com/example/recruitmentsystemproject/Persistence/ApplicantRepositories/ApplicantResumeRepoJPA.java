@@ -8,9 +8,19 @@ import java.util.Optional;
 
 public interface ApplicantResumeRepoJPA extends JpaRepository<ApplicantResume, Long> {
 
+    /**
+     * Find Applicant Resume by id
+     * @param id
+     * @return applicant resume
+     */
     @Override
     Optional<ApplicantResume> findById(Long id);
 
+    /**
+     * Find applicant resume by applicant
+     * @param applicant
+     * @return applicant resume
+     */
     Optional<ApplicantResume> findByApplicant(Applicant applicant);
 
 
