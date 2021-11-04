@@ -73,3 +73,14 @@ CREATE TABLE IF NOT EXISTS `job` (
     PRIMARY KEY (`job_id`),
     CONSTRAINT `fk_employer_id_to_job` FOREIGN KEY (`employer_id`) REFERENCES `employer` (`employer_id`)
     );
+
+CREATE TABLE IF NOT EXISTS `application` (
+    `application_id` bigint(20) AUTO_INCREMENT,
+    `applicant_id` bigint(20) DEFAULT NULL,
+    `job_id` bigint(20) DEFAULT NULL,
+    `apply_date` varchar(255) DEFAULT NULL,
+    `application_status` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`application_id`),
+    CONSTRAINT `fk_applicant_id_to_application` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`applicant_id`),
+    CONSTRAINT `fk_job_id_to_application` FOREIGN KEY (`job_id`) REFERENCES `job` (`job_id`)
+    );
