@@ -1,0 +1,64 @@
+.container {
+  max-width: 100%;
+  margin: 2em auto;
+  width: 900px;
+  background-color: #ffffff;
+  padding: 2em;
+  /**
+  Generated using https://www.cssmatic.com/box-shadow
+   */
+  -webkit-box-shadow: 0px 0px 50px -20px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 50px -20px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 50px -20px rgba(0,0,0,0.2);
+}
+
+.mainbody,
+.header,
+.footer {
+  padding: 5px;
+}
+.mainbody {
+  margin-top: 5px;
+  min-height: 150px;
+  max-height: none;
+  overflow: visible;
+}
+.header {
+  height: 210px;
+  max-width: 100%;
+  border-bottom: 1px solid #EEE;
+  background-color: #ffffff;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.footer {
+  height: 40px;
+  background-color: whiteSmoke;
+  border-top: 1px solid #DDD;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.nav-link {
+  color : #B5DC10 !important;
+  border-style: dot-dash !important;
+  font-size: 20px;
+}
+
+.navbar-toggler {
+  background-color: darkgray !important;
+  color : #B5DC10 !important;
+}
+
+.nav-link:hover {
+  border-width: 1px;
+  border-style: solid;
+}
