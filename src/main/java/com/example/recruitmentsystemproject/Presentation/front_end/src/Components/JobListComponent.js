@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import '../css/Breadcrumb.css';
-import UserService from "../Services/UserService";
+import UserService from "../Services/JobService";
 import {Table} from "react-bootstrap";
 
-class UserListComponent extends Component {
+class JobListComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -23,7 +23,8 @@ class UserListComponent extends Component {
 
     render() {
         return (
-            <main >
+            <main className='container'>
+                <div className='mainbody'>
                 <nav>
                     <ol className="breadcrumb">
                         <li><a href="#">APPLICANT DASHBOARD</a></li>
@@ -62,10 +63,11 @@ class UserListComponent extends Component {
                         </tbody>
                     </Table>
                 </div>
+                </div>
             </main>
         );
     }
 }
 
 
-export default UserListComponent;
+export default JobListComponent;

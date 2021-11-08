@@ -1,20 +1,15 @@
 import './css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UserListComponent from "./Components/UserListComponent";
-import Header from "./Components/header";
+import JobListComponent from "./Components/JobListComponent";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
     <div className="App">
-      <div className="header">
         <Header/>
-      </div>
-      <div className="container">
-        <div className="mainbody">
-          <UserListComponent/>
-        </div>
-        <div className="footer">Footer</div>
-      </div>
+        <JobListComponent/>
+        <Footer />
     </div>
   );
 }

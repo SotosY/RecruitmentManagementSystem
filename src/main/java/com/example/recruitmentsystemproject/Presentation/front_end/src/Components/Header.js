@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Nav, Navbar} from "react-bootstrap";
 import "tailwindcss/tailwind.css"
-import '../css/App.css';
+import '../css/Header.css';
 
 class Header extends Component {
 
     render() {
         return (
-                <header>
+                <header className='header'>
                     <Navbar className='m-3' bg="white" expand="xxl" fixed="top">
                         <div className='container-lg mx-auto'>
                             <Navbar.Brand href="#home">
@@ -27,7 +27,7 @@ class Header extends Component {
                                     <Nav.Link href="#services">SERVICES</Nav.Link>
                                     <Nav.Link href="#project">PROJECTS</Nav.Link>
                                     <Nav.Link href="#partners">PARTNERS</Nav.Link>
-                                    <Nav.Link href="#careers">CAREERS</Nav.Link>
+                                    <Nav.Link href="http://localhost:3000">CAREERS</Nav.Link>
                                     <Nav.Link href="#contactus">CONTACT US</Nav.Link>
                                     <Nav.Link href="#language">LANGUAGE</Nav.Link>
                                 </Nav>
