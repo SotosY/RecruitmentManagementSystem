@@ -1,0 +1,28 @@
+.nav-link {
+    color : #B5DC10 !important;
+    border-style: dot-dash !important;
+    font-size: 20px;
+}
+
+.navbar-toggler {
+    background-color: darkgray !important;
+    color : #B5DC10 !important;
+}
+
+.nav-link:hover {
+    border-width: 1px;
+    border-style: solid;
+}
+
+.header {
+    height: 210px;
+    max-width: 100%;
+    border-bottom: 1px solid #EEE;
+    background-color: #ffffff;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
