@@ -3,12 +3,15 @@ package com.example.recruitmentsystemproject.Application.Controllers;
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
 import com.example.recruitmentsystemproject.Model.Applicant;
+import com.example.recruitmentsystemproject.Model.ApplicantResume;
 import com.example.recruitmentsystemproject.Model.User;
 import com.example.recruitmentsystemproject.Security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,9 +52,13 @@ public class ApplicantController {
     }
 
 
-    @GetMapping("/applicant/profile")
-    public String applicantProfile() {
-        return "applicant-profile";
+    @GetMapping("/applicant/profile/{id}")
+    public String applicantProfile(@PathVariable Long id, Model model) {
+        ApplicantResume applicantResume = new ApplicantResume();
+        Optional<Applicant> applicant = applicantReadService.findById(id);
+        applicantResume.setApplicant(applicant.get());
+        model.addAttribute("ApplicantProfile", applicantResume);
+        return "applicant/profile";
     }
 
     @GetMapping("/applicant/application")

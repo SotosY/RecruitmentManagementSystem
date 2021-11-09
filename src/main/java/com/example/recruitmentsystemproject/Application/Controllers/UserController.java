@@ -5,9 +5,16 @@ import com.example.recruitmentsystemproject.Business.UserServices.UserReadServic
 import com.example.recruitmentsystemproject.Model.Job;
 import com.example.recruitmentsystemproject.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestController
 @RequestMapping("/careers")
@@ -23,6 +30,20 @@ public class UserController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String postLogin(HttpServletRequest request, User user, BindingResult bindingResult){
+        String pass = user.getPassword();
+        try {
+            SecurityContextHolder.getContext().setAuthentication(null);
+            request.login(user.getEmail(), pass);
+        } catch (ServletException e) {
+            System.out.println(e);
+            throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
+        }
+
+        return "redirect:/applicant/dashboard";
     }
 
     @GetMapping("/register")
