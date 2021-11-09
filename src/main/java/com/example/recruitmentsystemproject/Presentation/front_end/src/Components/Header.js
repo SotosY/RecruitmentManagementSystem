@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Nav, Navbar} from "react-bootstrap";
-import "tailwindcss/tailwind.css"
-import '../css/Header.css';
+import "tailwindcss/tailwind.css";
+import Logo from "./files/cycom_logo.png";
+import './css/Header.css';
 
 class Header extends Component {
 
@@ -12,7 +13,7 @@ class Header extends Component {
                         <div className='container-lg mx-auto'>
                             <Navbar.Brand href="#home">
                                 <img
-                                    src="../cycom_logo.png"
+                                    src= {Logo}
                                     width="280"
                                     height="130"
                                     className="d-inline-block align-top"
@@ -27,7 +28,7 @@ class Header extends Component {
                                     <Nav.Link href="#services">SERVICES</Nav.Link>
                                     <Nav.Link href="#project">PROJECTS</Nav.Link>
                                     <Nav.Link href="#partners">PARTNERS</Nav.Link>
-                                    <Nav.Link href="http://localhost:3000">CAREERS</Nav.Link>
+                                    <Nav.Link href="http://localhost:3000/careers">CAREERS</Nav.Link>
                                     <Nav.Link href="#contactus">CONTACT US</Nav.Link>
                                     <Nav.Link href="#language">LANGUAGE</Nav.Link>
                                 </Nav>

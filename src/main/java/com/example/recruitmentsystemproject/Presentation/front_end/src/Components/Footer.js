@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { AiOutlineCopyrightCircle } from "react-icons/ai";
 import {IconContext} from "react-icons";
 import "tailwindcss/tailwind.css"
-import '../css/Footer.css';
+import './css/Footer.css';
 
 
 class Footer extends Component {
