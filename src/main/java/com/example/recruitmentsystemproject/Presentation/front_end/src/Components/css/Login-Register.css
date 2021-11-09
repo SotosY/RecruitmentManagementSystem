@@ -1,0 +1,74 @@
+h1 {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+h2 {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+.h2_clickable {
+    color: #B5DC10;
+}
+
+.h2_clickable:hover {
+    font-weight: bold;
+}
+
+.container-login {
+    max-width: 100%;
+    margin: 2em auto;
+    width: 550px;
+    background-color: #ffffff;
+    padding: 2em;
+    /**
+    Generated using https://www.cssmatic.com/box-shadow
+     */
+    -webkit-box-shadow: 0px 0px 50px -20px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 50px -20px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 50px -20px rgba(0,0,0,0.2);
+}
+
+.container-login-inside {
+    max-width: 100%;
+    margin: auto;
+    width: 350px;
+    background-color: #ffffff;
+    padding: 1em;
+}
+
+.btn {
+    background-color: #B5DC10;
+    border-color: #B5DC10;
+    font-weight: bold;
+    color: white;
+}
+
+.btn:hover,
+.btn:active,
+.btn:visited,
+.btn:checked{
+    background-color: white !important;
+    color: #B5DC10;
+    border-color: #B5DC10;
+    outline: none !important;
+    border-width: 2px;
+    font-weight: bold;
+}
+
+
+.form-check-input:checked:enabled{
+    border-color: #B5DC10 !important;
+    background-color: #B5DC10 !important;
+}
+
+.form-control:hover,
+.form-control:active,
+.form-control:checked{
+    border-color: #B5DC10 !important;
+}
+
