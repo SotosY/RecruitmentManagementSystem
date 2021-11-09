@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/careers/login")
+//                .loginPage("/careers/login")
                 .successHandler(simpleAuthenticationSuccessHandler())
                 .permitAll();
     }
