@@ -2,6 +2,7 @@
 ol.breadcrumb {
     padding: 10px 16px;
     list-style: none;
+    width: 500px;
 }
 
 /* Display list items side by side */
@@ -49,4 +50,46 @@ ol.breadcrumb li a:hover {
 
 .breadcrumb >.active {
     color: darkgrey;
+}
+
+.btn btn-secondary{
+    margin-left: 800px;
+    background-color: #B5DC10;
+    border-color: #B5DC10;
+    font-weight: bold;
+    color: white;
+}
+
+.btn-logout:hover,
+.btn-logout:active,
+.btn-logout:visited,
+.btn-logout:checked{
+    background-color: white !important;
+    color: #B5DC10;
+    border-color: #B5DC10;
+    outline: none !important;
+    border-width: 2px;
+    font-weight: bold;
+}
+
+section {
+    white-space: nowrap;
+}
+
+.container-breadcrumb{
+    width: 50%;
+    display: inline-block;
+}
+.container-button{
+    width: 50%;
+    text-align: right;
+    display: inline-block;
+}
+
+.section-outside{
+    white-space: nowrap;
+    width: 84%;
+    height: 40px;
+    padding-top: 10px;
+    padding-left: 280px;
 }
