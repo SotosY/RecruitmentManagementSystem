@@ -47,6 +47,12 @@ public class Job {
     private String department;
 
     /**
+     * The department of the job.
+     */
+    @Column(name = "company")
+    private String company;
+
+    /**
      * The person who manages the job.
      */
     @Column(name = "managed_by")

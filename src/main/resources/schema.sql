@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `job` (
     `status` varchar(255) DEFAULT NULL,
     `title` varchar(255) DEFAULT NULL,
     `department` varchar(255) DEFAULT NULL,
+    `company` varchar(255) DEFAULT NULL,
     `managed_by` varchar(255) DEFAULT NULL,
     `location` varchar(255) DEFAULT NULL,
     `salary` varchar(255) DEFAULT NULL,
