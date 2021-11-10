@@ -30,12 +30,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/careers/applicant/**").hasAuthority("APPLICANT")
                 .antMatchers("/careers/employer/**").hasAuthority("EMPLOYER")
                 .antMatchers("/",
                         "/careers",
-                        "/careers/register"
+                        "/careers/register/e"
                 ).permitAll()
                 .and()
                 .formLogin()
