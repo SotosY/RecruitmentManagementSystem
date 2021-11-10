@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Form, Button} from "react-bootstrap";
+import {Form} from "react-bootstrap";
 import './css/Login-Register.css';
+import {Link} from "react-router-dom";
+import * as param from "react-dom/test-utils";
 
 class LoginComponent extends Component {
 
@@ -10,7 +12,7 @@ class LoginComponent extends Component {
             <main>
                 <section className='section-outside'>
                     <ol className="breadcrumb">
-                        <li><a href="http://localhost:3000/careers">CAREERS</a></li>
+                        <li><Link to="/careers" >CAREERS</Link></li>
                         <li className='active'>SIGN IN</li>
                     </ol>
                 </section>
@@ -18,10 +20,10 @@ class LoginComponent extends Component {
                 <Form className='container-login'>
 
                     <h1>Sign In</h1>
-                    <h2>Don't have an account? <span className='h2_clickable'>Register</span></h2>
+                    <h2>Don't have an account? <Link to='/careers' className='h2_clickable'>Register</Link></h2>
 
                     {/*<div className='mt-4'>*/}
-                    {/*    <div if="{param.error}" className="alert alert-danger">*/}
+                    {/*    <div if={param.error} className="alert alert-danger">*/}
                     {/*        Invalid username and password.*/}
                     {/*    </div>*/}
                     {/*    <div if="${param.logout}" className="alert alert-success">*/}

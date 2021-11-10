@@ -13,10 +13,12 @@ h2 {
 
 .h2_clickable {
     color: #B5DC10;
+    text-decoration: none;
 }
 
 .h2_clickable:hover {
     font-weight: bold;
+    color: #B5DC10;
 }
 
 .container-login {
