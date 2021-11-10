@@ -2,6 +2,7 @@ import React, {Component, useState} from 'react';
 import './css/Breadcrumb.css';
 import UserService from "../Services/JobService";
 import {Table, DropdownButton, ButtonGroup, Dropdown} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 
 class JobListComponent extends Component {
@@ -25,17 +26,19 @@ class JobListComponent extends Component {
     render() {
         return (
             <main>
-                <section className={'section-outside'}>
+                <section className='section-outside'>
                     <div className='container-breadcrumb'>
                         <ol className="breadcrumb">
                             <li className='active'>CAREERS</li>
                         </ol>
                     </div>
                     <div className='container-button'>
-                        <button type="submit" className="btn btn-secondary" id="btn_login" style={{marginRight: '10px'}}>SIGN IN</button>
+                        <Link to="/careers/login">
+                            <button type="submit" className="btn btn-secondary" id="btn_login" style={{marginRight: '10px'}}>SIGN IN</button>
+                        </Link>
                         <DropdownButton as={ButtonGroup} title="REGISTER" id="bg-vertical-dropdown-3" variant="secondary">
-                            <Dropdown.Item eventKey="1">AS A USER</Dropdown.Item>
-                            <Dropdown.Item eventKey="2">AS A COMPANY</Dropdown.Item>
+                                <Dropdown.Item as={Link} to={"/careers/register/a"} eventKey="1">AS A USER</Dropdown.Item>
+                                <Dropdown.Item as={Link} to={"/careers/register/e"} eventKey="2">AS A COMPANY</Dropdown.Item>
                         </DropdownButton>
                     </div>
                 </section>
