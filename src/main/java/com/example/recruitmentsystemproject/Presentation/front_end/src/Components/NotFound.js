@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
 import './css/Error.css';
+import {withRouter} from "react-router-dom";
 
 class NotFound extends Component {
+
+    constructor(props){
+        super(props);
+        this.goBack = this.goBack.bind(this);
+    }
+
+    goBack(){
+        this.props.history.goBack();
+    }
+
     render() {
-        let backgroundColor;
+
         return (
             <div>
                 <main className='container'>
@@ -12,7 +23,7 @@ class NotFound extends Component {
                         <h2 className='h2-error'>Something's went wrong here</h2>
                         <h3 className='h3-error'>We're working on in and we'll get it fixed as as soon as possible</h3>
                         <div style={{textAlign: 'center'}} className='mt-5'>
-                        <button type="submit" className="btn btn-secondary" id="btn_goBack">Go Back</button>
+                            <button onClick={this.goBack} type="submit" className="btn btn-secondary" id="btn_goBack">Go Back</button>
                         </div>
                     </div>
                 </main>
@@ -21,4 +32,4 @@ class NotFound extends Component {
     }
 }
 
-export default NotFound;
+export default withRouter(NotFound);
