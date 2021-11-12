@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../css/Breadcrumb.css';
 import {Link} from "react-router-dom";
 
-class ApplicantDashboard extends Component {
+class EmployerDashboard extends Component {
 
     render() {
         return (
@@ -11,7 +11,7 @@ class ApplicantDashboard extends Component {
                     <section>
                         <div className='container-breadcrumb'>
                             <ol className="breadcrumb">
-                                <li className='active'>APPLICANT DASHBOARD</li>
+                                <li className='active'>EMPLOYER DASHBOARD</li>
                             </ol>
                         </div>
                         <div className='container-button'>
@@ -20,14 +20,14 @@ class ApplicantDashboard extends Component {
                     </section>
 
                     <div className="row">
-                        <Link to="/careers/applicant/profile" className="column">
+                        <Link to="/careers/employer/profile" className="column">
                             <h1>Profile</h1>
                         </Link>
-                        <Link to="/careers/applicant/application" className="column">
-                            <h1>Application</h1>
+                        <Link to="/careers/employer/vacancies" className="column">
+                            <h1>Vacancies</h1>
                         </Link>
-                        <Link to="/careers/applicant/application-history" className="column">
-                            <h1>Application History</h1>
+                        <Link to="/careers/employer/vacancy-history" className="column">
+                            <h1>Vacancy History</h1>
                         </Link>
                     </div>
                 </div>
@@ -36,4 +36,4 @@ class ApplicantDashboard extends Component {
     }
 }
 
-export default ApplicantDashboard;
+export default EmployerDashboard;

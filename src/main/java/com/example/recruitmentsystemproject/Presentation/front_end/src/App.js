@@ -12,6 +12,7 @@ import ApplicantJobInfo from "./Components/ApplicantComponents/ApplicantJobInfo"
 import ApplicantApplicationHistory from "./Components/ApplicantComponents/ApplicantApplicationHistory";
 import ApplicantRegister from "./Components/ApplicantComponents/ApplicantRegister";
 import EmployerRegister from "./Components/EmployerComponents/EmployerRegister";
+import EmployerDashboard from "./Components/EmployerComponents/EmployerDashboard";
 import NotFound from "./Components/NotFound";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                         <Route exact path = "/careers/applicant/application" component={ApplicantApplication}/>
                         <Route exact path = "/careers/applicant/application-history" component={ApplicantApplicationHistory}/>
                         <Route exact path = "/careers/applicant/application/job" component={ApplicantJobInfo}/>
+                        <Route exact path = "/careers/employer/dashboard" component={EmployerDashboard}/>
                         <Route path = "*" component={NotFound}/>
                     </Switch>
                 </div>

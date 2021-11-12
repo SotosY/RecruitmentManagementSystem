@@ -93,3 +93,40 @@ section {
     padding-top: 10px;
     padding-left: 280px;
 }
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 50px;
+    text-align: center;
+    background-color: #DDDDDD;
+    text-decoration: none;
+    border-style: solid;
+    border-width: thin;
+    border-top: none;
+    border-bottom: none;
+    border-left:none;
+    color: dimgrey;
+}
+
+.column:hover {
+    background-color: #EEEEEE;
+    color: #B5DC10;
+    border-style: solid;
+    border-width: thin;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
