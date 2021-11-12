@@ -23,8 +23,8 @@ function App() {
                     <Switch>
                         <Route exact path = "/careers" component={JobListComponent}/>
                         <Route exact path = "/careers/login" component={LoginComponent}/>
-                        <Route exact path = "/careers/register/a" component={ApplicantRegister} />
-                        <Route exact path = "/careers/register/e" component={EmployerRegister} />
+                        <Route exact path = "/careers/register/a" component={ApplicantRegister}/>
+                        <Route exact path = "/careers/register/e" component={EmployerRegister}/>
                         <Route exact path = "/careers/applicant/dashboard" component={ApplicantDashboard}/>
                         <Route exact path = "/careers/applicant/profile" component={ApplicantProfile}/>
                         <Route exact path = "/careers/applicant/application" component={ApplicantApplication}/>

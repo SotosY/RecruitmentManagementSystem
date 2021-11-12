@@ -16,6 +16,7 @@ const ApplicantRegister = () => {
         e.preventDefault();
 
         const user = {email, password, firstName, lastName}
+
         registerApplicant(user)
             .then(res => {
                 console.log("Data added successfully", res.data);
@@ -24,7 +25,7 @@ const ApplicantRegister = () => {
 
             .catch(onerror => {
                 console.log('Something went wrong', onerror);
-                history.push('/careers/applicant/dashboard')
+                // history.push('/careers/applicant/dashboard')
             });
     }
 

@@ -10,6 +10,7 @@ import com.example.recruitmentsystemproject.Model.Applicant;
 import com.example.recruitmentsystemproject.Model.Employer;
 import com.example.recruitmentsystemproject.Model.User;
 import com.example.recruitmentsystemproject.Security.UserDetailsImpl;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
@@ -41,7 +42,15 @@ public class EmployerController {
     private UserCreateService userCreateService;
 
     @PostMapping("/register/e")
-    public String registerEmployer(@RequestBody User user, HttpServletRequest request, BindingResult bindingResult, Employer employer) {
+    public String registerEmployer(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
+
+        String pass = data.get("password").asText();
+        String email = data.get("email").asText();
+        String firstName = data.get("firstName").asText();
+        String lastName = data.get("lastName").asText();
+        String company = data.get("company").asText();
+
+        System.out.println(company);
 
         if (bindingResult.hasErrors()){
             System.out.println("Errors" + bindingResult.getFieldError());
@@ -53,19 +62,28 @@ public class EmployerController {
 
         } else {
 
+            User user = new User();
+            Employer employer = new Employer();
+
+            user.setEmail(email);
+            user.setPassword(pass);
             user.setRoles("EMPLOYER");
             userCreateService.saveUser(user);
-            employer.setUser(user);
-            employerCreateService.saveEmployer(employer);
-            User theUser = userReadService.findById(user.getUserId()).get();
 
-            try {
-                SecurityContextHolder.getContext().setAuthentication(null);
-                request.login(theUser.getEmail(), theUser.getPassword());
-            } catch (ServletException e) {
-                System.out.println(e);
-                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
-            }
+            employer.setUser(user);
+            employer.setFirstName(firstName);
+            employer.setLastName(lastName);
+            employer.setCompany(company);
+            employerCreateService.saveEmployer(employer);
+
+
+//            try {
+//                SecurityContextHolder.getContext().setAuthentication(null);
+//                request.login(user.getEmail(), user.getPassword());
+//            } catch (ServletException e) {
+//                System.out.println(e);
+//                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
+//            }
 
             return "redirect:/careers/employer/dashboard";
 
@@ -79,6 +97,7 @@ public class EmployerController {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetailsImpl) {
+
             Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
 
             if (user.isPresent()) {

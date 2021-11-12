@@ -3,13 +3,12 @@ import {Form} from "react-bootstrap";
 import '../css/Login-Register.css';
 import "tailwindcss/tailwind.css";
 import {Link, useHistory} from "react-router-dom";
-import UserService from "../../Services/UserService";
 import {registerEmployer} from "../../Services/UserService";
 
 const EmployerRegister = () => {
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [firstName, setFirstname] = useState('');
+    const [lastName, setLastname] = useState('');
     const [company, setCompany] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,7 +17,8 @@ const EmployerRegister = () => {
     const saveEmployerDetails = (e) => {
         e.preventDefault();
 
-        const user = {email, password, company, firstName, lastName}
+        const user = {email, password, firstName, lastName, company}
+
         registerEmployer(user)
             .then(res => {
                 console.log("Data added successfully", res.data);
@@ -27,7 +27,7 @@ const EmployerRegister = () => {
 
             .catch(onerror => {
                 console.log('Something went wrong', onerror);
-                history.push('/careers/employer/dashboard')
+                // history.push('/careers/employer/dashboard')
             });
     }
 
@@ -52,9 +52,9 @@ const EmployerRegister = () => {
                             <Form.Label>First name</Form.Label>
                             <Form.Control type="text"
                                           placeholder="Enter your first name"
-                                          id='firstName'
+                                          id='firstname'
                                           value={firstName}
-                                          onChange={(e) => setFirstName(e.target.value)}
+                                          onChange={(e) => setFirstname(e.target.value)}
                             />
                         </Form.Group>
 
@@ -62,20 +62,27 @@ const EmployerRegister = () => {
                             <Form.Label>Last name</Form.Label>
                             <Form.Control type="text"
                                           placeholder="Enter your last name"
-                                          id='lastName'
+                                          id='lastname'
                                           value={lastName}
-                                          onChange={(e) => setLastName(e.target.value)}
+                                          onChange={(e) => setLastname(e.target.value)}
                             />
                         </Form.Group>
 
                         <Form.Group className="mt-3" controlId="Company">
                             <Form.Label>Company</Form.Label>
-                            <Form.Control type="text"
-                                          placeholder="Enter the company name"
+                            <Form.Select type="text"
                                           id='company'
                                           value={company}
                                           onChange={(e) => setCompany(e.target.value)}
-                            />
+                            >
+                                <option>Please select..</option>
+                                <option value="Cycom">Cycom</option>
+                                <option value="Google">Google</option>
+                                <option value="Microsoft">Microsoft</option>
+                                <option value="Metaverse">Metaverse</option>
+                                <option value="Admiral">Admiral</option>
+                                <option value="Tesco">Tesco</option>
+                            </Form.Select>
                         </Form.Group>
 
                         <Form.Group className="mt-3" controlId="formBasicEmail">
@@ -106,7 +113,7 @@ const EmployerRegister = () => {
                             <h2>
                                 By clicking the "Sign Up" button, you are
                                 creating an account, and you agree to the
-                                <span className='h2_clickable'>Terms of use</span>.
+                                <span className='h2_clickable'> Terms of use</span>.
                             </h2>
                         </center>
 
