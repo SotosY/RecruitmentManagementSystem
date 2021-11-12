@@ -47,6 +47,12 @@ public class Employer {
     private String contactName;
 
     /**
+     * The company name of the employer.
+     */
+    @Column(name = "company")
+    private String company;
+
+    /**
      * The company email of the employer.
      */
     @Column(name = "company_email")

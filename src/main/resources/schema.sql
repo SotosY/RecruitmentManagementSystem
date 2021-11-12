@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `employer` (
     `first_name` varchar(255) DEFAULT NULL,
     `last_name` varchar(255) DEFAULT NULL,
     `contact_name` varchar(255) DEFAULT NULL,
+    `company` varchar(255) DEFAULT NULL,
     `company_email` varchar(255) DEFAULT NULL,
     `business_type` varchar(255) DEFAULT NULL,
     `telephone_number` varchar(255) DEFAULT NULL,
