@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import UserService from "../../Services/JobService";
 import '../css/Breadcrumb.css';
 
 class ApplicantDashboard extends Component {

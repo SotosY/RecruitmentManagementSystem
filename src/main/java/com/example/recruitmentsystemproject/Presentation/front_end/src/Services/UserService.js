@@ -9,5 +9,9 @@ export const registerApplicant = (data) => {
     return httpClient.post("/register/a",data);
 }
 
+export const getJobs = (data) => {
+    return httpClient.get("",data);
+}
+
 
 

@@ -1,9 +1,8 @@
 import React, {Component, useState} from 'react';
 import './css/Breadcrumb.css';
-import UserService from "../Services/JobService";
 import {Table, DropdownButton, ButtonGroup, Dropdown} from "react-bootstrap";
 import {Link} from "react-router-dom";
-
+import {getJobs} from "../Services/UserService";
 
 class JobListComponent extends Component {
 
@@ -13,17 +12,17 @@ class JobListComponent extends Component {
         this.state ={
                 jobs:[]
         }
-
     }
 
     componentDidMount() {
-        UserService.getJobs()
+        getJobs()
             .then((res) => {
                 this.setState({jobs: res.data})
             });
     }
 
     render() {
+
         return (
             <main>
                 <section className='section-outside'>
@@ -37,8 +36,8 @@ class JobListComponent extends Component {
                             <button type="submit" className="btn btn-secondary" id="btn_login" style={{marginRight: '10px'}}>SIGN IN</button>
                         </Link>
                         <DropdownButton as={ButtonGroup} title="REGISTER" id="bg-vertical-dropdown-3" variant="secondary">
-                                <Dropdown.Item as={Link} to={"/careers/register/a"} eventKey="1">AS A USER</Dropdown.Item>
-                                <Dropdown.Item as={Link} to={"/careers/register/e"} eventKey="2">AS A COMPANY</Dropdown.Item>
+                                <Dropdown.Item as={Link} to={"/careers/register/a"} eventKey="1">AS AN APPLICANT</Dropdown.Item>
+                                <Dropdown.Item as={Link} to={"/careers/register/e"} eventKey="2">AS AN EMPLOYER</Dropdown.Item>
                         </DropdownButton>
                     </div>
                 </section>
@@ -46,12 +45,11 @@ class JobListComponent extends Component {
                 <div className='container'>
                     <div className="mainbody">
 
-                        <h2 className="text-center">Jobs List</h2>
+                        <h1 className="text-center">Jobs List</h1>
 
                         <Table striped bordered hover size="sm" id="sortTable">
                             <thead>
                                 <tr>
-                                    <th>Job ID</th>
                                     <th>Job Title</th>
                                     <th>Company</th>
                                     <th>Location</th>
@@ -63,7 +61,6 @@ class JobListComponent extends Component {
                                     this.state.jobs.map(
                                         job =>
                                             <tr key = {job.jobId} >
-                                                <td>{job.jobId}</td>
                                                 <td>{job.title}</td>
                                                 <td>{job.company}</td>
                                                 <td>{job.location}</td>
