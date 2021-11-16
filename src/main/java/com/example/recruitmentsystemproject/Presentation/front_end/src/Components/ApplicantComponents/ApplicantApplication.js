@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 
 class ApplicantApplication extends Component {
 
+    /**
+     * Code adapted from examples at https://www.powerupcloud.com/securing-spring-boot-and-react-js-with-spring-security-using-jwt-authentication/ [Accessed: 15 November 2021]
+     */
+    handleLogout() {
+        localStorage.clear();
+        window.location.href = "/careers/login";
+    }
+
     render() {
         return (
             <div>
@@ -14,7 +22,13 @@ class ApplicantApplication extends Component {
                             </ol>
                         </div>
                         <div className='container-button'>
-                            <button type="submit" className="btn btn-secondary" variant="primary" id="submit">LOG OUT</button>
+                            <button type="submit"
+                                    className="btn btn-secondary"
+                                    variant="primary"
+                                    id="submit"
+                                    href="javascript:void(0);"
+                                    onClick={this.handleLogout}
+                            >LOG OUT</button>
                         </div>
                     </section>
                     <h2 className="text-center">Application</h2>

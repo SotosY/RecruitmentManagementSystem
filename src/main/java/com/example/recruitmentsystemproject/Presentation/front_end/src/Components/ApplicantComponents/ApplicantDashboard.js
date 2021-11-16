@@ -1,8 +1,20 @@
 import React, {Component} from 'react';
 import '../css/Breadcrumb.css';
 import {Link} from "react-router-dom";
+import {getApplicantDashboard} from "../../Services/ApplicantService";
 
 class ApplicantDashboard extends Component {
+
+    handleLogout() {
+        localStorage.clear();
+        window.location.href = "/careers/login";
+    }
+
+    constructor(props) {
+        super(props);
+
+    }
+
 
     render() {
         return (
@@ -15,11 +27,17 @@ class ApplicantDashboard extends Component {
                             </ol>
                         </div>
                         <div className='container-button'>
-                            <button type="submit" className="btn btn-secondary" variant="primary" id="submit">LOG OUT</button>
+                            <button type="submit"
+                                    href="javascript:void(0);"
+                                    onClick={this.handleLogout}
+                                    className="btn btn-secondary"
+                                    variant="primary"
+                                    id="submit">LOG OUT</button>
                         </div>
                     </section>
 
                     <div className="row">
+
                         <Link to="/careers/applicant/profile" className="column">
                             <h1>Profile</h1>
                         </Link>

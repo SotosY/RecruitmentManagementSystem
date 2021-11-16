@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 
 class ApplicantApplicationHistory extends Component {
+
+    handleLogout() {
+        localStorage.clear();
+        window.location.href = "/careers/login";
+    }
+
     render() {
         return (
             <div>
@@ -13,7 +19,13 @@ class ApplicantApplicationHistory extends Component {
                             </ol>
                         </div>
                         <div className='container-button'>
-                            <button type="submit" className="btn btn-secondary" variant="primary" id="submit">LOG OUT</button>
+                            <button type="submit"
+                                    className="btn btn-secondary"
+                                    variant="primary"
+                                    id="submit"
+                                    href="javascript:void(0);"
+                                    onClick={this.handleLogout}
+                            >LOG OUT</button>
                         </div>
                     </section>
                     <h2 className="text-center">Application History</h2>
