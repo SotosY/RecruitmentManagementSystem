@@ -1,0 +1,36 @@
+.h2_profile_font{
+    color: darkgrey;
+    font-size: 25px;
+    margin-top:60px;
+}
+
+.textarea_box{
+    height: 200px;
+    margin-bottom: 5px;
+}
+
+.column_picture {
+    width: 25%;
+    height: 25%;
+    text-align: center;
+}
+
+.column_right {
+    width: 35%;
+}
+
+.column_right_25 {
+    width: 25%;
+}
+
+.column_50 {
+    width: 50%;
+}
+
+.img_picture {
+    border: 1px solid #B5DC10;
+    border-radius: 4px;
+    width: 70%;
+    height: 170px;
+}
+
