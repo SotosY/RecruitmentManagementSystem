@@ -1,14 +1,37 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {Form} from "react-bootstrap";
 import './css/Login-Register.css';
-import {Link} from "react-router-dom";
-import * as param from "react-dom/test-utils";
+import {Link, useHistory} from "react-router-dom";
+import {getErrorLogin, getLogin, loginEmployer} from "../Services/UserService";
 
-class LoginComponent extends Component {
 
-    render() {
+const UserLogin = () => {
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [roles, setRoles] = useState('');
+    const history = useHistory();
+
+    const loginUser = (e) => {
+        e.preventDefault();
+
+        const user = new FormData();
+        user.append("username",username)
+        user.append("password",password)
+
+
+        loginEmployer(user)
+            .then(res => {
+                    console.log("Data added successfully", res.data);
+                    history.push('/careers/applicant/dashboard')
+            })
+
+            .catch(onerror => {
+                console.log('Something went wrong', onerror);
+                history.push('/careers/login')
+            });
+    }
         return (
-
             <main>
                 <section className='section-outside'>
                     <ol className="breadcrumb">
@@ -34,19 +57,28 @@ class LoginComponent extends Component {
                     <div className='container-login-inside'>
                         <Form.Group className="mt-1" controlId="formBasicEmail">
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" placeholder="Enter your email" />
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your email"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}/>
                         </Form.Group>
 
                         <Form.Group className="mt-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control onChange='' type="password" placeholder="Enter your password" />
+                            <Form.Control
+                                type="password"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </Form.Group>
                         <Form.Group className="mt-3" controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Remember me" />
                         </Form.Group>
 
                         <center className='mt-5'>
-                            <button type="submit" className="btn btn-secondary" variant="primary">Sign In
+                            <button type="submit" className="btn btn-secondary" variant="primary" onClick={(e) => loginUser(e)}>Sign In
                             </button>
                         </center>
 
@@ -55,7 +87,6 @@ class LoginComponent extends Component {
 
             </main>
         );
-    }
 }
 
-export default LoginComponent;
+export default UserLogin;

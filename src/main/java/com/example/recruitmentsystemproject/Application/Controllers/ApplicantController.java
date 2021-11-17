@@ -89,27 +89,22 @@ public class ApplicantController {
     }
 
     @GetMapping("/applicant/dashboard")
-    public String applicantDashboard() {
-
-        boolean applicantIsEmpty = true;
+    public ResponseEntity<?> applicantDashboard() {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> user2 = userReadService.findByEmail(((UserDetailsImpl) principal).getUsername());
+        Optional<Applicant> applicant = applicantReadService.findByUser(user2.get());
+
+
 
         if (principal instanceof UserDetailsImpl) {
-            Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
+            Optional<User> user = userReadService.findByEmail(((UserDetailsImpl) principal).getUsername());
 
             if (user.isPresent()) {
-                Optional<Applicant> applicant = applicantReadService.findByUser(user.get());
-
-                if (applicant.isPresent()) {
-                    applicantIsEmpty = false;
-                }
+                return ResponseEntity.ok(user);
             }
-        } if (!applicantIsEmpty) {
-            return "applicant-dashboard";
-        } else {
-            return "applicant/profile";
         }
+       return ResponseEntity.ok(applicant);
     }
 
 

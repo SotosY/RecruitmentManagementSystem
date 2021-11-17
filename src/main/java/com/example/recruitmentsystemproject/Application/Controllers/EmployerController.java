@@ -115,8 +115,14 @@ public class EmployerController {
     }
 
     @GetMapping("/employer/profile")
-    public String employerProfile() {
-        return "employer-profile";
+    public Optional<Employer> employerProfile() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
+        Optional<Employer> employer = employerReadService.findByUser(user.get());
+
+        return employer;
     }
 
     @GetMapping("/employer/vacancies")

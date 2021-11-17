@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import JobListComponent from "./Components/JobListComponent";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import LoginComponent from "./Components/LoginComponent";
+import LoginComponent from "./Components/UserLogin";
 import ApplicantDashboard from "./Components/ApplicantComponents/ApplicantDashboard";
 import ApplicantProfile from "./Components/ApplicantComponents/ApplicantProfile";
 import ApplicantApplication from "./Components/ApplicantComponents/ApplicantApplication";
@@ -13,6 +13,7 @@ import ApplicantApplicationHistory from "./Components/ApplicantComponents/Applic
 import ApplicantRegister from "./Components/ApplicantComponents/ApplicantRegister";
 import EmployerRegister from "./Components/EmployerComponents/EmployerRegister";
 import EmployerDashboard from "./Components/EmployerComponents/EmployerDashboard";
+import EmployerProfile from "./Components/EmployerComponents/EmployerProfile";
 import NotFound from "./Components/NotFound";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                         <Route exact path = "/careers/applicant/application-history" component={ApplicantApplicationHistory}/>
                         <Route exact path = "/careers/applicant/application/job" component={ApplicantJobInfo}/>
                         <Route exact path = "/careers/employer/dashboard" component={EmployerDashboard}/>
+                        <Route exact path = "/careers/employer/profile" component={EmployerProfile}/>
                         <Route path = "*" component={NotFound}/>
                     </Switch>
                 </div>

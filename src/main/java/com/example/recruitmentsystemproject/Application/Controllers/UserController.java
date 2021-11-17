@@ -4,21 +4,18 @@ import com.example.recruitmentsystemproject.Business.JobServices.JobReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
 import com.example.recruitmentsystemproject.Model.Job;
 import com.example.recruitmentsystemproject.Model.User;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-
 @RestController
 @RequestMapping("/careers")
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins={"http://localhost:3000"})
 public class UserController {
 
     @Autowired
@@ -28,23 +25,34 @@ public class UserController {
     private JobReadService jobReadService;
 
     @GetMapping("/login")
-    public String login() {
+    public ResponseEntity<?> login() {
+        return ResponseEntity.ok("Login page");
+    }
+
+    @GetMapping("/login?error")
+    public String loginError() {
         return "login";
     }
+//
+//    @GetMapping("/login")
+//    public String login() {
+//        return "login";
+//    }
 
-    @PostMapping("/login")
-    public String postLogin(HttpServletRequest request, User user, BindingResult bindingResult){
-        String pass = user.getPassword();
-        try {
-            SecurityContextHolder.getContext().setAuthentication(null);
-            request.login(user.getEmail(), pass);
-        } catch (ServletException e) {
-            System.out.println(e);
-            throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
-        }
 
-        return "redirect:/applicant/dashboard";
-    }
+//    @PostMapping("/login")
+//    public String postLogin(@RequestBody ObjectNode data, HttpServletRequest request){
+//
+//        String email = data.get("username").asText();
+//        User user = userReadService.findByEmail(email).get();
+//
+//        if (user.getRoles()=="APPLICANT"){
+//            return "redirect:/applicant/dashboard";
+//        } else if (user.getRoles()=="EMPLOYER"){
+//            return "redirect:/employer/dashboard";
+//        }
+//
+//    }
 
     @GetMapping("/register")
     public String register() {
