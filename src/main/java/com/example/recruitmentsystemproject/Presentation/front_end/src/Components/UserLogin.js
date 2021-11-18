@@ -23,7 +23,7 @@ const UserLogin = () => {
         loginEmployer(user)
             .then(res => {
                     console.log("Data added successfully", res.data);
-                    history.push('/careers/applicant/dashboard')
+                    // history.push('/careers/applicant/dashboard')
             })
 
             .catch(onerror => {

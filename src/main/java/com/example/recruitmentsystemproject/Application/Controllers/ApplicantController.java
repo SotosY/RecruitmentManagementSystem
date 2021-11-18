@@ -91,19 +91,24 @@ public class ApplicantController {
     @GetMapping("/applicant/dashboard")
     public ResponseEntity<?> applicantDashboard() {
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<User> user2 = userReadService.findByEmail(((UserDetailsImpl) principal).getUsername());
-        Optional<Applicant> applicant = applicantReadService.findByUser(user2.get());
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//
+//        if (principal instanceof UserDetailsImpl) {
+//            Optional<User> user = userReadService.findByEmail(((UserDetailsImpl) principal).getUsername());
+//
+//            if (user.isPresent()) {
+//                return ResponseEntity.ok(user);
+//            }
+//        }
+
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        System.out.println(principal);
+
+        Optional<User> user = userReadService.findByEmail("applicant");
+        Optional<Applicant> applicant = applicantReadService.findByUser(user.get());
 
 
-
-        if (principal instanceof UserDetailsImpl) {
-            Optional<User> user = userReadService.findByEmail(((UserDetailsImpl) principal).getUsername());
-
-            if (user.isPresent()) {
-                return ResponseEntity.ok(user);
-            }
-        }
        return ResponseEntity.ok(applicant);
     }
 

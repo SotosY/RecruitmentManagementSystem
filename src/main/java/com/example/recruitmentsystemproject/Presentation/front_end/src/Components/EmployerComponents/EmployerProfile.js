@@ -1,34 +1,90 @@
 import {Form, Row} from "react-bootstrap";
 import Logo from "../files/add_a_photo_grey.png";
-import React, {useState} from "react";
+import React, {useState, useEffect, useMemo} from "react";
+import {useForm} from "react-hook-form";
 import '../css/Login-Register.css';
 import "tailwindcss/tailwind.css";
-import {getEmployerDetails} from "../../Services/EmployerService";
+import {getEmployerDetails, saveEmployerProfileDetails} from "../../Services/EmployerService";
+import {useHistory} from "react-router-dom";
 
 const EmployerProfile = () => {
 
-    let [responseData, setResponseData] = React.useState('')
+    const [employer, setEmployer] = useState("");
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
+    const [postcode, setPostcode] = useState("");
+    const [contactName, setContactName] = useState("");
+    const [businessType, setBusinessType] = useState("");
+    const [companyEmail, setCompanyEmail] = useState("");
+    const [telephoneNumber, setTelephoneNumber] = useState("");
+    const [companyProfile, setCompanyProfile] = useState("");
+    const history = useHistory();
 
-    const fetchData = (e) => {
-        e.preventDefault()
-
+    const getEmployer = () => {
         getEmployerDetails().then((res) => {
-            setResponseData(res.data)
-            console.log(res)
-            })
+            const data = res.data;
+            setEmployer(data)
+            setAddress(data.address)
+            setCity(data.city)
+            setCountry(data.country)
+            setPostcode(data.postcode)
+            setContactName(data.contactName)
+            setBusinessType(data.businessType)
+            setCompanyEmail(data.companyEmail)
+            setTelephoneNumber(data.telephoneNumber)
+            setCompanyProfile(data.companyProfile)
+            console.log(data)
+        })
             .catch((error) => {
                 console.log(error)
-            }
-        )
+            })
     }
 
+    useEffect( () => {
+        getEmployer();
+    }, [] )
+
+    const saveEmployerProfile = (e) => {
+        e.preventDefault();
+
+        const employer = {address, city, country, postcode, contactName, businessType, companyEmail, telephoneNumber, companyProfile}
+
+        saveEmployerProfileDetails(employer)
+            .then(res => {
+                console.log("Data added successfully", res.data);
+                history.push('/careers/employer/profile')
+            })
+
+            .catch(onerror => {
+                console.log('Something went wrong', onerror);
+            });
+
+    }
+
+    function handleChange(event) {
+        const value = event.target.value;
+        setEmployer({
+            employer,
+        [event.target.name]: value
+        });
+    }
 
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";
     }
 
+    function isSet(actualVal, defaultVal){
+        if(typeof actualVal != 'undefined'){
+            return actualVal;
+        }
+        console.log('The actual value is undefined. This is the default one');
+        return defaultVal;
+    }
+
     return (
+
         <div>
             <div className='container'>
                 <section>
@@ -60,42 +116,42 @@ const EmployerProfile = () => {
 
                             <Form.Group className="column_right_25"  controlId="col_company">
                                 <Form.Label className="ml-4">Company ID:</Form.Label>
-                                <Form.Control type="text" />
+                                <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="text" value={employer.employerId} disabled={true}></Form.Control>
                                 <Form.Label className="mt-3">Company:</Form.Label>
-                                <Form.Control type="email" />
+                                <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="text" value={employer.company} disabled={true}></Form.Control>
                             </Form.Group>
 
                             <Form.Group className="column_right_25"  controlId="col_firstName_email">
                                 <Form.Label className="ml-4">First Name:</Form.Label>
-                                <Form.Control type="text" />
+                                <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="text" value={employer.firstName} disabled={true}></Form.Control>
                                 <Form.Label className="mt-3">Email:</Form.Label>
-                                <Form.Control type="email" />
+                                <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="text" value={employer.user?.email} disabled={true}></Form.Control>
                             </Form.Group>
 
                             <Form.Group className="column_right_25"  controlId="col_lastname_password">
                                 <Form.Label>Last Name:</Form.Label>
-                                <Form.Control type="text"/>
+                                <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="text" value={employer.lastName} disabled={true}></Form.Control>
                                 <Form.Label className="mt-3">Password:</Form.Label>
-                                <Form.Control type="password" />
+                                <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="password" value={employer.user?.password} disabled={true}></Form.Control>
                             </Form.Group>
                         </Row>
-                    </div>
+                    </div >
 
                     <h2 className="h2_profile_font" >Personal Details</h2>
                     <div className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_50" controlId="col_address_country">
                                 <Form.Label>Address:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter your address" />
+                                <Form.Control type="text" placeholder="Enter your address" value={employer.address} onChange={(e) => {setAddress(e.target.value); handleChange(e)}}/>
                                 <Form.Label className="mt-3">Country:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter your country" />
+                                <Form.Control type="text" placeholder="Enter your country" value={employer.country} onChange={(e) => {setCountry(e.target.value); handleChange(e)}}/>
                             </Form.Group>
 
                             <Form.Group className="column_50" controlId="col_city_postcode">
                                 <Form.Label>City:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter city" />
+                                <Form.Control type="text" placeholder="Enter city" value={employer.city}  onChange={(e) => {setCity(e.target.value); handleChange(e)}}/>
                                 <Form.Label className="mt-3">Postcode:</Form.Label>
-                                <Form.Control className="mb-5"  type="text" placeholder="Enter postcode" />
+                                <Form.Control className="mb-5"  type="text" placeholder="Enter postcode" value={employer.postcode} onChange={(e) => {setPostcode(e.target.value); handleChange(e)}}/>
                             </Form.Group>
 
                         </Row>
@@ -108,29 +164,29 @@ const EmployerProfile = () => {
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_50"  controlId="col_contactName_companyEmail">
                                 <Form.Label>Contact Name:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter your date of birth" />
+                                <Form.Control type="text" placeholder="Enter your date of birth" value={employer.contactName} onChange={(e) => {setContactName(e.target.value); handleChange(e)}}/>
                                 <Form.Label className="mt-3">Company Email:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter your company email" />
+                                <Form.Control type="text" placeholder="Enter your company email" value={employer.companyEmail} onChange={(e) => {setCompanyEmail(e.target.value); handleChange(e)}}/>
                             </Form.Group>
 
                             <Form.Group className="column_50"  controlId="col_businessType_telephone">
                                 <Form.Label>Business Type:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter your business type" />
+                                <Form.Control type="text" placeholder="Enter your business type" value={employer.businessType} onChange={(e) => {setBusinessType(e.target.value); handleChange(e)}}/>
                                 <Form.Label className="mt-3">Telephone:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter your telephone" />
+                                <Form.Control type="text" placeholder="Enter your telephone" value={employer.telephoneNumber} onChange={(e) => {setTelephoneNumber(e.target.value); handleChange(e)}}/>
                             </Form.Group>
                         </Row>
 
                         <Row className="mx-3 mt-3">
                             <Form.Group   controlId="col_companyProfile">
                                 <Form.Label>Company Profile</Form.Label>
-                                <Form.Control className="textarea_box" as="textarea" type="text" placeholder="Say a few things about the Company..." />
+                                <Form.Control className="textarea_box" as="textarea" type="text" placeholder="Say a few things about the Company..." value={employer.companyProfile} onChange={(e) => {setCompanyProfile(e.target.value); handleChange(e)}}/>
                             </Form.Group>
                         </Row>
                     </div>
 
                     <center className='mt-5'>
-                        <button type="submit" className="btn btn-secondary" variant="primary" >Save Details</button>
+                        <button type="submit" className="btn btn-secondary" variant="primary" onClick={(e) => saveEmployerProfile(e)} >Save Details</button>
                     </center>
 
                 </Form>
