@@ -1,0 +1,115 @@
+.filter-container{
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 45px;
+}
+
+.input-search{
+    width: 25%;
+    display: inline-block;
+}
+
+
+.input-checkbox{
+    width: 55%;
+    margin-left: 3%;
+    display: inline-block;
+}
+
+.input-btn{
+    width: 15%;
+    display: inline-block;
+}
+
+.inline{
+    display: inline-block;
+    margin-right: 6%;
+}
+
+.btn-all{
+
+    background-color: darkgrey;
+    border-color: darkgrey;
+}
+
+td{
+    border-right: lightgray solid;
+    border-width: 1px;
+}
+
+thead, th{
+    background-color: #ffffff;
+    color: black;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 48px;
+    text-align: left;
+    padding-left: 4px;
+}
+
+.th{
+    border-left: lightgray solid 1px !important;
+}
+
+tbody{
+    line-height: 48px;
+    border-right: darkgrey solid;
+    border-width: 1px;
+}
+
+.btn-actions{
+    color: dimgray;
+}
+
+.btn-actions:hover{
+    color: #B5DC10;
+}
+
+.dropdown-item:active{
+    background-color: #B5DC10;
+}
+
+.-sort-desc {
+    box-shadow: none !important;
+    color: #B5DC10;
+}
+
+.-sort-desc:before{
+     content: "▲";
+     float: none;
+ }
+
+.-sort-asc {
+    box-shadow: none !important;
+    color: #B5DC10;
+
+}
+
+.-sort-asc:before {
+     content: "▼";
+     float: none;
+ }
+
+.pagination,
+.page-link{
+    color: darkgrey;
+    font-weight: bold;
+}
+
+a.page-link:visited,
+a.page-link:hover {
+    background-color: #B5DC10;
+    color: #EEEEEE;
+}
+
+.page-item.active .page-link{
+    background-color: #B5DC10;
+    border-color: #B5DC10;
+}
+
+.page-item .page-link:focus-within {
+    color: white;
+    background-color: #B5DC10;
+}
+
+
