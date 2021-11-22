@@ -26,7 +26,7 @@ public class ApplicantResume {
     private Long resumeId;
 
     @OneToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "applicantId")
+    @JoinColumn(name = "applicant_id")
     private Applicant applicant;
 
     /**
@@ -45,11 +45,11 @@ public class ApplicantResume {
      * The CV of the applicant.
      */
     @Column(name = "cv")
-    private File cv;
+    private String cv;
 
     /**
      * The cover letter of the applicant.
      */
     @Column(name = "cover_letter")
-    private File coverLetter;
+    private String coverLetter;
 }

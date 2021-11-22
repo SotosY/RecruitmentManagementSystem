@@ -13,23 +13,14 @@ public class ApplicantCreateServiceImpl implements ApplicantCreateService {
     @Autowired
     private final ApplicantRepo applicantRepo;
 
-    @Autowired
-    private final ApplicantResumeRepo applicantResumeRepo;
 
-    public ApplicantCreateServiceImpl(ApplicantRepo applicantRepo, ApplicantResumeRepo applicantResumeRepo) {
+    public ApplicantCreateServiceImpl(ApplicantRepo applicantRepo) {
         this.applicantRepo = applicantRepo;
-        this.applicantResumeRepo = applicantResumeRepo;
     }
 
     @Override
     public void saveApplicant(Applicant applicant) {
         applicantRepo.saveApplicant(applicant);
     }
-
-    @Override
-    public void saveApplicantResume(ApplicantResume applicantResume) {
-        applicantResumeRepo.saveApplicantResume(applicantResume);
-    }
-
 
 }

@@ -3,7 +3,10 @@ package com.example.recruitmentsystemproject.Business.ApplicantServices;
 import com.example.recruitmentsystemproject.Model.Applicant;
 import com.example.recruitmentsystemproject.Model.ApplicantResume;
 
-public interface ApplicantCreateService {
+import java.util.Optional;
 
-    void saveApplicant(Applicant applicant);
+public interface ApplicantResumeReadService {
+
+    Optional<ApplicantResume> findByApplicant(Applicant applicant);
+    Optional<ApplicantResume> findById(Long id);
 }

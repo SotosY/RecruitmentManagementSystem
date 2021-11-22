@@ -2,6 +2,7 @@ package com.example.recruitmentsystemproject.Persistence.ApplicantRepositories;
 
 import com.example.recruitmentsystemproject.Model.Applicant;
 import com.example.recruitmentsystemproject.Model.ApplicantResume;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -16,7 +17,7 @@ public class ApplicantResumeRepo {
     }
 
     public Optional<ApplicantResume> findById(Long id) {
-        return repository.findById(id);
+        return repository.findByResumeId(id);
     }
 
     public Optional<ApplicantResume> findByApplicant(Applicant applicant){

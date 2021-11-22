@@ -16,12 +16,8 @@ public class ApplicantReadServiceImpl implements ApplicantReadService {
     @Autowired
     private final ApplicantRepo applicantRepo;
 
-    @Autowired
-    private final ApplicantResumeRepo applicantResumeRepo;
-
-    public ApplicantReadServiceImpl(ApplicantRepo applicantRepo, ApplicantResumeRepo applicantResumeRepo) {
+    public ApplicantReadServiceImpl(ApplicantRepo applicantRepo) {
         this.applicantRepo = applicantRepo;
-        this.applicantResumeRepo = applicantResumeRepo;
     }
 
     @Override
@@ -32,11 +28,6 @@ public class ApplicantReadServiceImpl implements ApplicantReadService {
     @Override
     public Optional<Applicant> findByUser(User user) {
         return applicantRepo.findByUser(user);
-    }
-
-    @Override
-    public Optional<ApplicantResume> findByApplicant(Applicant applicant) {
-        return applicantResumeRepo.findByApplicant(applicant);
     }
 
 }

@@ -10,5 +10,4 @@ public interface ApplicantReadService {
 
     Optional<Applicant> findById(Long id);
     Optional<Applicant> findByUser(User user);
-    Optional<ApplicantResume> findByApplicant(Applicant applicant);
 }

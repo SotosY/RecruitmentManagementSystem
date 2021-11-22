@@ -13,8 +13,7 @@ public interface ApplicantResumeRepoJPA extends JpaRepository<ApplicantResume, L
      * @param id
      * @return applicant resume
      */
-    @Override
-    Optional<ApplicantResume> findById(Long id);
+    Optional<ApplicantResume> findByResumeId(Long id);
 
     /**
      * Find applicant resume by applicant

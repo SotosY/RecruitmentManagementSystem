@@ -2,6 +2,8 @@ package com.example.recruitmentsystemproject;
 
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantCreateService;
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantReadService;
+import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantResumeCreateService;
+import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantResumeReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserCreateService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
 import com.example.recruitmentsystemproject.Model.Applicant;
@@ -34,6 +36,12 @@ public class ApplicantResumeTests {
     private ApplicantCreateService applicantCreateService;
 
     @Autowired
+    private ApplicantResumeCreateService applicantResumeCreateService;
+
+    @Autowired
+    private ApplicantResumeReadService applicantResumeReadService;
+
+    @Autowired
     private UserReadService userReadService;
 
     @Autowired
@@ -49,7 +57,6 @@ public class ApplicantResumeTests {
         userCreateService.saveUser(user);
 
         Applicant applicant = new Applicant();
-        applicant.setApplicantId(1L);
         applicant.setUser(user);
         applicant.setFirstName("George");
         applicant.setLastName("Ioakim");
@@ -66,11 +73,13 @@ public class ApplicantResumeTests {
         applicantResume.setApplicant(applicant);
         applicantResume.setExperience("No experience at all");
         applicantResume.setEducation("No education");
-        applicantResume.setCv(new File("cv.pdf"));
-        applicantResume.setCoverLetter(new File("coverletter_pdf"));
-        applicantCreateService.saveApplicantResume(applicantResume);
+        applicantResume.setCv("cv.pdf");
+        applicantResume.setCoverLetter("coverletter_pdf");
+        applicantResumeCreateService.saveApplicantResume(applicantResume);
 
-        ApplicantResume applicantResume2 = applicantReadService.findByApplicant(applicant).get();
+        ApplicantResume applicantResume2 = applicantResumeReadService.findByApplicant(applicant).get();
+        System.out.println(applicantResume);
+        System.out.println(applicantResume2);
 
         assertNotNull(applicantResume);
         Assertions.assertEquals(applicantResume, applicantResume2);
