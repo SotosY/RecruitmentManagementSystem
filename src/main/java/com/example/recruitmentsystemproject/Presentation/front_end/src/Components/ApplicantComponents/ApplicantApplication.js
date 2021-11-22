@@ -76,7 +76,8 @@ const ApplicantApplication = () => {
     }
 
     function handleJobInfo(id){
-        history.push(`/careers/applicant/application/job/${id}`)
+        history.push({pathname:`/careers/applicant/application/job/${id}`,
+        state:id})
     }
 
     /**
@@ -191,7 +192,7 @@ const ApplicantApplication = () => {
                                             <Dropdown.Item eventKey="48px">
                                                 Regular view
                                             </Dropdown.Item>
-                                            <Dropdown.Item eventKey="56px" >
+                                            <Dropdown.Item eventKey="56px">
                                                 <div></div>
                                                 Relaxed view
                                             </Dropdown.Item>

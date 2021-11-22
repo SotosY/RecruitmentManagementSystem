@@ -1,0 +1,34 @@
+.inline{
+    display: inline-block;
+    width: auto;
+    margin-right: 5%;
+}
+
+.h2-title{
+    padding-top: 3px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+    width: max-content;
+    color: #474747;
+}
+
+.h2-value{
+    font-size: 17px;
+    text-align: left;
+    width: max-content;
+}
+
+p {
+    word-wrap: break-word
+}
+
+.btn-icon{
+    margin-bottom: 4px;
+    margin-left: 4px;
+}
+
+.btn-apply:hover,
+.btn-icon:hover{
+    margin-left: 10px;
+}

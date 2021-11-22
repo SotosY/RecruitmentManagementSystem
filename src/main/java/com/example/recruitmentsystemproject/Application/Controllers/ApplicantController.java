@@ -4,10 +4,13 @@ import com.example.recruitmentsystemproject.Business.ApplicantServices.Applicant
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantReadService;
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantResumeCreateService;
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantResumeReadService;
+import com.example.recruitmentsystemproject.Business.JobServices.JobCreateService;
+import com.example.recruitmentsystemproject.Business.JobServices.JobReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserCreateService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
 import com.example.recruitmentsystemproject.Model.Applicant;
 import com.example.recruitmentsystemproject.Model.ApplicantResume;
+import com.example.recruitmentsystemproject.Model.Job;
 import com.example.recruitmentsystemproject.Model.User;
 import com.example.recruitmentsystemproject.Persistence.ApplicantRepositories.ApplicantResumeRepo;
 import com.example.recruitmentsystemproject.Persistence.ApplicantRepositories.ApplicantResumeRepoJPA;
@@ -39,11 +42,10 @@ public class ApplicantController {
     private ApplicantResumeCreateService applicantResumeCreateService;
 
     @Autowired
-    private ApplicantResumeRepo applicantResumeRepo;
+    private JobReadService jobReadService;
 
     @Autowired
-    private ApplicantResumeRepoJPA applicantResumeRepoJPA;
-
+    private JobCreateService jobCreateService;
 
     @Autowired
     private UserReadService userReadService;
@@ -188,9 +190,10 @@ public class ApplicantController {
 
     }
 
-    @GetMapping("/applicant/application")
-    public String applicantApplication() {
-        return "applicant-application";
+    @GetMapping("/applicant/application/job/{id}")
+    public Job applicantApplication(@PathVariable Long id) {
+        Job job = jobReadService.findById(id).get();
+        return job;
     }
 
     @GetMapping("/applicant/application-history")
