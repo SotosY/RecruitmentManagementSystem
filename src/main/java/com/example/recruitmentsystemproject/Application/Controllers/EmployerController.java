@@ -107,6 +107,20 @@ public class EmployerController {
         return ResponseEntity.ok(employer);
     }
 
+    @GetMapping("/employer/profile")
+    public Optional<Employer> employerProfile() {
+
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
+//        Optional<Employer> employer = employerReadService.findByUser(user.get());
+
+        Optional<User> user = userReadService.findByEmail("bob123@hotmail.com");
+        Optional<Employer> employer = employerReadService.findByUser(user.get());
+
+        return employer;
+    }
+
     @PostMapping("/employer/profile/save")
     public String saveEmployerProfileDetails(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
 
@@ -159,19 +173,6 @@ public class EmployerController {
         }
     }
 
-    @GetMapping("/employer/profile")
-    public Optional<Employer> employerProfile() {
-
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
-//        Optional<Employer> employer = employerReadService.findByUser(user.get());
-
-        Optional<User> user = userReadService.findByEmail("bob123@hotmail.com");
-        Optional<Employer> employer = employerReadService.findByUser(user.get());
-
-        return employer;
-    }
 
     @GetMapping("/employer/vacancies")
     public String employerVacancies() {

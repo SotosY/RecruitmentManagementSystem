@@ -1,4 +1,4 @@
-import {Form, Row} from "react-bootstrap";
+import {Button, Form, Modal, Row} from "react-bootstrap";
 import Logo from "../files/add_a_photo_grey.png";
 import React, {useState, useEffect, useMemo} from "react";
 import {useForm} from "react-hook-form";
@@ -19,7 +19,10 @@ const EmployerProfile = () => {
     const [companyEmail, setCompanyEmail] = useState("");
     const [telephoneNumber, setTelephoneNumber] = useState("");
     const [companyProfile, setCompanyProfile] = useState("");
+
     const history = useHistory();
+
+    const [show, setShow] = useState(false);
 
     const getEmployer = () => {
         getEmployerDetails().then((res) => {
@@ -83,7 +86,23 @@ const EmployerProfile = () => {
         return defaultVal;
     }
 
-    return (
+    const handleScroll = () => {
+        window.scrollTo({top: 0, behavior: "smooth"})
+    }
+
+    const handleClose = () => {
+        handleScroll()
+        setShow(false);
+    }
+
+    const handleShow = (e) => {
+        e.preventDefault();
+        setShow(true);
+    }
+
+
+
+        return (
 
         <div>
             <div className='container'>
@@ -186,8 +205,23 @@ const EmployerProfile = () => {
                     </div>
 
                     <center className='mt-5'>
-                        <button type="submit" className="btn btn-secondary" variant="primary" onClick={(e) => saveEmployerProfile(e)} >Save Details</button>
+                        <button type="submit" className="btn btn-secondary" variant="primary" onClick={(e) => {saveEmployerProfile(e); handleShow(e)}} >Save Details</button>
                     </center>
+
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                    >
+                        <Modal.Header closeButton onClick={handleClose}>
+                            <Modal.Title>SUCCESS</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            Your details have been saved successfully!
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={handleClose}>OK</Button>
+                        </Modal.Footer>
+                    </Modal>
 
                 </Form>
             </div>

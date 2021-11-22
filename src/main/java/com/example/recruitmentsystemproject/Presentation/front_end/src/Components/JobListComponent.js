@@ -18,6 +18,7 @@ class JobListComponent extends Component {
         getJobs()
             .then((res) => {
                 this.setState({jobs: res.data})
+                console.log(res.data);
             });
     }
 
