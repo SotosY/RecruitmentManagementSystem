@@ -28,3 +28,18 @@ INSERT INTO APPLICATION (applicant_id, job_id, apply_date, application_status) V
 INSERT INTO APPLICATION (applicant_id, job_id, apply_date, application_status) VALUES(1, 3, '21/09/2021',"Received");
 INSERT INTO APPLICATION (applicant_id, job_id, apply_date, application_status) VALUES(3, 4, '21/09/2021',"Rejected");
 INSERT INTO APPLICATION (applicant_id, job_id, apply_date, application_status) VALUES(3, 5, '21/09/2021',"Accepted");
+
+--Trigger that sets Status according to Starting Date
+DROP TRIGGER IF EXISTS setActiveInactiveJob;
+DELIMITER //
+CREATE TRIGGER setActiveInactiveJob
+    BEFORE UPDATE ON JOB
+    FOR EACH ROW BEGIN
+    IF (NEW.ACTIVE_DATE <= current_date()) THEN
+		SET NEW.STATUS = "Active";
+END IF;
+IF (NEW.ACTIVE_DATE > current_date()) THEN
+		SET NEW.STATUS = "Entered";
+END IF;
+END//
+  DELIMITER ;

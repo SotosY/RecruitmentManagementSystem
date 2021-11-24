@@ -1,22 +1,28 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import '../css/Breadcrumb.css';
 import {Link} from "react-router-dom";
 import {getApplicantDashboard} from "../../Services/ApplicantService";
 
-class ApplicantDashboard extends Component {
+const ApplicantDashboard = () => {
 
-    handleLogout() {
+    const [applicant, setApplicant] = useState("");
+
+    const getApplicant = () =>{
+        getApplicantDashboard().then((res) =>{
+        const data = res.data;
+        setApplicant(data)
+        })
+    }
+
+    useEffect( () => {
+        getApplicant();
+    }, [] )
+
+    function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";
     }
 
-    constructor(props) {
-        super(props);
-
-    }
-
-
-    render() {
         return (
             <div>
                 <div className='container'>
@@ -29,7 +35,7 @@ class ApplicantDashboard extends Component {
                         <div className='container-button'>
                             <button type="submit"
                                     href="javascript:void(0);"
-                                    onClick={this.handleLogout}
+                                    onClick={handleLogout}
                                     className="btn btn-secondary"
                                     variant="primary"
                                     id="submit">LOG OUT</button>
@@ -51,7 +57,7 @@ class ApplicantDashboard extends Component {
                 </div>
             </div>
         );
-    }
+
 }
 
 export default ApplicantDashboard;
