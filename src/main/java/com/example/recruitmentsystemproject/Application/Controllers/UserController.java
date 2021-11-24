@@ -24,6 +24,7 @@ public class UserController {
     @Autowired
     private JobReadService jobReadService;
 
+
     @GetMapping("/login")
     public ResponseEntity<?> login() {
         return ResponseEntity.ok("Login page");
@@ -33,11 +34,6 @@ public class UserController {
     public String loginError() {
         return "login";
     }
-//
-//    @GetMapping("/login")
-//    public String login() {
-//        return "login";
-//    }
 
 
 //    @PostMapping("/login")
@@ -51,7 +47,17 @@ public class UserController {
 //        } else if (user.getRoles()=="EMPLOYER"){
 //            return "redirect:/employer/dashboard";
 //        }
+//    }
+
+    //    @PostMapping("/login")
+//    public ResponseEntity<User> postLogin (@RequestBody User user){
 //
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        Object principal = authentication.getPrincipal();
+//
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        System.out.println(authentication);
+//        return ResponseEntity.ok(authentication);
 //    }
 
     @GetMapping("/register")

@@ -8,3 +8,11 @@ export const getEmployerDetails = (data) => {
 export const saveEmployerProfileDetails = (data) => {
     return httpClient.post("/employer/profile/save",data);
 }
+
+export const getVacancyPage = (data) => {
+    return httpClient.get("/employer/vacancies", data);
+}
+
+export const saveJobDetails = (data) => {
+    return httpClient.post("/employer/vacancy/save",data);
+}

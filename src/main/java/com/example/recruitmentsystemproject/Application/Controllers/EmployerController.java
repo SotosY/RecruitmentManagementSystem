@@ -1,30 +1,24 @@
 package com.example.recruitmentsystemproject.Application.Controllers;
 
-import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantCreateService;
-import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantReadService;
 import com.example.recruitmentsystemproject.Business.EmployerServices.EmployerCreateService;
 import com.example.recruitmentsystemproject.Business.EmployerServices.EmployerReadService;
+import com.example.recruitmentsystemproject.Business.JobServices.JobCreateService;
+import com.example.recruitmentsystemproject.Business.JobServices.JobReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserCreateService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
-import com.example.recruitmentsystemproject.Model.Applicant;
 import com.example.recruitmentsystemproject.Model.Employer;
+import com.example.recruitmentsystemproject.Model.Job;
 import com.example.recruitmentsystemproject.Model.User;
-import com.example.recruitmentsystemproject.Security.UserDetailsImpl;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Optional;
-
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestController
 @RequestMapping("/careers")
@@ -42,6 +36,12 @@ public class EmployerController {
 
     @Autowired
     private UserCreateService userCreateService;
+
+    @Autowired
+    private JobReadService jobReadService;
+
+    @Autowired
+    private JobCreateService jobCreateService;
 
     @PostMapping("/register/e")
     public String registerEmployer(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
@@ -174,9 +174,79 @@ public class EmployerController {
     }
 
 
+
     @GetMapping("/employer/vacancies")
-    public String employerVacancies() {
-        return "employer-vacancies";
+    public Job employerVacancy() {
+        Job job = new Job();
+        job.setPostDate(LocalDate.now().toString());
+        jobCreateService.saveJob(job);
+
+        return job;
+    }
+
+    @PostMapping("/employer/vacancy/save")
+    public String saveVacancyDetails(@RequestBody ObjectNode data, BindingResult bindingResult) {
+
+        User user = userReadService.findByEmail("bob123@hotmail.com").get();
+        Employer employer = employerReadService.findByUser(user).get();
+
+        Long jobId = data.get("jobId").asLong();
+        String title = data.get("title").asText();
+        String department = data.get("department").asText();
+        String managedBy = data.get("managedBy").asText();
+        String location = data.get("location").asText();
+        String salary = data.get("salary").asText();
+        String activeDate = data.get("activeDate").asText();
+        String expiryDate = data.get("expiryDate").asText();
+        String startingDate = data.get("startingDate").asText();
+        String description = data.get("description").asText();
+        String requirements = data.get("requirements").asText();
+        String essentialCriteria = data.get("essentialCriteria").asText();
+        String desirableCriteria = data.get("desirableCriteria").asText();
+        String salaryAndBenefits= data.get("salaryAndBenefits").asText();
+
+
+        if (bindingResult.hasErrors()){
+            System.out.println("Errors" + bindingResult.getFieldError());
+            for (ObjectError oe : bindingResult.getAllErrors()) {
+                System.out.println(oe);
+            }
+
+            return "redirect:/careers/employer/vacancies";
+
+        } else {
+
+            Job job = jobReadService.findById(jobId).get();
+
+            job.setTitle(title);
+            job.setEmployer(employer);
+            job.setCompany(employer.getCompany());
+            job.setDepartment(department);
+            job.setManagedBy(managedBy);
+            job.setLocation(location);
+            job.setSalary(salary);
+            job.setActiveDate(activeDate);
+            job.setExpiryDate(expiryDate);
+            job.setStartingDate(startingDate);
+            job.setDescription(description);
+            job.setRequirements(requirements);
+            job.setEssentialCriteria(essentialCriteria);
+            job.setDesirableCriteria(desirableCriteria);
+            job.setSalaryAndBenefits(salaryAndBenefits);
+            jobCreateService.saveJob(job);
+
+
+//            try {
+//                SecurityContextHolder.getContext().setAuthentication(null);
+//                request.login(user.getEmail(), user.getPassword());
+//            } catch (ServletException e) {
+//                System.out.println(e);
+//                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
+//            }
+
+            return "redirect:/careers/employer/profile";
+
+        }
     }
 
     @GetMapping("/employer/vacancy-history")
