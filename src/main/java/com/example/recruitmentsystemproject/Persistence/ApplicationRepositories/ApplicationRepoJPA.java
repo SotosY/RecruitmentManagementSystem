@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface ApplicationRepoJPA extends JpaRepository<Application, Long> {
 
     Optional<Application> findByApplicationId(Long id);
+    Optional<Application> findByJobAndApplicant(Job job, Applicant applicant);
     List<Application> findByApplicant(Applicant applicant);
     List<Application> findByJob(Job job);
     List<Application> findByApplicationStatus(String applicationStatus);

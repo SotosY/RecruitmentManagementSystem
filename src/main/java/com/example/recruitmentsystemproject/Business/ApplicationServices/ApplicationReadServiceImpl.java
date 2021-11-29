@@ -24,6 +24,11 @@ public class ApplicationReadServiceImpl implements ApplicationReadService {
     }
 
     @Override
+    public Optional<Application> findByJobAndApplicant(Job job, Applicant applicant) {
+        return applicationRepo.findByJobAndApplicant(job, applicant);
+    }
+
+    @Override
     public List<Application> findByApplicant(Applicant applicant) {
         return applicationRepo.findByApplicant(applicant);
     }

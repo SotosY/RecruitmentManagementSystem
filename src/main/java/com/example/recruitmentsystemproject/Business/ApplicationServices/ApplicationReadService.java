@@ -11,6 +11,8 @@ public interface ApplicationReadService {
 
     Optional<Application> findById(Long id);
 
+    Optional<Application> findByJobAndApplicant(Job job, Applicant applicant);
+
     List<Application> findByApplicant(Applicant applicant);
 
     List<Application> findByJob(Job job);

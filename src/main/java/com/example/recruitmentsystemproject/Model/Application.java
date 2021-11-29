@@ -29,6 +29,10 @@ public class Application {
     private Applicant applicant;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "resumeId")
+    private ApplicantResume applicantResume;
+
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "jobId")
     private Job job;
 

@@ -21,6 +21,10 @@ public class ApplicationRepo {
         return repository.findByApplicationId(id);
     }
 
+    public Optional<Application> findByJobAndApplicant(Job job, Applicant applicant){
+        return repository.findByJobAndApplicant(job, applicant);
+    }
+
     public List<Application> findByApplicant(Applicant applicant){
         return repository.findByApplicant(applicant);
     }
