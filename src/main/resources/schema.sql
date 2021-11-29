@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `job` (
 CREATE TABLE IF NOT EXISTS `application` (
     `application_id` bigint(20) AUTO_INCREMENT,
     `applicant_id` bigint(20) DEFAULT NULL,
+    `resume_id` bigint(20) DEFAULT NULL,
     `job_id` bigint(20) DEFAULT NULL,
     `apply_date` varchar(255) DEFAULT NULL,
     `application_status` varchar(255) DEFAULT NULL,
