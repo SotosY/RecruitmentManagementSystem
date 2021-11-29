@@ -1,9 +1,11 @@
 package com.example.recruitmentsystemproject.Security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -30,6 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
+
+    @Autowired
+    RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -39,17 +45,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .headers().frameOptions().deny().and()
-                .authorizeRequests()
-//                .antMatchers("/careers/applicant/**").hasAuthority("APPLICANT")
-//                .antMatchers("/careers/employer/**").hasAuthority("EMPLOYER")
-//                .antMatchers("/",
-//                        "/careers",
-//                        "/careers/register/e"
-//                ).permitAll()
+                .exceptionHandling()
+                .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
-                .formLogin()
-                .loginPage("/careers/login")
+//                .headers().frameOptions().deny().and()
+                .authorizeRequests()
+                .antMatchers(
+                        HttpMethod.GET, "index*", "/static/**", "/*.js", "/*.json","/*.ico"
+                ).permitAll()
+                .antMatchers(HttpMethod.OPTIONS,"/careers/applicant/**").hasAuthority("APPLICANT")
+                .antMatchers("/careers/employer/**").hasAuthority("EMPLOYER")
+                .antMatchers("/",
+                        "/careers",
+                        "/careers/register/e"
+                ).permitAll()
+                .and()
+                .formLogin().loginPage("/careers/login")
                 .successHandler(simpleAuthenticationSuccessHandler())
                 .permitAll();
     }
