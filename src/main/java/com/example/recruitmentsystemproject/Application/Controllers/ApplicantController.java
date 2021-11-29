@@ -4,14 +4,13 @@ import com.example.recruitmentsystemproject.Business.ApplicantServices.Applicant
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantReadService;
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantResumeCreateService;
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantResumeReadService;
+import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationCreateService;
+import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationReadService;
 import com.example.recruitmentsystemproject.Business.JobServices.JobCreateService;
 import com.example.recruitmentsystemproject.Business.JobServices.JobReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserCreateService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
-import com.example.recruitmentsystemproject.Model.Applicant;
-import com.example.recruitmentsystemproject.Model.ApplicantResume;
-import com.example.recruitmentsystemproject.Model.Job;
-import com.example.recruitmentsystemproject.Model.User;
+import com.example.recruitmentsystemproject.Model.*;
 import com.example.recruitmentsystemproject.Persistence.ApplicantRepositories.ApplicantResumeRepo;
 import com.example.recruitmentsystemproject.Persistence.ApplicantRepositories.ApplicantResumeRepoJPA;
 import com.example.recruitmentsystemproject.Security.UserDetailsImpl;
@@ -26,13 +25,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/careers")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins={"http://localhost:3000"}, allowedHeaders = "*", allowCredentials = "true")
 public class ApplicantController {
 
     @Autowired
@@ -57,6 +60,12 @@ public class ApplicantController {
 
     @Autowired
     private JobCreateService jobCreateService;
+
+    @Autowired
+    private ApplicationReadService applicationReadService;
+
+    @Autowired
+    private ApplicationCreateService applicationCreateService;
 
     @Autowired
     private UserReadService userReadService;
@@ -114,10 +123,16 @@ public class ApplicantController {
 
     @GetMapping("/applicant/dashboard")
     public ResponseEntity<?> applicantDashboard() {
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         System.out.println(principal);
         Optional<User> theUser = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
+
+        Optional<User> user = userReadService.findByEmail("sotirisy@hotmail.com");
+
+        System.out.println(theUser);
+        System.out.println((principal));
+
 //
 //
 //        if (principal instanceof UserDetailsImpl) {
@@ -128,7 +143,7 @@ public class ApplicantController {
 //            }
 //        }
 
-        Optional<User> user = userReadService.findByEmail("sotirisy@hotmail.com");
+//        Optional<User> user = userReadService.findByEmail("sotirisy@hotmail.com");
         Optional<Applicant> applicant = applicantReadService.findByUser(theUser.get());
 
 
@@ -201,13 +216,88 @@ public class ApplicantController {
     }
 
     @GetMapping("/applicant/application/job/{id}")
-    public Job applicantApplication(@PathVariable Long id) {
+    public Job getJob(@PathVariable Long id) {
         Job job = jobReadService.findById(id).get();
         return job;
     }
 
-    @GetMapping("/applicant/application-history")
-    public String applicantAppicationHistory() {
-        return "applicant-application-history";
+    @GetMapping("/applicant/application/job/{id}/application")
+    public Application getApplication (@PathVariable Long id) {
+
+        User user = userReadService.findByEmail("sotirisy@hotmail.com").get();
+        Applicant applicant = applicantReadService.findByUser(user).get();
+        Job job = jobReadService.findById(id).get();
+        ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
+
+        Optional<Application> existingApplication = applicationReadService.findByJobAndApplicant(job, applicant);
+
+        if (existingApplication.isPresent()) {
+            return existingApplication.get();
+        }
+
+        Application newApplication = new Application();
+        newApplication.setApplicant(applicant);
+        newApplication.setApplicantResume(applicantResume);
+        newApplication.setJob(job);
+        applicationCreateService.saveApplication(newApplication);
+
+        return newApplication;
     }
+
+    @PostMapping("/applicant/application/job/apply")
+    public String applyApplication(@RequestBody ObjectNode data) {
+
+        User user = userReadService.findByEmail("sotirisy@hotmail.com").get();
+        Applicant applicant = applicantReadService.findByUser(user).get();
+        ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
+
+        Long applicationId = data.get("applicationId").asLong();
+        String dateOfBirth = data.get("dateOfBirth").asText();
+        String gender = data.get("gender").asText();
+        String phoneNumber = data.get("phoneNumber").asText();
+
+        String education = data.get("education").asText();
+        String experience = data.get("experience").asText();
+        File cv = new File(data.get("cv").asText());
+        File coverLetter = new File(data.get("coverLetter").asText());
+
+        Application application = applicationReadService.findById(applicationId).get();
+
+        applicant.setDateOfBirth(dateOfBirth);
+        applicant.setGender(gender);
+        applicant.setPhoneNumber(phoneNumber);
+        applicantCreateService.saveApplicant(applicant);
+
+        applicantResume.setEducation(education);
+        applicantResume.setExperience(experience);
+        applicantResume.setCv(cv.toString());
+        applicantResume.setCoverLetter(coverLetter.toString());
+        applicantResumeCreateService.saveApplicantResume(applicantResume);
+
+        application.setApplyDate(LocalDate.now().toString());
+        application.setApplicationStatus("Entered");
+        applicationCreateService.saveApplication(application);
+
+
+//            try {
+//                SecurityContextHolder.getContext().setAuthentication(null);
+//                request.login(user.getEmail(), user.getPassword());
+//            } catch (ServletException e) {
+//                System.out.println(e);
+//                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
+//            }
+
+        return "redirect:/careers/applicant/application";
+
+    }
+
+    @GetMapping("/applicant/application-history")
+    public List<Application> applicantApplicationHistory() {
+
+        User user = userReadService.findByEmail("sotirisy@hotmail.com").get();
+        Applicant applicant = applicantReadService.findByUser(user).get();
+
+        return applicationReadService.findByApplicant(applicant);
+    }
+
 }
