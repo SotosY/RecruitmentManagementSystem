@@ -33,4 +33,5 @@ public class JobReadServiceImpl implements JobReadService{
     public List<Job> findByStatus(String status) {
         return jobRepo.findByStatus(status);
     }
+
 }

@@ -1,16 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form} from "react-bootstrap";
 import './css/Login-Register.css';
-import {Link, useHistory} from "react-router-dom";
+import {Link, Redirect, useHistory} from "react-router-dom";
 import {getErrorLogin, getLogin, loginEmployer} from "../Services/UserService";
-
 
 const UserLogin = () => {
 
+    const [session, setSession] = useState()
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [roles, setRoles] = useState('');
     const history = useHistory();
+
+    const getLoginHeader = () => {
+        getLogin().then((res) => {
+        })
+    }
+
+    useEffect( () => {
+        getLoginHeader();
+    }, [] )
 
     const loginUser = (e) => {
         e.preventDefault();
@@ -18,7 +27,6 @@ const UserLogin = () => {
         const user = new FormData();
         user.append("username",username)
         user.append("password",password)
-
 
         loginEmployer(user)
             .then(res => {
@@ -28,7 +36,7 @@ const UserLogin = () => {
 
             .catch(onerror => {
                 console.log('Something went wrong', onerror);
-                history.push('/careers/login')
+                // history.push('/careers/login')
             });
     }
         return (
