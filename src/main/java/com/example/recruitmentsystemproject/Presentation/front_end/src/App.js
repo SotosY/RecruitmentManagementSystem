@@ -9,6 +9,7 @@ import ApplicantDashboard from "./Components/ApplicantComponents/ApplicantDashbo
 import ApplicantProfile from "./Components/ApplicantComponents/ApplicantProfile";
 import ApplicantApplication from "./Components/ApplicantComponents/ApplicantApplication";
 import ApplicantJobInfo from "./Components/ApplicantComponents/ApplicantJobInfo";
+import ApplicantApply from "./Components/ApplicantComponents/ApplicantApply"
 import ApplicantApplicationHistory from "./Components/ApplicantComponents/ApplicantApplicationHistory";
 import ApplicantRegister from "./Components/ApplicantComponents/ApplicantRegister";
 import EmployerRegister from "./Components/EmployerComponents/EmployerRegister";
@@ -36,6 +37,7 @@ function App() {
                         <Route exact path = "/careers/applicant/application" component={ApplicantApplication}/>
                         <Route exact path = "/careers/applicant/application-history" component={ApplicantApplicationHistory}/>
                         <Route exact path = "/careers/applicant/application/job/:id" component={ApplicantJobInfo}/>
+                        <Route exact path = "/careers/applicant/application/job/:id/application" component={ApplicantApply}/>
                         <Route exact path = "/careers/employer/dashboard" component={EmployerDashboard}/>
                         <Route exact path = "/careers/employer/profile" component={EmployerProfile}/>
                         <Route exact path = "/careers/employer/vacancies" component={EmployerVacancy}/>
