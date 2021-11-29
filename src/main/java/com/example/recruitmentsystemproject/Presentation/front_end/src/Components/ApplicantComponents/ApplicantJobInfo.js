@@ -1,7 +1,7 @@
 import React, {Component, useEffect, useState} from 'react';
 import '../css/JobInfo.css';
 import {getJobDetails} from "../../Services/ApplicantService";
-import {useLocation} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {HiOutlineChevronRight} from "react-icons/hi";
 import {HiOutlineChevronDoubleRight} from "react-icons/hi";
 
@@ -9,6 +9,7 @@ const ApplicantJobInfo = () => {
 
     const [job, setJob] = useState("");
     const location = useLocation();
+    const history = useHistory();
     const getId = location.state;
 
     const getJob = () => {
@@ -21,6 +22,11 @@ const ApplicantJobInfo = () => {
     useEffect( () => {
         getJob();
     }, [] )
+
+    function handleJobInfo(id){
+        history.push({pathname:`/careers/applicant/application/job/${id}/application`,
+            state:id})
+    }
 
     function handleLogout() {
         localStorage.clear();
@@ -53,7 +59,7 @@ const ApplicantJobInfo = () => {
                                 <h1 className="h2-title" style={{padding:"40px",fontSize:"30px", textAlign:"center"}}>{job.title}</h1>
                             </div>
                             <div className="inline" style={{height:"max-content", float:"right"}}>
-                                <button type="submit" variant="secondary" className="btn btn-apply" style={{float:"right", marginTop:"37px"}}>APPLY<HiOutlineChevronRight size="20" className="btn-icon"/></button>
+                                <button type="submit" variant="secondary" className="btn btn-apply" style={{float:"right", marginTop:"37px"}} onClick={() => handleJobInfo(getId)}>APPLY<HiOutlineChevronRight size="20" className="btn-icon"/></button>
                             </div>
                         </div>
                         <div>

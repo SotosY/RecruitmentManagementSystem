@@ -2,7 +2,7 @@
 ol.breadcrumb {
     padding: 10px 16px;
     list-style: none;
-    width: 500px;
+    width: max-content;
 }
 
 /* Display list items side by side */
@@ -77,11 +77,11 @@ section {
 }
 
 .container-breadcrumb{
-    width: 50%;
+    width: 85%;
     display: inline-block;
 }
 .container-button{
-    width: 50%;
+    width: 15%;
     text-align: right;
     display: inline-block;
 }
