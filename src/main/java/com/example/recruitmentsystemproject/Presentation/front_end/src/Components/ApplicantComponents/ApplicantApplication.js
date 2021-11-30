@@ -234,7 +234,8 @@ const ApplicantApplication = () => {
                                     </th>
                                 </thead>
                                 <tbody style={{lineHeight: size}}>
-                                {search(paginatedData).map(row =>
+                                { paginatedData &&
+                                    search(paginatedData).map(row =>
                                     <tr key={row.jobId} onClick={() => handleJobInfo(row.jobId)}>
                                         <td style={{textAlign:"right", paddingRight:"10px"}}>{row.jobId}</td>
                                         <td>{row.title}</td>

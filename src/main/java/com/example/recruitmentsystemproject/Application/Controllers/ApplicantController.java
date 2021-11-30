@@ -296,8 +296,8 @@ public class ApplicantController {
 
         User user = userReadService.findByEmail("sotirisy@hotmail.com").get();
         Applicant applicant = applicantReadService.findByUser(user).get();
-
-        return applicationReadService.findByApplicant(applicant);
+        List<Application> application = applicationReadService.findByApplicant(applicant);
+        return application;
     }
 
 }

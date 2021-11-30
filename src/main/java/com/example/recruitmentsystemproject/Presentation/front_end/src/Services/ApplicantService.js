@@ -35,3 +35,7 @@ export const applyApplicantApplication = (data) => {
     return httpClient.post("/applicant/application/job/apply",data);
 }
 
+export const getApplicationHistory = (data) => {
+    return httpClient.get(`/applicant/application-history`);
+}
+
