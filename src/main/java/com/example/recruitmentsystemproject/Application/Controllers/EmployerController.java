@@ -1,14 +1,14 @@
 package com.example.recruitmentsystemproject.Application.Controllers;
 
+import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationCreateService;
+import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationReadService;
 import com.example.recruitmentsystemproject.Business.EmployerServices.EmployerCreateService;
 import com.example.recruitmentsystemproject.Business.EmployerServices.EmployerReadService;
 import com.example.recruitmentsystemproject.Business.JobServices.JobCreateService;
 import com.example.recruitmentsystemproject.Business.JobServices.JobReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserCreateService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
-import com.example.recruitmentsystemproject.Model.Employer;
-import com.example.recruitmentsystemproject.Model.Job;
-import com.example.recruitmentsystemproject.Model.User;
+import com.example.recruitmentsystemproject.Model.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -42,6 +44,12 @@ public class EmployerController {
 
     @Autowired
     private JobCreateService jobCreateService;
+
+    @Autowired
+    private ApplicationReadService applicationReadService;
+
+    @Autowired
+    private ApplicationCreateService applicationCreateService;
 
     @PostMapping("/register/e")
     public String registerEmployer(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
@@ -249,9 +257,22 @@ public class EmployerController {
         }
     }
 
+
     @GetMapping("/employer/vacancy-history")
-    public String employerVacancyHistory() {
-        return "employer-vacancy-history";
+    public List<Job> employerVacancyHistory() {
+
+        User user = userReadService.findByEmail("bob123@hotmail.com").get();
+        Employer employer = employerReadService.findByUser(user).get();
+        List<Job> jobs = jobReadService.findByEmployer(employer);
+
+        List applications = new ArrayList();
+
+        for (int i=0; i<jobs.size(); i++){
+            List<Application> application = applicationReadService.findByJob(jobs.get(i));
+            applications.add(application);
+        }
+
+        return jobs;
     }
 
 }

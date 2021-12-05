@@ -123,6 +123,7 @@ public class ApplicantController {
 
     @GetMapping("/applicant/dashboard")
     public ResponseEntity<?> applicantDashboard() {
+
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         System.out.println(principal);
