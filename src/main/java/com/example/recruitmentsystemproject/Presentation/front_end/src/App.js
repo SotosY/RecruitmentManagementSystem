@@ -16,6 +16,8 @@ import EmployerRegister from "./Components/EmployerComponents/EmployerRegister";
 import EmployerDashboard from "./Components/EmployerComponents/EmployerDashboard";
 import EmployerProfile from "./Components/EmployerComponents/EmployerProfile";
 import EmployerVacancy from "./Components/EmployerComponents/EmployerVacancy";
+import EmployerVacancyHistory from "./Components/EmployerComponents/EmployerVacancyHistory";
+import EmployerVacancyApplications from "./Components/EmployerComponents/EmployerVacancyApplications";
 import NotFound from "./Components/NotFound";
 
 
@@ -41,6 +43,8 @@ function App() {
                         <Route exact path = "/careers/employer/dashboard" component={EmployerDashboard}/>
                         <Route exact path = "/careers/employer/profile" component={EmployerProfile}/>
                         <Route exact path = "/careers/employer/vacancies" component={EmployerVacancy}/>
+                        <Route exact path = "/careers/employer/vacancy-history" component={EmployerVacancyHistory}/>
+                        <Route exact path = "/careers/employer/vacancy-history/:id" component={EmployerVacancyApplications}/>
                         <Route path = "*" component={NotFound}/>
                     </Switch>
                 </div>
