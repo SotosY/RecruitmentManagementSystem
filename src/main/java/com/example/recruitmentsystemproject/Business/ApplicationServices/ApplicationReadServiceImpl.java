@@ -42,4 +42,9 @@ public class ApplicationReadServiceImpl implements ApplicationReadService {
     public List<Application> findByApplicationStatus(String applicationStatus) {
         return applicationRepo.findByApplicationStatus(applicationStatus);
     }
+
+    @Override
+    public void updateApplicationStatusByApplicantId(String status, Long applicationId, Applicant applicant) {
+        applicationRepo.updateApplicationStatusByApplicantId(status, applicationId, applicant);
+    }
 }

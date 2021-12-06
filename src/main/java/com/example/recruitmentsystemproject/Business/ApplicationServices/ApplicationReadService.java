@@ -18,4 +18,6 @@ public interface ApplicationReadService {
     List<Application> findByJob(Job job);
 
     List<Application> findByApplicationStatus(String applicationStatus);
+
+    void updateApplicationStatusByApplicantId(String status, Long applicationId, Applicant applicant);
 }

@@ -40,4 +40,8 @@ public class ApplicationRepo {
     public void saveApplication(Application application){
         repository.save(application);
     }
+
+    public void updateApplicationStatusByApplicantId(String status, Long applicationId, Applicant applicant) {
+        repository.updateStatusByApplicant(status, applicationId, applicant);
+    }
 }
