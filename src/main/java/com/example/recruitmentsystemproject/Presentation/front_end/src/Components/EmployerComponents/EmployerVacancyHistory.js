@@ -226,7 +226,7 @@ const EmployerVacancyHistory = () => {
                                     <tbody style={{lineHeight: size}}>
                                     { paginatedData &&
                                     search(paginatedData).map(row =>
-                                        <tr key={row.jobId}>
+                                        <tr key={row.jobId} onClick={() => handleApplication(row.jobId)}>
                                             <td style={{textAlign:"right", paddingRight:"10px"}}>{row.jobId}</td>
                                             <td>{row.status}</td>
                                             <td>{row.title}</td>

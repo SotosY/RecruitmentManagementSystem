@@ -116,12 +116,12 @@ const ApplicantApplicationHistory = () => {
         //
         // }
         return rows.filter(
-        //     (row) =>
-        //         row?.applicationId.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-        //         row?.job?.status?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-        //         row?.job?.title?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-        //         row?.job?.managedBy?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
-                // row?.applyDate.toString().indexOf(query.toLowerCase()) > -1
+            // (row) =>
+            //     row?.applicationId.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
+            //     row?.job?.status?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
+            //     row?.job?.title?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
+            //     row?.job?.managedBy?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
+            //     row?.applyDate.toString().indexOf(query.toLowerCase()) > -1
 
             (row) =>
                 filter.some(column => row[column]?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 )

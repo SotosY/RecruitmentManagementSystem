@@ -1,5 +1,6 @@
 package com.example.recruitmentsystemproject.Application.Controllers;
 
+import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantReadService;
 import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationCreateService;
 import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationReadService;
 import com.example.recruitmentsystemproject.Business.EmployerServices.EmployerCreateService;
@@ -50,6 +51,9 @@ public class EmployerController {
 
     @Autowired
     private ApplicationCreateService applicationCreateService;
+
+    @Autowired
+    private ApplicantReadService applicantReadService;
 
     @PostMapping("/register/e")
     public String registerEmployer(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
@@ -273,6 +277,39 @@ public class EmployerController {
         }
 
         return jobs;
+    }
+
+    @GetMapping("/employer/vacancy-history/{id}")
+    public List<Application> getApplicationDetails(@PathVariable Long id) {
+        Job job = jobReadService.findById(id).get();
+        List<Application> application = applicationReadService.findByJob(job);
+        return application;
+    }
+
+    @PostMapping("/employer/vacancy-history/accept")
+    public String acceptAnApplicant(@RequestBody ObjectNode data) {
+
+        Long applicationId = data.get("applicationId").asLong();
+        Long applicantId = data.get("applicantId").asLong();
+
+        Applicant applicant = applicantReadService.findById(applicantId).get();
+
+        applicationReadService.updateApplicationStatusByApplicantId("Accepted", applicationId, applicant );
+
+        return "redirect:/careers/employer/vacancy-history";
+    }
+
+    @PostMapping("/employer/vacancy-history/reject")
+    public String rejectAnApplicant(@RequestBody ObjectNode data) {
+
+        Long applicationId = data.get("applicationId").asLong();
+        Long applicantId = data.get("applicantId").asLong();
+
+        Applicant applicant = applicantReadService.findById(applicantId).get();
+
+        applicationReadService.updateApplicationStatusByApplicantId("Rejected", applicationId, applicant );
+
+        return "redirect:/careers/employer/vacancy-history";
     }
 
 }

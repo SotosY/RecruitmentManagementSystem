@@ -112,4 +112,23 @@ a.page-link:hover {
     background-color: #B5DC10;
 }
 
+.btn-reject {
+    background-color: red;
+    border-color: red;
+    font-weight: bold;
+    color: white;
+}
+
+.btn-reject:hover,
+.btn-reject:active,
+.btn-reject:visited,
+.btn-reject:checked{
+    background-color: white !important;
+    color: red !important;
+    border-color: red;
+    outline: none !important;
+    border-width: 2px;
+    font-weight: bold;
+}
+
 
