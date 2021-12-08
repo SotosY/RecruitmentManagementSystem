@@ -8,6 +8,7 @@ import {
 import {useHistory, useLocation} from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import '../css/Application.css';
+import {hotjar} from "react-hotjar";
 
 const ApplicantApply = () => {
 
@@ -62,6 +63,7 @@ const ApplicantApply = () => {
 
     useEffect( () => {
         getApplication();
+        hotjar.initialize(2738985, 6);
     }, [] )
 
     function handleChange(event) {

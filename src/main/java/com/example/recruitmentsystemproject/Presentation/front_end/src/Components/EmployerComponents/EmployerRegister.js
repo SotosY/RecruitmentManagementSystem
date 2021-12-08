@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form} from "react-bootstrap";
 import '../css/Login-Register.css';
 import "tailwindcss/tailwind.css";
 import {Link, useHistory} from "react-router-dom";
 import {registerEmployer} from "../../Services/UserService";
+import {hotjar} from "react-hotjar";
 
 const EmployerRegister = () => {
 
@@ -30,6 +31,11 @@ const EmployerRegister = () => {
                 // history.push('/careers/employer/dashboard')
             });
     }
+
+    useEffect( () => {
+        hotjar.initialize(2738985, 6);
+    }, [] )
+
 
     return (
         <div>

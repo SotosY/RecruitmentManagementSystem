@@ -4,6 +4,8 @@ import {Table, DropdownButton, ButtonGroup, Dropdown, Form} from "react-bootstra
 import {Link} from "react-router-dom";
 import {getJobs} from "../Services/UserService";
 import _ from "lodash/fp";
+import { hotjar } from 'react-hotjar';
+
 
 class JobListComponent extends Component {
 
@@ -22,9 +24,9 @@ class JobListComponent extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
-        getJobs()
+        await getJobs()
             .then((res) => {
                 const data = res.data;
                 this.setState({jobs: data})
@@ -33,6 +35,11 @@ class JobListComponent extends Component {
                 this.getTitle()
                 this.handleTables(1)
             });
+
+        hotjar.initialize(2738985, 6);
+
+        // Add an event
+        hotjar.event(this.handleChange);
     }
 
 

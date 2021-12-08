@@ -6,6 +6,7 @@ import {getApplicationHistory} from "../../Services/ApplicantService";
 import {MdFormatLineSpacing} from "react-icons/md";
 import {BiSelectMultiple} from "react-icons/bi";
 import ReactPaginate from "react-paginate";
+import {hotjar} from "react-hotjar";
 
 const ApplicantApplicationHistory = () => {
 
@@ -36,6 +37,7 @@ const ApplicantApplicationHistory = () => {
 
     useEffect(() => {
         getApplication()
+        hotjar.initialize(2738985, 6);
     }, [])
 
 

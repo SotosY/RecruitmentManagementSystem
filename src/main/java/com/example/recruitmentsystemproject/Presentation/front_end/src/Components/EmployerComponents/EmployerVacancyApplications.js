@@ -11,6 +11,7 @@ import {MdFormatLineSpacing} from "react-icons/md";
 import {Dropdown, Form, Table} from "react-bootstrap";
 import {BiSelectMultiple} from "react-icons/bi";
 import ReactPaginate from "react-paginate";
+import {hotjar} from "react-hotjar";
 
 
 const EmployerVacancyApplications = () => {
@@ -40,6 +41,7 @@ const EmployerVacancyApplications = () => {
 
     useEffect(() => {
         getApplications()
+        hotjar.initialize(2738985, 6);
     }, [])
 
     function search(rows) {

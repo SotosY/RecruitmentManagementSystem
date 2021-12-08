@@ -9,6 +9,7 @@ import ReactPaginate from "react-paginate"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import _ from "lodash/fp";
 import {useHistory} from "react-router-dom";
+import {hotjar} from "react-hotjar";
 
 const ApplicantApplication = () => {
 
@@ -31,6 +32,7 @@ const ApplicantApplication = () => {
                 setPaginatedData(_(data).slice(0).take(pageSize).value());
             }
         ))
+        hotjar.initialize(2738985, 6);
     }, [])
 
     function search(rows) {
@@ -228,9 +230,11 @@ const ApplicantApplication = () => {
                                     </th>
                                     <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}} onClick={() => handleSorting(getColumnName(6))}>
                                         Deadline Date
+                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
                                     </th>
                                     <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(7))}>
                                         Starting Date
+                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
                                     </th>
                                 </thead>
                                 <tbody style={{lineHeight: size}}>

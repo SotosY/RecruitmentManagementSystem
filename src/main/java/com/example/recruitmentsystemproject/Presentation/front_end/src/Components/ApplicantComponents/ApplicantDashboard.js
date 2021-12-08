@@ -2,6 +2,7 @@ import React, {Component, useEffect, useState} from 'react';
 import '../css/Breadcrumb.css';
 import {Link} from "react-router-dom";
 import {getApplicantDashboard} from "../../Services/ApplicantService";
+import {hotjar} from "react-hotjar";
 
 const ApplicantDashboard = () => {
 
@@ -16,6 +17,7 @@ const ApplicantDashboard = () => {
 
     useEffect( () => {
         getApplicant();
+        hotjar.initialize(2738985, 6);
     }, [] )
 
     function handleLogout() {

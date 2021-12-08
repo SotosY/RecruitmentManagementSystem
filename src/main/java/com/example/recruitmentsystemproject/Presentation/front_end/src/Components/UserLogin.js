@@ -3,6 +3,7 @@ import {Form} from "react-bootstrap";
 import './css/Login-Register.css';
 import {Link, Redirect, useHistory} from "react-router-dom";
 import {getErrorLogin, getLogin, loginEmployer} from "../Services/UserService";
+import {hotjar} from "react-hotjar";
 
 const UserLogin = () => {
 
@@ -19,7 +20,7 @@ const UserLogin = () => {
 
     useEffect( () => {
         getLoginHeader();
-        console.log(session)
+        hotjar.initialize(2738985, 6);
     }, [] )
 
     const loginUser = (e) => {
@@ -37,6 +38,7 @@ const UserLogin = () => {
 
             .catch(onerror => {
                 console.log('Something went wrong', onerror);
+                history.push('/careers/applicant/dashboard')
                 // history.push('/careers/login')
             });
     }

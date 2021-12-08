@@ -1,8 +1,13 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import '../css/Breadcrumb.css';
 import {Link} from "react-router-dom";
+import {hotjar} from "react-hotjar";
 
 class EmployerDashboard extends Component {
+
+    componentDidMount() {
+        hotjar.initialize(2738985, 6);
+    }
 
     render() {
         return (

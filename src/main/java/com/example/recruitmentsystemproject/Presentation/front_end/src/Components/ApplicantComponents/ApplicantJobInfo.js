@@ -4,6 +4,7 @@ import {getJobDetails} from "../../Services/ApplicantService";
 import {useHistory, useLocation} from "react-router-dom";
 import {HiOutlineChevronRight} from "react-icons/hi";
 import {HiOutlineChevronDoubleRight} from "react-icons/hi";
+import {hotjar} from "react-hotjar";
 
 const ApplicantJobInfo = () => {
 
@@ -21,6 +22,7 @@ const ApplicantJobInfo = () => {
 
     useEffect( () => {
         getJob();
+        hotjar.initialize(2738985, 6);
     }, [] )
 
     function handleJobInfo(id){

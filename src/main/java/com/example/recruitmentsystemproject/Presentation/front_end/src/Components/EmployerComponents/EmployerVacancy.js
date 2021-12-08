@@ -3,6 +3,7 @@ import {getVacancyPage, saveEmployerProfileDetails, saveJobDetails} from "../../
 import {Button, Form, Modal, Row} from "react-bootstrap";
 import '../css/Vacancy.css';
 import {useHistory} from "react-router-dom";
+import {hotjar} from "react-hotjar";
 
 
 const EmployerVacancy = () => {
@@ -36,6 +37,7 @@ const EmployerVacancy = () => {
 
     useEffect( () => {
         getJob();
+        hotjar.initialize(2738985, 6);
     }, [] )
 
     const saveJob = (e) => {

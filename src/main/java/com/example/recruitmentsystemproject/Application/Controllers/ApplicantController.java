@@ -129,7 +129,7 @@ public class ApplicantController {
         System.out.println(principal);
         Optional<User> theUser = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
 
-        Optional<User> user = userReadService.findByEmail("sotirisy@hotmail.com");
+        Optional<User> user = userReadService.findByEmail("testing@gmail.com");
 
         System.out.println(theUser);
         System.out.println((principal));
@@ -159,7 +159,7 @@ public class ApplicantController {
 //        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
 //        Optional<Employer> employer = employerReadService.findByUser(user.get());
 
-        Optional<User> user = userReadService.findByEmail("sotirisy@hotmail.com");
+        Optional<User> user = userReadService.findByEmail("testing@gmail.com");
         Applicant applicant = applicantReadService.findByUser(user.get()).get();
         ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
 
@@ -185,7 +185,7 @@ public class ApplicantController {
         String experience = data.get("experience").asText();
 
 
-            User user = userReadService.findByEmail("sotirisy@hotmail.com").get();
+            User user = userReadService.findByEmail("testing@gmail.com").get();
             Applicant applicant = applicantReadService.findByUser(user).get();
             ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
 
@@ -225,7 +225,7 @@ public class ApplicantController {
     @GetMapping("/applicant/application/job/{id}/application")
     public Application getApplication (@PathVariable Long id) {
 
-        User user = userReadService.findByEmail("sotirisy@hotmail.com").get();
+        User user = userReadService.findByEmail("testing@gmail.com").get();
         Applicant applicant = applicantReadService.findByUser(user).get();
         Job job = jobReadService.findById(id).get();
         ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
@@ -248,7 +248,7 @@ public class ApplicantController {
     @PostMapping("/applicant/application/job/apply")
     public String applyApplication(@RequestBody ObjectNode data) {
 
-        User user = userReadService.findByEmail("sotirisy@hotmail.com").get();
+        User user = userReadService.findByEmail("testing@gmail.com").get();
         Applicant applicant = applicantReadService.findByUser(user).get();
         ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
 
@@ -295,7 +295,7 @@ public class ApplicantController {
     @GetMapping("/applicant/application-history")
     public List<Application> applicantApplicationHistory() {
 
-        User user = userReadService.findByEmail("sotirisy@hotmail.com").get();
+        User user = userReadService.findByEmail("testing@gmail.com").get();
         Applicant applicant = applicantReadService.findByUser(user).get();
         List<Application> application = applicationReadService.findByApplicant(applicant);
         return application;

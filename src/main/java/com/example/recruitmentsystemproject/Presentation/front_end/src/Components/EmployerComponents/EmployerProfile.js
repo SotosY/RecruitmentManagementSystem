@@ -6,6 +6,7 @@ import '../css/Login-Register.css';
 import "tailwindcss/tailwind.css";
 import {getEmployerDetails, saveEmployerProfileDetails} from "../../Services/EmployerService";
 import {useHistory} from "react-router-dom";
+import {hotjar} from "react-hotjar";
 
 const EmployerProfile = () => {
 
@@ -46,6 +47,7 @@ const EmployerProfile = () => {
 
     useEffect( () => {
         getEmployer();
+        hotjar.initialize(2738985, 6);
     }, [] )
 
     const saveEmployerProfile = (e) => {

@@ -1,8 +1,9 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {Form} from "react-bootstrap";
 import '../css/Login-Register.css';
 import {Link, useHistory} from "react-router-dom";
 import {registerApplicant} from "../../Services/UserService";
+import {hotjar} from "react-hotjar";
 
 const ApplicantRegister = () => {
 
@@ -28,6 +29,10 @@ const ApplicantRegister = () => {
                 // history.push('/careers/applicant/dashboard')
             });
     }
+
+    useEffect( () => {
+        hotjar.initialize(2738985, 6);
+    }, [] )
 
         return (
             <div>

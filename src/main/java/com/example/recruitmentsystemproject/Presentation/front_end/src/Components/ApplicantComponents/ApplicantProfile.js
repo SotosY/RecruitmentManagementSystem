@@ -5,6 +5,7 @@ import '../css/Profile.css';
 import "tailwindcss/tailwind.css";
 import {useHistory} from "react-router-dom";
 import {getApplicantDetails, saveApplicantProfileDetails} from "../../Services/ApplicantService";
+import {hotjar} from "react-hotjar";
 
 
 
@@ -48,6 +49,7 @@ const ApplicantProfile = () => {
 
     useEffect( () => {
         getApplicant();
+        hotjar.initialize(2738985, 6);
     }, [] )
 
     const saveApplicantProfile = (e) => {
