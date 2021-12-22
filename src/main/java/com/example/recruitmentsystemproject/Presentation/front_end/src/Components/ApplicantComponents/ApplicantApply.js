@@ -1,10 +1,6 @@
 import {Button, Form, Modal, Row} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
-import {
-    applyApplicantApplication,
-    getApplicantApply,
-    saveApplicantProfileDetails
-} from "../../Services/ApplicantService";
+import {applyApplicantApplication, getApplicantApply} from "../../Services/ApplicantService";
 import {useHistory, useLocation} from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import '../css/Application.css';
@@ -26,6 +22,8 @@ const ApplicantApply = () => {
     const location = useLocation();
     const getId = location.state;
     const history = useHistory();
+
+    const genderList = ["Please select a gender", "Male", "Female", "Other"]
 
     const [show, setShow] = useState(false);
 
@@ -121,15 +119,35 @@ const ApplicantApply = () => {
                             <Row className="mx-3 mt-4 mb-3">
                                 <Form.Group controlId="col_lastname_password">
                                     <Form.Label>First Name:</Form.Label>
-                                    <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="text" value={application.applicant?.firstName}></Form.Control>
+                                    <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}}
+                                                  type="text"
+                                                  value={application.applicant?.firstName}>
+                                    </Form.Control>
                                     <Form.Label className="mt-3">Last Name:</Form.Label>
-                                    <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="text" value={application.applicant?.lastName}></Form.Control>
+                                    <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}}
+                                                  type="text"
+                                                  value={application.applicant?.lastName}>
+                                    </Form.Control>
                                     <Form.Label className="mt-3">Email:</Form.Label>
-                                    <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} type="text" value={application.applicant?.user?.email}></Form.Control>
+                                    <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}}
+                                                  type="text"
+                                                  value={application.applicant?.user?.email}>
+                                    </Form.Control>
                                     <Form.Label className="mt-3">Date of Birth:</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter your address" value={application.applicant?.dateOfBirth} onChange={(e) => {setDateOfBirth(e.target.value); handleChange(e)}}/>
+                                    <Form.Control type="date"
+                                                  placeholder="Enter your address"
+                                                  value={application.applicant?.dateOfBirth}
+                                                  onChange={(e) => {setDateOfBirth(e.target.value); handleChange(e)}}/>
                                     <Form.Label className="mt-3">Gender:</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter your address" value={application.applicant?.gender} onChange={(e) => {setGender(e.target.value); handleChange(e)}}/>
+                                    <Form.Select type="text"
+                                                 id='country'
+                                                 value={application.applicant?.gender}
+                                                 onChange={(e) => {setGender(e.target.value); handleChange(e)}}
+                                    >
+                                        {genderList.map(row =>
+                                            <option value={row.toString()}>{row.toString()}</option>
+                                        )}
+                                    </Form.Select>
                                     <Form.Label className="mt-3">Phone Number:</Form.Label>
                                     <Form.Control type="text" placeholder="Enter your country" value={application.applicant?.phoneNumber} onChange={(e) => {setPhoneNumber(e.target.value); handleChange(e)}}/>
                                 </Form.Group>

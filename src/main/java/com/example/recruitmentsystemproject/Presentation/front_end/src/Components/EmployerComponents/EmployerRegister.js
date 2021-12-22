@@ -1,22 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import {Form} from "react-bootstrap";
+import {Form, InputGroup} from "react-bootstrap";
 import '../css/Login-Register.css';
 import "tailwindcss/tailwind.css";
 import {Link, useHistory} from "react-router-dom";
 import {registerEmployer} from "../../Services/UserService";
 import {hotjar} from "react-hotjar";
+import {useForm} from "react-hook-form";
 
 const EmployerRegister = () => {
 
-    const [firstName, setFirstname] = useState('');
-    const [lastName, setLastname] = useState('');
-    const [company, setCompany] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const history = useHistory();
+    const companyList = ["Please select a Company","Cycom", "Google","Microsoft", "Metaverse","Admiral", "Tesco"];
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm();
 
     const saveEmployerDetails = (e) => {
-        e.preventDefault();
+
+        const firstName = e.firstName
+        const lastName = e.lastName
+        const company = e.company
+        const email = e.email
+        const password = e.password
 
         const user = {email, password, firstName, lastName, company}
 
@@ -30,6 +38,10 @@ const EmployerRegister = () => {
                 console.log('Something went wrong', onerror);
                 // history.push('/careers/employer/dashboard')
             });
+    }
+
+    const onSubmit = (e) => {
+        saveEmployerDetails(e)
     }
 
     useEffect( () => {
@@ -47,72 +59,90 @@ const EmployerRegister = () => {
                     </ol>
                 </section>
 
-                <Form className='container-login'>
+                <Form className='container-login' onSubmit={handleSubmit(onSubmit)}>
 
                     <h1>Register</h1>
                     <h2>Already have an account? <Link to='/careers/login' className='h2_clickable'>Sign in</Link></h2>
 
                     <div className='container-login-inside'>
 
-                        <Form.Group className="mt-1" controlId="First name">
+                        <Form.Group className="mt-1">
                             <Form.Label>First name</Form.Label>
-                            <Form.Control type="text"
-                                          placeholder="Enter your first name"
-                                          id='firstname'
-                                          value={firstName}
-                                          onChange={(e) => setFirstname(e.target.value)}
+                            <Form.Control
+                                            type="text"
+                                            placeholder="Enter your first name"
+                                            id='firstName'
+                                            {...register("firstName", {
+                                                required: "First Name is required",
+                                                pattern: {
+                                                    value: /^[a-zA-Z]+$$/i,
+                                                    message: "Must contain only letters"
+                                                }})}
                             />
+                            {errors.firstName && (<small className="text-danger">{errors.firstName.message}</small>)}
                         </Form.Group>
 
-                        <Form.Group className="mt-3" controlId="Last name">
+                        <Form.Group className="mt-3">
                             <Form.Label>Last name</Form.Label>
                             <Form.Control type="text"
                                           placeholder="Enter your last name"
                                           id='lastname'
-                                          value={lastName}
-                                          onChange={(e) => setLastname(e.target.value)}
+                                          {...register("lastName", {
+                                              required: "Last Name is required",
+                                              pattern: {
+                                                  value: /^[a-zA-Z]+$$/i,
+                                                  message: "Must contain only letters"
+                                              }})}
                             />
+                            {errors.lastName && (<small className="text-danger">{errors.lastName.message}</small>)}
                         </Form.Group>
 
-                        <Form.Group className="mt-3" controlId="Company">
+                        <Form.Group className="mt-3">
                             <Form.Label>Company</Form.Label>
                             <Form.Select type="text"
                                           id='company'
-                                          value={company}
-                                          onChange={(e) => setCompany(e.target.value)}
+                                         {...register("company", { required: "Company is required" })}
                             >
-                                <option>Please select..</option>
-                                <option value="Cycom">Cycom</option>
-                                <option value="Google">Google</option>
-                                <option value="Microsoft">Microsoft</option>
-                                <option value="Metaverse">Metaverse</option>
-                                <option value="Admiral">Admiral</option>
-                                <option value="Tesco">Tesco</option>
+                                {companyList.map(row =>
+                                <option>{row.toString()}</option>
+                                )}
                             </Form.Select>
+                            {errors.company && (<small className="text-danger">{errors.company.message}</small>)}
                         </Form.Group>
 
-                        <Form.Group className="mt-3" controlId="formBasicEmail">
+                        <Form.Group className="mt-3">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email"
                                           placeholder="Enter your email"
                                           id='email'
-                                          value={email}
-                                          onChange={(e) => setEmail(e.target.value)}
+                                          {...register("email", {
+                                              required: "Email is required",
+                                              pattern: {
+                                                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                                  message: "Please enter a valid email address"
+                                              }}
+                                          )}
                             />
+                            {errors.email && (<small className="text-danger">{errors.email.message}</small>)}
                         </Form.Group>
 
-                        <Form.Group className="mt-3" controlId="formBasicPassword">
+                        <Form.Group className="mt-3">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password"
                                           placeholder="Enter your password"
                                           id='password'
-                                          value={password}
-                                          onChange={(e) => setPassword(e.target.value)}
+                                          {...register("password", {
+                                              required: "Password is required",
+                                              minLength: {
+                                                  value: 8,
+                                                  message: "Must be at least 8 characters"
+                                              }})}
                             />
+                            {errors.password && (<small className="text-danger">{errors.password.message}</small>)}
                         </Form.Group>
 
                         <center className='mt-5'>
-                            <button type="submit" className="btn btn-secondary" variant="primary" onClick={(e) => saveEmployerDetails(e)}>Sign Up</button>
+                            <button type="submit" className="btn btn-secondary" variant="primary" >Sign Up</button>
                         </center>
 
                         <center className='mt-4'>

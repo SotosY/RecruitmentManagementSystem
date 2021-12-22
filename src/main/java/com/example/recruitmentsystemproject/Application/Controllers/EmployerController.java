@@ -288,12 +288,12 @@ public class EmployerController {
 
     @PostMapping("/employer/vacancy-history/accept")
     public String acceptAnApplicant(@RequestBody ObjectNode data) {
-
+        
         Long applicationId = data.get("applicationId").asLong();
         Long applicantId = data.get("applicantId").asLong();
 
         Applicant applicant = applicantReadService.findById(applicantId).get();
-
+        
         applicationReadService.updateApplicationStatusByApplicantId("Accepted", applicationId, applicant );
 
         return "redirect:/careers/employer/vacancy-history";

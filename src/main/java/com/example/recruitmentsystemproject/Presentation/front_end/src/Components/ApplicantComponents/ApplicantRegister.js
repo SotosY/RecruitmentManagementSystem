@@ -4,17 +4,24 @@ import '../css/Login-Register.css';
 import {Link, useHistory} from "react-router-dom";
 import {registerApplicant} from "../../Services/UserService";
 import {hotjar} from "react-hotjar";
+import {useForm} from "react-hook-form";
 
 const ApplicantRegister = () => {
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const history = useHistory();
 
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm();
+
     const saveApplicantDetails = (e) => {
-        e.preventDefault();
+
+        const firstName = e.firstName
+        const lastName = e.lastName
+        const email = e.email
+        const password = e.password
 
         const user = {email, password, firstName, lastName}
 
@@ -28,6 +35,10 @@ const ApplicantRegister = () => {
                 console.log('Something went wrong', onerror);
                 // history.push('/careers/applicant/dashboard')
             });
+    }
+
+    const onSubmit = (e) => {
+        saveApplicantDetails(e)
     }
 
     useEffect( () => {
@@ -44,7 +55,7 @@ const ApplicantRegister = () => {
                         </ol>
                     </section>
 
-                    <Form className='container-login'>
+                    <Form className='container-login' onSubmit={handleSubmit(onSubmit)}>
 
                         <h1>Register</h1>
                         <h2>Already have an account? <Link to='/careers/login' className='h2_clickable'>Sign in</Link></h2>
@@ -56,9 +67,14 @@ const ApplicantRegister = () => {
                                 <Form.Control type="text"
                                               placeholder="Enter your first name"
                                               id='firstName'
-                                              value={firstName}
-                                              onChange={(e) => setFirstName(e.target.value)}
+                                              {...register("firstName", {
+                                                  required: "First Name is required",
+                                                  pattern: {
+                                                      value: /^[a-zA-Z]+$$/i,
+                                                      message: "Must contain only letters"
+                                                  }})}
                                 />
+                                {errors.firstName && (<small className="text-danger">{errors.firstName.message}</small>)}
                             </Form.Group>
 
                             <Form.Group className="mt-3" controlId="Last name">
@@ -66,9 +82,14 @@ const ApplicantRegister = () => {
                                 <Form.Control type="text"
                                               placeholder="Enter your last name"
                                               id='lastName'
-                                              value={lastName}
-                                              onChange={(e) => setLastName(e.target.value)}
+                                              {...register("lastName", {
+                                                  required: "Last Name is required",
+                                                  pattern: {
+                                                      value: /^[a-zA-Z]+$$/i,
+                                                      message: "Must contain only letters"
+                                                  }})}
                                 />
+                                {errors.lastName && (<small className="text-danger">{errors.lastName.message}</small>)}
                             </Form.Group>
 
                             <Form.Group className="mt-3" controlId="formBasicEmail">
@@ -76,10 +97,16 @@ const ApplicantRegister = () => {
                                 <Form.Control type="email"
                                               placeholder="Enter your email"
                                               id='email'
-                                              value={email}
-                                              onChange={(e) => setEmail(e.target.value)}
-
+                                              {...register("email", {
+                                                  required: "Email is required",
+                                                  pattern: {
+                                                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                                      message: "Please enter a valid email address"
+                                                  }}
+                                              )}
                                 />
+                                {errors.email && (<small className="text-danger">{errors.email.message}</small>)}
+
                             </Form.Group>
 
                             <Form.Group className="mt-3" controlId="formBasicPassword">
@@ -87,13 +114,19 @@ const ApplicantRegister = () => {
                                 <Form.Control type="password"
                                               placeholder="Enter your password"
                                               id='password'
-                                              value={password}
-                                              onChange={(e) => setPassword(e.target.value)}
+                                              {...register("password", {
+                                                  required: "Password is required",
+                                                  minLength: {
+                                                      value: 8,
+                                                      message: "Must be at least 8 characters"
+                                                  }})}
                                 />
+                                {errors.password && (<small className="text-danger">{errors.password.message}</small>)}
+
                             </Form.Group>
 
                             <center className='mt-5'>
-                                <button type="submit" className="btn btn-secondary" variant="primary" onClick={(e) => saveApplicantDetails(e)}>Sign Up</button>
+                                <button type="submit" className="btn btn-secondary" variant="primary">Sign Up</button>
                             </center>
 
                             <center className='mt-4'>

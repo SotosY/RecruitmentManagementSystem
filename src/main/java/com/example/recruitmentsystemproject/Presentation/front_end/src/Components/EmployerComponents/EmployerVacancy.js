@@ -4,34 +4,28 @@ import {Button, Form, Modal, Row} from "react-bootstrap";
 import '../css/Vacancy.css';
 import {useHistory} from "react-router-dom";
 import {hotjar} from "react-hotjar";
+import {useForm} from "react-hook-form";
 
 
 const EmployerVacancy = () => {
 
     const [job, setJob] = useState("");
     const [jobId, setJobId] = useState("");
-    const [title, setTitle] = useState("");
-    const [department, setDepartment] = useState("");
-    const [managedBy, setManagedBy] = useState("");
-    const [location, setLocation] = useState("");
-    const [salary, setSalary] = useState("");
-    const [activeDate, setActiveDate] = useState("");
-    const [expiryDate, setExpiryDate] = useState("");
-    const [startingDate, setStartingDate] = useState("");
-    const [description, setDescription] = useState("");
-    const [requirements, setRequirements] = useState("");
-    const [essentialCriteria, setEssentialCriteria] = useState("");
-    const [desirableCriteria, setDesirableCriteria] = useState("");
-    const [salaryAndBenefits, setSalaryAndBenefits] = useState("");
     const [show, setShow] = useState(false);
     const history = useHistory();
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+        reset
+    } = useForm();
 
     const getJob = () =>{
         getVacancyPage().then((res) => {
             const data = res.data;
             setJob(data)
             setJobId(data.jobId)
-            console.log(data)
         })
     }
 
@@ -42,7 +36,20 @@ const EmployerVacancy = () => {
 
     const saveJob = (e) => {
 
-        e.preventDefault();
+        console.log(e)
+        const title = e.title
+        const department = e.department
+        const managedBy = e.managedBy
+        const location = e.location
+        const salary = e.salary
+        const activeDate = e.activeDate
+        const expiryDate = e.expiryDate
+        const startingDate = e.startingDate
+        const description = e.description
+        const requirements = e.requirements
+        const essentialCriteria = e.essentialCriteria
+        const desirableCriteria = e.desirableCriteria
+        const salaryAndBenefits = e.salaryAndBenefits
 
         const job = {jobId, title, department, managedBy, location, salary, activeDate, expiryDate,startingDate, description, requirements, essentialCriteria, desirableCriteria, salaryAndBenefits}
 
@@ -55,9 +62,18 @@ const EmployerVacancy = () => {
             });
     }
 
+    const onSubmit = (e) => {
+        saveJob(e)
+        handleShow(e)
+    }
+
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";
+    }
+
+    function handleRefreshPage() {
+        window.location.reload();
     }
 
     const handleScroll = () => {
@@ -65,13 +81,14 @@ const EmployerVacancy = () => {
     }
 
     const handleClose = () => {
-        history.push("/careers/employer/vacancies");
         handleScroll()
+        reset()
+        handleRefreshPage()
         setShow(false)
     }
 
     const handleShow = (e) => {
-        e.preventDefault();
+
         setShow(true);
     }
 
@@ -95,7 +112,7 @@ const EmployerVacancy = () => {
                     </div>
                 </section>
 
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                     <div className='container-md' style={{width:"90%", marginTop:"40px"}}>
                         <div className="inline" style={{width:"100%"}}>
                                     <div className="inline" style={{width:"20px", marginLeft:"26px"}}>
@@ -116,35 +133,105 @@ const EmployerVacancy = () => {
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_50"  controlId="col_contactName_companyEmail">
                                 <Form.Label>Job Title:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter a title" value={job.title} onChange={(e) => {setTitle(e.target.value)}}/>
+                                <Form.Control type="text"
+                                              placeholder="Enter a title"
+                                              {...register("title", {
+                                                  required: "Job Title is required",
+                                                  pattern: {
+                                                      value: /^[a-zA-Z\s]*$/,
+                                                      message: "Must contain only letters"
+                                                  }})}
+                                />
+                                {errors.title && (<small className="text-danger">{errors.title.message}</small>)}
+
                             </Form.Group>
                             <Form.Group className="column_50"  controlId="col_contactName_companyEmail">
                                 <Form.Label>Department:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter the department" value={job.department} onChange={(e) => {setDepartment(e.target.value)}} />
+                                <Form.Control type="text"
+                                              placeholder="Enter the department"
+                                              {...register("department", {
+                                                  required: "Department is required",
+                                                  pattern: {
+                                                      value: /^[a-zA-Z\s]*$/,
+                                                      message: "Must contain only letters"
+                                                  }})}
+                                />
+                                {errors.department && (<small className="text-danger">{errors.department.message}</small>)}
                             </Form.Group>
                         </Row>
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_33" controlId="col_address_country">
                                 <Form.Label>Managed By:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter managed by name" value={job.managedBy} onChange={(e) => {setManagedBy(e.target.value)}}/>
+                                <Form.Control type="text"
+                                              placeholder="Enter managed by name"
+                                              {...register("managedBy", {
+                                                  required: "Managed By is required",
+                                                  pattern: {
+                                                      value: /^[a-zA-Z\s]*$/,
+                                                      message: "Must contain only letters"
+                                                  }})}
+                                />
+                                {errors.managedBy && (<small className="text-danger">{errors.managedBy.message}</small>)}
+
                                 <Form.Label className="mt-3">Post Date:</Form.Label>
                                 <Form.Control style={{color:"#AAAAAA", borderStyle:"none", backgroundColor:"#F0FFF0"}} disabled={true} value={job.postDate} />
                                 <Form.Label className="mt-3">Starting Date:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter the starting date" value={job.startingDate} onChange={(e) => {setStartingDate(e.target.value)}} />
+                                <Form.Control type="date"
+                                              placeholder="Enter the starting date"
+                                              {...register("startingDate", {
+                                                  required: "Starting Date is required",
+                                                 })
+                                              }
+                                />
+                                {errors.startingDate && (<small className="text-danger">{errors.startingDate.message}</small>)}
+
                             </Form.Group>
 
                             <Form.Group className="column_33" controlId="col_city_postcode">
                                 <Form.Label>Location:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter the location" value={job.location} onChange={(e) => {setLocation(e.target.value)}} />
+                                <Form.Control type="text"
+                                              placeholder="Enter the location"
+                                              {...register("location", {
+                                                  required: "Location is required",
+                                                  pattern: {
+                                                      value: /^[a-zA-Z\s]*$/,
+                                                      message: "Must contain only letters"
+                                                  }})}
+                                />
+                                {errors.location && (<small className="text-danger">{errors.location.message}</small>)}
+
                                 <Form.Label className="mt-3">Active Date:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter the activation date" value={job.activeDate} onChange={(e) => {setActiveDate(e.target.value)}} />
+                                <Form.Control type="date"
+                                              placeholder="Enter the activation date"
+                                              {...register("activeDate", {
+                                                  required: "Active Date is required",
+                                              })
+                                              }
+                                />
+                                {errors.activeDate && (<small className="text-danger">{errors.activeDate.message}</small>)}
                             </Form.Group>
 
                             <Form.Group className="column_33" controlId="col_city_postcode">
                                 <Form.Label>Salary:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter the salary" value={job.salary} onChange={(e) => {setSalary(e.target.value)}}/>
+                                <Form.Control type="text"
+                                              placeholder="Enter the salary"
+                                              {...register("salary", {
+                                                  required: "Salary is required",
+                                                  pattern: {
+                                                      value: /^[0-9]*$/,
+                                                      message: "Must contain only numbers"
+                                                  }})}
+                                />
+                                {errors.salary && (<small className="text-danger">{errors.salary.message}</small>)}
                                 <Form.Label className="mt-3">Expiry Date:</Form.Label>
-                                <Form.Control type="text" placeholder="Enter the expiration date" value={job.expiryDate} onChange={(e) => {setExpiryDate(e.target.value)}}/>
+                                <Form.Control type="date"
+                                              placeholder="Enter the expiration date"
+                                              {...register("expiryDate", {
+                                                  required: "Expiry Date is required",
+                                              })
+                                              }
+                                />
+                                {errors.expiryDate && (<small className="text-danger">{errors.expiryDate.message}</small>)}
                             </Form.Group>
                         </Row>
 
@@ -156,14 +243,31 @@ const EmployerVacancy = () => {
                         <Row className="mx-3 mt-4">
                             <Form.Group   controlId="col_companyProfile">
                                 <Form.Label>Description:</Form.Label>
-                                <Form.Control className="textarea_box" as="textarea" type="text" placeholder="Enter the description" value={job.description} onChange={(e) => {setDescription(e.target.value)}}/>
+                                <Form.Control className="textarea_box"
+                                              as="textarea" type="text"
+                                              placeholder="Enter the description"
+                                              {...register("description", {
+                                                  required: "Description is required"
+                                                  }
+                                                  )}
+                                />
+                                {errors.description && (<small className="text-danger">{errors.description.message}</small>)}
                             </Form.Group>
                         </Row>
 
                         <Row className="mx-3 mt-4">
                             <Form.Group controlId="col_companyProfile">
                                 <Form.Label>Requirements:</Form.Label>
-                                <Form.Control className="textarea_box" as="textarea" type="text" placeholder="Enter the requirements" value={job.requirements} onChange={(e) => {setRequirements(e.target.value)}}/>
+                                <Form.Control className="textarea_box"
+                                              as="textarea"
+                                              type="text"
+                                              placeholder="Enter the requirements"
+                                              {...register("requirements", {
+                                                  required: "Requirements are required"
+                                                })
+                                              }
+                                />
+                                {errors.requirements && (<small className="text-danger">{errors.requirements.message}</small>)}
                             </Form.Group>
                         </Row>
                     </div>
@@ -174,25 +278,52 @@ const EmployerVacancy = () => {
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_50"  controlId="col_contactName_companyEmail">
                                 <Form.Label>Essential Criteria:</Form.Label>
-                                <Form.Control className="textarea_box" as="textarea" type="text" placeholder="Enter the essential criteria" value={job.essentialCriteria} onChange={(e) => {setEssentialCriteria(e.target.value)}}/>
+                                <Form.Control className="textarea_box"
+                                              as="textarea"
+                                              type="text"
+                                              placeholder="Enter the essential criteria"
+                                              {...register("essentialCriteria", {
+                                                  required: "Essential Criteria are required"
+                                              })
+                                              }
+                                />
+                                {errors.essentialCriteria && (<small className="text-danger">{errors.essentialCriteria.message}</small>)}
                             </Form.Group>
 
                             <Form.Group className="column_50"  controlId="col_businessType_telephone">
                                 <Form.Label>Desirable Criteria:</Form.Label>
-                                <Form.Control className="textarea_box" as="textarea" type="text" placeholder="Enter the desirable criteria" value={job.desirableCriteria} onChange={(e) => {setDesirableCriteria(e.target.value)}}/>
+                                <Form.Control className="textarea_box"
+                                              as="textarea"
+                                              type="text"
+                                              placeholder="Enter the desirable criteria"
+                                              {...register("desirableCriteria", {
+                                                  required: "Desirable Criteria are required"
+                                              })
+                                              }
+                                />
+                                {errors.desirableCriteria && (<small className="text-danger">{errors.desirableCriteria.message}</small>)}
                             </Form.Group>
                         </Row>
 
                         <Row className="mx-3 mt-4">
                             <Form.Group controlId="col_companyProfile">
                                 <Form.Label>Salary & Other Benefits:</Form.Label>
-                                <Form.Control className="textarea_box" as="textarea" type="text" placeholder="Enter the salary & other benefits" value={job.salaryAndBenefits} onChange={(e) => {setSalaryAndBenefits(e.target.value)}}/>
+                                <Form.Control className="textarea_box"
+                                              as="textarea"
+                                              type="text"
+                                              placeholder="Enter the salary & other benefits"
+                                              {...register("salaryAndBenefits", {
+                                                  required: "Salary And Benefits are required"
+                                              })
+                                              }
+                                />
+                                {errors.salaryAndBenefits && (<small className="text-danger">{errors.salaryAndBenefits.message}</small>)}
                             </Form.Group>
                         </Row>
                     </div>
 
                     <center className='mt-5'>
-                        <button type="submit" className="btn btn-secondary" variant="primary" onClick={(e) => {saveJob(e); handleShow(e);}} >Save Details</button>
+                        <button type="submit" className="btn btn-secondary" variant="primary">Save Details</button>
                     </center>
 
                     <Modal
