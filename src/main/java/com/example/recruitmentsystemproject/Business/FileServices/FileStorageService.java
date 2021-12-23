@@ -1,8 +1,8 @@
 package com.example.recruitmentsystemproject.Business.FileServices;
 
-import com.example.recruitmentsystemproject.Model.FileNotFoundException;
-import com.example.recruitmentsystemproject.Model.FileStorageException;
-import com.example.recruitmentsystemproject.Model.FileStorageProperties;
+import com.example.recruitmentsystemproject.Model.File.FileNotFoundException;
+import com.example.recruitmentsystemproject.Model.File.FileStorageException;
+import com.example.recruitmentsystemproject.Model.File.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

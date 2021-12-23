@@ -1,4 +1,4 @@
-package com.example.recruitmentsystemproject.Model;
+package com.example.recruitmentsystemproject.Model.File;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

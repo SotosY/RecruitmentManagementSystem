@@ -1,4 +1,4 @@
-package com.example.recruitmentsystemproject.Model;
+package com.example.recruitmentsystemproject.Model.File;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
