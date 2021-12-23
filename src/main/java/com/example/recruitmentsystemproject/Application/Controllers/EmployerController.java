@@ -5,6 +5,7 @@ import com.example.recruitmentsystemproject.Business.ApplicationServices.Applica
 import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationReadService;
 import com.example.recruitmentsystemproject.Business.EmployerServices.EmployerCreateService;
 import com.example.recruitmentsystemproject.Business.EmployerServices.EmployerReadService;
+import com.example.recruitmentsystemproject.Business.FileServices.FileStorageService;
 import com.example.recruitmentsystemproject.Business.JobServices.JobCreateService;
 import com.example.recruitmentsystemproject.Business.JobServices.JobReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserCreateService;
@@ -12,12 +13,17 @@ import com.example.recruitmentsystemproject.Business.UserServices.UserReadServic
 import com.example.recruitmentsystemproject.Model.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +60,9 @@ public class EmployerController {
 
     @Autowired
     private ApplicantReadService applicantReadService;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
     @PostMapping("/register/e")
     public String registerEmployer(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
@@ -310,6 +319,28 @@ public class EmployerController {
         applicationReadService.updateApplicationStatusByApplicantId("Rejected", applicationId, applicant );
 
         return "redirect:/careers/employer/vacancy-history";
+    }
+
+    @GetMapping("/{fileName:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request){
+
+        Resource resource = fileStorageService.loadFileAsResource(fileName);
+
+        String contentType= null;
+
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex){
+            System.out.println("Could not determine fileType");
+        }
+
+        if (contentType==null){
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .body(resource);
     }
 
 }

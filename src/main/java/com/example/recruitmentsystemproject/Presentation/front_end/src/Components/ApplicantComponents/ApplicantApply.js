@@ -46,8 +46,8 @@ const ApplicantApply = () => {
     const applyApplication = (e) => {
         e.preventDefault();
 
-        const application = {applicationId, dateOfBirth, gender, phoneNumber, education, experience, cv, coverLetter}
 
+        const application = {applicationId, dateOfBirth, gender, phoneNumber, education, experience, cv, coverLetter}
         applyApplicantApplication(application)
             .then(res => {
                 console.log("Data added successfully", res.data);
@@ -181,10 +181,10 @@ const ApplicantApply = () => {
                                     <Form.Label>Cover Letter</Form.Label>
                                     <Form.Control type="file" onChange={(e) => {setCoverLetter(e.target.value); handleChange(e)}}/>
                                 </Form.Group>
-                                <h2 className="mt-5">Or drag and drop files below</h2>
-                                <div className="upload-drop-zone" id="drop-zone">
-                                    Just drag and drop files here
-                                </div>
+                                {/*<h2 className="mt-5">Or drag and drop files below</h2>*/}
+                                {/*<div className="upload-drop-zone" id="drop-zone">*/}
+                                {/*    Just drag and drop files here*/}
+                                {/*</div>*/}
                             </Row>
                         </div>
                     </div>

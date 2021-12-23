@@ -6,29 +6,27 @@ import com.example.recruitmentsystemproject.Business.ApplicantServices.Applicant
 import com.example.recruitmentsystemproject.Business.ApplicantServices.ApplicantResumeReadService;
 import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationCreateService;
 import com.example.recruitmentsystemproject.Business.ApplicationServices.ApplicationReadService;
+import com.example.recruitmentsystemproject.Business.FileServices.FileStorageService;
 import com.example.recruitmentsystemproject.Business.JobServices.JobCreateService;
 import com.example.recruitmentsystemproject.Business.JobServices.JobReadService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserCreateService;
 import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
 import com.example.recruitmentsystemproject.Model.*;
-import com.example.recruitmentsystemproject.Persistence.ApplicantRepositories.ApplicantResumeRepo;
-import com.example.recruitmentsystemproject.Persistence.ApplicantRepositories.ApplicantResumeRepoJPA;
 import com.example.recruitmentsystemproject.Security.UserDetailsImpl;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -72,6 +70,9 @@ public class ApplicantController {
 
     @Autowired
     private UserCreateService userCreateService;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
     @PostMapping("/register/a")
     public String registerApplicant(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
@@ -252,6 +253,7 @@ public class ApplicantController {
         Applicant applicant = applicantReadService.findByUser(user).get();
         ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
 
+        System.out.println(data);
         Long applicationId = data.get("applicationId").asLong();
         String dateOfBirth = data.get("dateOfBirth").asText();
         String gender = data.get("gender").asText();
@@ -259,8 +261,21 @@ public class ApplicantController {
 
         String education = data.get("education").asText();
         String experience = data.get("experience").asText();
-        File cv = new File(data.get("cv").asText());
-        File coverLetter = new File(data.get("coverLetter").asText());
+        String cv = data.get("cv").asText();
+        String coverLetter = data.get("coverLetter").asText();
+
+        //Converts to file name
+        cv = cv.substring(cv.lastIndexOf("\\") + 1);
+        coverLetter = coverLetter.substring(coverLetter.lastIndexOf("\\") + 1);
+
+
+//        String fileName = fileStorageService.storeFile(cvFile);
+//        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentRequestUri()
+//                .path("/files/")
+//                .path(fileName)
+//                .toUriString();
+//
+//        FileResponse fileResponse = new FileResponse(fileName, fileDownloadUri, cvFile.getContentType(), cvFile.getSize());
 
         Application application = applicationReadService.findById(applicationId).get();
 
@@ -271,8 +286,8 @@ public class ApplicantController {
 
         applicantResume.setEducation(education);
         applicantResume.setExperience(experience);
-        applicantResume.setCv(cv.toString());
-        applicantResume.setCoverLetter(coverLetter.toString());
+        applicantResume.setCv(cv);
+        applicantResume.setCoverLetter(coverLetter);
         applicantResumeCreateService.saveApplicantResume(applicantResume);
 
         application.setApplyDate(LocalDate.now().toString());
@@ -289,7 +304,6 @@ public class ApplicantController {
 //            }
 
         return "redirect:/careers/applicant/application";
-
     }
 
     @GetMapping("/applicant/application-history")

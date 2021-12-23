@@ -111,6 +111,16 @@ const EmployerVacancyApplications = () => {
         setFilter(columns)
     }
 
+    function handleCv(file){
+        history.push(file);
+    }
+
+    function openLink(url, newTab) {
+        newTab
+            ? window.open(url.toString(), "_blank", "noopener noreferrer")
+            : (window.location.href = url);
+    }
+
     function handlePageClick(data){
         let currentPage = data.selected + 1
         console.log(currentPage)
@@ -274,10 +284,11 @@ const EmployerVacancyApplications = () => {
                                     <td>{row.applicant?.lastName}</td>
                                     <td>{row.applicant?.user?.email}</td>
                                     <td>{row.applicant?.dateOfBirth}</td>
-                                    <td>{row.applicantResume?.cv}</td>
-                                    <td style={{textAlign:"right", paddingRight:"10px"}}>{row.applicantResume?.coverLetter}</td>
+                                    <td><a href={row.applicantResume?.cv} target="_blank" rel="nore" style={{color:"#B5DC10"}}>{row.applicantResume?.cv}</a></td>
+                                    <td style={{textAlign:"right", paddingRight:"10px"}}><a href={row.applicantResume?.coverLetter} target="_blank" rel="nore" style={{color:"#B5DC10"}}>{row.applicantResume?.coverLetter}</a></td>
                                     <td style={{textAlign:"right", paddingRight:"10px"}}>{row.applicationStatus}</td>
                                     <td align="center">
+
                                         <button
                                             onClick={() => handleAccept(row.applicationId,row.applicant?.applicantId)}
                                             style={{marginRight:"25px"}}
