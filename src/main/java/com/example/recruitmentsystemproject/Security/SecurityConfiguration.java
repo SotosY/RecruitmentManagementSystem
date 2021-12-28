@@ -45,16 +45,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(restAuthenticationEntryPoint)
-                .and()
+//                .exceptionHandling()
+//                .authenticationEntryPoint(restAuthenticationEntryPoint)
+//                .and()
 //                .headers().frameOptions().deny().and()
                 .authorizeRequests()
-//                .antMatchers(
-//                        HttpMethod.GET, "index*", "/static/**", "/*.js", "/*.json","/*.ico"
-//                ).permitAll()
+                .antMatchers(
+                        HttpMethod.GET, "index*", "/static/**", "/*.js", "/*.json","/*.ico"
+                ).permitAll()
 //                .antMatchers(HttpMethod.OPTIONS,"/careers/applicant/**").hasAuthority("APPLICANT")
-//                .antMatchers("/careers/employer/**").hasAuthority("EMPLOYER")
+//                .antMatchers(HttpMethod.OPTIONS,"/careers/employer/**").hasAuthority("EMPLOYER")
 //                .antMatchers("/",
 //                        "/careers",
 //                        "/careers/register/e"

@@ -37,18 +37,20 @@ public class UserController {
     @GetMapping("/login")
     public ResponseEntity<?> login() {
 
-        HttpStatus status = HttpStatus.OK;
 
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-//
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        Object principal = authentication.getPrincipal();
+////
         String session = RequestContextHolder.currentRequestAttributes().getSessionId();
-        System.out.println(authentication.getName());
+//        System.out.println(authentication.getName());
         System.out.println(principal);
         System.out.println(session);
 //        System.out.println(RequestContextHolder.currentRequestAttributes().getSessionId());
-        return ResponseEntity.ok(status);
+        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
+
+        return ResponseEntity.ok(user);
     }
 
 //    @PostMapping("/login")
@@ -63,38 +65,39 @@ public class UserController {
     }
 
 //
-//    @PostMapping("/login")
-//    public String postLogin(@RequestBody ObjectNode data, HttpServletRequest request){
-//
-//        String email = data.get("username").asText();
-//        User user = userReadService.findByEmail(email).get();
-//
-//        if (user.getRoles()=="APPLICANT"){
-//            return "redirect:/applicant/dashboard";
-//        } else if (user.getRoles()=="EMPLOYER"){
-//            return "redirect:/employer/dashboard";
-//        }
-//    }
-
     @PostMapping("/login")
-    public ResponseEntity<?> postLogin (HttpServletRequest request){
+    public String postLogin(@RequestBody ObjectNode data, HttpServletRequest request){
 
-        System.out.println(request.getUserPrincipal());
+        String email = data.get("username").asText();
+        User user = userReadService.findByEmail(email).get();
 
-//
-//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-//                email, pass
-//        ));
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        Optional<User> theUser = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
-
-
-        System.out.println(authentication);
-        return ResponseEntity.ok(theUser);
+        if (user.getRoles()=="APPLICANT"){
+            return "redirect:/applicant/dashboard";
+        } else if (user.getRoles()=="EMPLOYER"){
+            return "redirect:/employer/dashboard";
+        }
+        return "hi";
     }
+
+//    @PostMapping("/login")
+//    public ResponseEntity<?> postLogin (HttpServletRequest request){
+//
+//        System.out.println(request.getUserPrincipal());
+//
+////
+////        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+////                email, pass
+////        ));
+//
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        Object principal = authentication.getPrincipal();
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        Optional<User> theUser = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
+//
+//
+//        System.out.println(authentication);
+//        return ResponseEntity.ok(theUser);
+//    }
 
     @GetMapping("/register")
     public String register() {
