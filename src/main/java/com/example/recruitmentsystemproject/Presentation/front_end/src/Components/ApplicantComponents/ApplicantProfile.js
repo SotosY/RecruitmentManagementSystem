@@ -165,8 +165,8 @@ const ApplicantProfile = () => {
                                                  value={country}
                                                  onChange={(e) => setCountry(e.target.value)}
                                     >
-                                        {countryList.map(row =>
-                                            <option value={row.toString()}>{row.toString()}</option>
+                                        {countryList.map((row,i) =>
+                                            <option key={i} value={row.toString()}>{row.toString()}</option>
                                         )}
                                     </Form.Select>
                                 </Form.Group>
@@ -180,8 +180,8 @@ const ApplicantProfile = () => {
                                                  value={gender}
                                                  onChange={(e) => setGender(e.target.value)}
                                     >
-                                        {genderList.map(row =>
-                                            <option value={row.toString()}>{row.toString()}</option>
+                                        {genderList.map((row,i) =>
+                                            <option key={i} value={row.toString()}>{row.toString()}</option>
                                         )}
                                     </Form.Select>
                                 </Form.Group>

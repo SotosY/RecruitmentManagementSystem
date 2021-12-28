@@ -178,7 +178,6 @@ const EmployerVacancyApplications = () => {
                                 className="btn btn-secondary"
                                 variant="primary"
                                 id="submit"
-                                href="javascript:void(0);"
                                 onClick={handleLogout}
                         >LOG OUT</button>
                     </div>
@@ -242,38 +241,40 @@ const EmployerVacancyApplications = () => {
                     </div>
                         <Table  striped bordered hover size="sm" id="sortTable">
                             <thead>
-                            {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
-                            <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(0))}>
-                                ID
-                                <i className={`-sort-${sort.toLowerCase()}`}></i>
-                            </th>
-                            <th className="th">
-                                First Name
-                            </th>
-                            <th className="th">
-                                Last Name
+                                <tr>
+                                {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
+                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(0))}>
+                                        ID
+                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                    </th>
+                                    <th className="th">
+                                        First Name
+                                    </th>
+                                    <th className="th">
+                                        Last Name
 
-                            </th>
-                            <th className="th">
-                                Email
+                                    </th>
+                                    <th className="th">
+                                        Email
 
-                            </th>
-                            <th className="th">
-                                Date Of Birth
-                            </th>
-                            <th className="th">
-                                CV
-                            </th>
-                            <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}>
-                                Cover Letter
-                            </th>
-                            <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(7))}>
-                                Status
-                                <i className={`-sort-${sort.toLowerCase()}`}></i>
-                            </th>
-                            <th>
-                                Actions
-                            </th>
+                                    </th>
+                                    <th className="th">
+                                        Date Of Birth
+                                    </th>
+                                    <th className="th">
+                                        CV
+                                    </th>
+                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}>
+                                        Cover Letter
+                                    </th>
+                                    <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(7))}>
+                                        Status
+                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
                             <tbody style={{lineHeight: size}}>
                             { paginatedData &&

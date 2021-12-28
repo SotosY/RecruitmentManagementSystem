@@ -134,7 +134,6 @@ const ApplicantApplication = () => {
                                     className="btn btn-secondary"
                                     variant="primary"
                                     id="submit"
-                                    href="javascript:void(0);"
                                     onClick={handleLogout}
                             >LOG OUT</button>
                         </div>
@@ -205,37 +204,39 @@ const ApplicantApplication = () => {
                         </div>
                             <Table  striped bordered hover size="sm" id="sortTable">
                                 <thead>
-                                    {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
-                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(0))}>
-                                        ID</th>
-                                    <th className="th" onClick={() => handleSorting(getColumnName(1))}>
-                                        Job Title
-                                    <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th className="th" onClick={() => handleSorting(getColumnName(2))}>
-                                        Department
+                                    <tr>
+                                        {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
+                                        <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(0))}>
+                                            ID</th>
+                                        <th className="th" onClick={() => handleSorting(getColumnName(1))}>
+                                            Job Title
                                         <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th className="th" onClick={() => handleSorting(getColumnName(3))}>
-                                        Company
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th className="th" onClick={() => handleSorting(getColumnName(5))}>
-                                        Managed By
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th className="th" onClick={() => handleSorting(getColumnName(4))}>
-                                        Location
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}} onClick={() => handleSorting(getColumnName(6))}>
-                                        Deadline Date
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(7))}>
-                                        Starting Date
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
+                                        </th>
+                                        <th className="th" onClick={() => handleSorting(getColumnName(2))}>
+                                            Department
+                                            <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                        </th>
+                                        <th className="th" onClick={() => handleSorting(getColumnName(3))}>
+                                            Company
+                                            <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                        </th>
+                                        <th className="th" onClick={() => handleSorting(getColumnName(5))}>
+                                            Managed By
+                                            <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                        </th>
+                                        <th className="th" onClick={() => handleSorting(getColumnName(4))}>
+                                            Location
+                                            <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                        </th>
+                                        <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}} onClick={() => handleSorting(getColumnName(6))}>
+                                            Deadline Date
+                                            <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                        </th>
+                                        <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(7))}>
+                                            Starting Date
+                                            <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                        </th>
+                                    </tr>
                                 </thead>
                                 <tbody style={{lineHeight: size}}>
                                 { paginatedData &&

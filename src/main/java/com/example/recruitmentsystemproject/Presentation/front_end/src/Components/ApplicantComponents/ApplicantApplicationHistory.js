@@ -48,11 +48,9 @@ const ApplicantApplicationHistory = () => {
     function handleSorting(col){
 
         if (sort === "ASC"){
-            console.log(col)
             const sorted =[...paginatedData].sort((a,b) =>
                 a[col]?.toString().toLowerCase() > b[col].toString().toLowerCase() ? 1: -1
             );
-            console.log(sorted)
             setPaginatedData(sorted);
             setSort("DESC");
         } else {
@@ -70,18 +68,15 @@ const ApplicantApplicationHistory = () => {
     }
 
     function handleAllChecked(){
-        console.log(columnName)
         setFilter(columns)
     }
 
     function handlePageClick(data){
         let currentPage = data.selected + 1
-        console.log(currentPage)
         pagination(currentPage)
     }
 
     function getColumnName(num) {
-        console.log(columns[num])
         return columns?.[num]
     }
 
@@ -89,7 +84,6 @@ const ApplicantApplicationHistory = () => {
 
         const col = filter;
         const lastCol = col.length-1
-        console.log(col)
 
         // switch (col[lastCol]){
         //     case 'applicationId':
@@ -178,7 +172,6 @@ const ApplicantApplicationHistory = () => {
                                     className="btn btn-secondary"
                                     variant="primary"
                                     id="submit"
-                                    href="javascript:void(0);"
                                     onClick={handleLogout}
                             >LOG OUT</button>
                         </div>
@@ -240,34 +233,36 @@ const ApplicantApplicationHistory = () => {
                 <div className="container-md">
                     <Table  striped bordered hover size="sm" id="sortTable">
                         <thead>
-                        {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
-                        <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(0))}>
-                            ID
-                            <i className={`-sort-${sort.toLowerCase()}`}></i>
-                        </th>
-                        <th className="th">
-                            Status
-                        </th>
-                        <th className="th">
-                            Job Title
-                        </th>
-                        <th className="th" >
-                            Company
-                        </th>
-                        <th className="th">
-                            Managed By
-                        </th>
-                        <th className="th" onClick={() => handleSorting(getColumnName(1))}>
-                            Apply Date
-                            <i className={`-sort-${sort.toLowerCase()}`}></i>
-                        </th>
-                        <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}>
-                            Expiry Date
-                        </th>
-                        <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(2))}>
-                            Application Status
-                            <i className={`-sort-${sort.toLowerCase()}`}></i>
-                        </th>
+                            <tr>
+                            {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
+                                <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(0))}>
+                                    ID
+                                    <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                </th>
+                                <th className="th">
+                                    Status
+                                </th>
+                                <th className="th">
+                                    Job Title
+                                </th>
+                                <th className="th" >
+                                    Company
+                                </th>
+                                <th className="th">
+                                    Managed By
+                                </th>
+                                <th className="th" onClick={() => handleSorting(getColumnName(1))}>
+                                    Apply Date
+                                    <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                </th>
+                                <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}>
+                                    Expiry Date
+                                </th>
+                                <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(2))}>
+                                    Application Status
+                                    <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody style={{lineHeight: size}}>
                         { paginatedData &&

@@ -36,7 +36,6 @@ const ApplicantDashboard = () => {
                         </div>
                         <div className='container-button'>
                             <button type="submit"
-                                    href="javascript:void(0);"
                                     onClick={handleLogout}
                                     className="btn btn-secondary"
                                     variant="primary"

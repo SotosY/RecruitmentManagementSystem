@@ -62,7 +62,7 @@ const ApplicantRegister = () => {
 
                         <div className='container-login-inside'>
 
-                            <Form.Group className="mt-1" controlId="First name">
+                            <Form.Group className="mt-1">
                                 <Form.Label>First name</Form.Label>
                                 <Form.Control type="text"
                                               placeholder="Enter your first name"
@@ -77,7 +77,7 @@ const ApplicantRegister = () => {
                                 {errors.firstName && (<small className="text-danger">{errors.firstName.message}</small>)}
                             </Form.Group>
 
-                            <Form.Group className="mt-3" controlId="Last name">
+                            <Form.Group className="mt-3">
                                 <Form.Label>Last name</Form.Label>
                                 <Form.Control type="text"
                                               placeholder="Enter your last name"
@@ -92,7 +92,7 @@ const ApplicantRegister = () => {
                                 {errors.lastName && (<small className="text-danger">{errors.lastName.message}</small>)}
                             </Form.Group>
 
-                            <Form.Group className="mt-3" controlId="formBasicEmail">
+                            <Form.Group className="mt-3">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control type="email"
                                               placeholder="Enter your email"
@@ -109,7 +109,7 @@ const ApplicantRegister = () => {
 
                             </Form.Group>
 
-                            <Form.Group className="mt-3" controlId="formBasicPassword">
+                            <Form.Group className="mt-3">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password"
                                               placeholder="Enter your password"

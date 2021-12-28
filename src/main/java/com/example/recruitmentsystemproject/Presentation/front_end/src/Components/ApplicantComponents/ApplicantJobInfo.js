@@ -50,7 +50,6 @@ const ApplicantJobInfo = () => {
                             <button type="submit"
                                     className="btn btn-secondary"
                                     variant="primary"
-                                    href="javascript:void(0);"
                                     onClick={handleLogout}
                                     id="submit">LOG OUT</button>
                         </div>

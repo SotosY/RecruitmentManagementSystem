@@ -120,7 +120,6 @@ const EmployerProfile = () => {
                         <button type="submit"
                                 className="btn btn-secondary"
                                 variant="primary"
-                                href="javascript:void(0);"
                                 onClick={handleLogout}
                                 id="submit">LOG OUT</button>
                     </div>
@@ -171,8 +170,8 @@ const EmployerProfile = () => {
                                              value={country}
                                              onChange={(e) => setCountry(e.target.value)}
                                 >
-                                    {countryList.map(row =>
-                                        <option value={row.toString()}>{row.toString()}</option>
+                                    {countryList.map((row,i) =>
+                                        <option key={i} value={row.toString()}>{row.toString()}</option>
                                     )}
                                 </Form.Select>
                             </Form.Group>

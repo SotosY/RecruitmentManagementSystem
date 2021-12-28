@@ -4,6 +4,7 @@ import './css/Login-Register.css';
 import {Link, Redirect, useHistory} from "react-router-dom";
 import {getErrorLogin, getLogin, loginEmployer} from "../Services/UserService";
 import {hotjar} from "react-hotjar";
+import axios from "axios";
 
 const UserLogin = () => {
 
@@ -29,7 +30,7 @@ const UserLogin = () => {
         const user = new FormData();
         user.append("username",username)
         user.append("password",password)
-
+        console.log(user)
         loginEmployer(user)
             .then(res => {
                     console.log("Data added successfully", res.data);
@@ -41,6 +42,7 @@ const UserLogin = () => {
                 history.push('/careers/applicant/dashboard')
                 // history.push('/careers/login')
             });
+
     }
         return (
             <main>

@@ -107,7 +107,6 @@ const ApplicantApply = () => {
                         <button type="submit"
                                 className="btn btn-secondary"
                                 variant="primary"
-                                href="javascript:void(0);"
                                 onClick={handleLogout}
                                 id="submit">LOG OUT</button>
                     </div>
@@ -144,8 +143,8 @@ const ApplicantApply = () => {
                                                  value={application.applicant?.gender}
                                                  onChange={(e) => {setGender(e.target.value); handleChange(e)}}
                                     >
-                                        {genderList.map(row =>
-                                            <option value={row.toString()}>{row.toString()}</option>
+                                        {genderList.map((row,i) =>
+                                            <option key={i} value={row.toString()}>{row.toString()}</option>
                                         )}
                                     </Form.Select>
                                     <Form.Label className="mt-3">Phone Number:</Form.Label>

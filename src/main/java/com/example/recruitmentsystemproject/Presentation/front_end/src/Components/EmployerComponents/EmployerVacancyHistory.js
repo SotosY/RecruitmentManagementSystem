@@ -140,7 +140,6 @@ const EmployerVacancyHistory = () => {
                                     className="btn btn-secondary"
                                     variant="primary"
                                     id="submit"
-                                    href="javascript:void(0);"
                                     onClick={handleLogout}
                             >LOG OUT</button>
                         </div>
@@ -197,33 +196,35 @@ const EmployerVacancyHistory = () => {
                             </div>
                                 <Table  striped bordered hover size="sm" id="sortTable">
                                     <thead>
-                                    {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
-                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(0))}>
-                                        ID</th>
-                                    <th className="th" onClick={() => handleSorting(getColumnName(1))}>
-                                        Status
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th className="th" onClick={() => handleSorting(getColumnName(2))}>
-                                        Job Title
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th className="th" onClick={() => handleSorting(getColumnName(6))}>
-                                        Managed By
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}} onClick={() => handleSorting(getColumnName(3))}>
-                                        Post Date
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}} onClick={() => handleSorting(getColumnName(4))}>
-                                        Active Date
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
-                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}  onClick={() => handleSorting(getColumnName(5))}>
-                                        Expired Date
-                                        <i className={`-sort-${sort.toLowerCase()}`}></i>
-                                    </th>
+                                        <tr>
+                                        {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
+                                            <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(0))}>
+                                                ID</th>
+                                            <th className="th" onClick={() => handleSorting(getColumnName(1))}>
+                                                Status
+                                                <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                            </th>
+                                            <th className="th" onClick={() => handleSorting(getColumnName(2))}>
+                                                Job Title
+                                                <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                            </th>
+                                            <th className="th" onClick={() => handleSorting(getColumnName(6))}>
+                                                Managed By
+                                                <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                            </th>
+                                            <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}} onClick={() => handleSorting(getColumnName(3))}>
+                                                Post Date
+                                                <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                            </th>
+                                            <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}} onClick={() => handleSorting(getColumnName(4))}>
+                                                Active Date
+                                                <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                            </th>
+                                            <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}  onClick={() => handleSorting(getColumnName(5))}>
+                                                Expired Date
+                                                <i className={`-sort-${sort.toLowerCase()}`}></i>
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody style={{lineHeight: size}}>
                                     { paginatedData &&

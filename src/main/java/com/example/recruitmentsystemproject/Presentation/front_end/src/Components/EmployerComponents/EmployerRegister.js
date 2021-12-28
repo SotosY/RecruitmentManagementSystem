@@ -103,8 +103,8 @@ const EmployerRegister = () => {
                                           id='company'
                                          {...register("company", { required: "Company is required" })}
                             >
-                                {companyList.map(row =>
-                                <option>{row.toString()}</option>
+                                {companyList.map((row,i) =>
+                                <option key={i}>{row.toString()}</option>
                                 )}
                             </Form.Select>
                             {errors.company && (<small className="text-danger">{errors.company.message}</small>)}
