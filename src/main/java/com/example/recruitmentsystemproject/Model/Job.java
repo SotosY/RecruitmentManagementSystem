@@ -24,6 +24,9 @@ public class Job {
     @Column(name = "job_id")
     private Long jobId;
 
+    /**
+     * A employer ID that will identify the employer
+     */
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "employer_id")
     private Employer employer;

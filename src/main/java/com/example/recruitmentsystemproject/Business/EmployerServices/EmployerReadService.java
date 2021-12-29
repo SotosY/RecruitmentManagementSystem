@@ -7,6 +7,17 @@ import java.util.Optional;
 
 public interface EmployerReadService {
 
+    /**
+     * Finds Employer by ID
+     * @param id
+     * @return Employer
+     */
     Optional<Employer> findById(Long id);
+
+    /**
+     * Finds Employer by User
+     * @param user
+     * @return Employer
+     */
     Optional<Employer> findByUser(User user);
 }

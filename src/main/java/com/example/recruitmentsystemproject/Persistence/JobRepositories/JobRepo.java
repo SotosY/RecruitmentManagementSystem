@@ -16,18 +16,41 @@ public class JobRepo {
         this.repository = repository;
     }
 
+
+    /**
+     * Find a job by id
+     * @param id
+     * @return job
+     */
     public Optional<Job> findById(Long id){
         return repository.findByJobId(id);
     }
 
+
+    /**
+     * Get a list of jobs by employer
+     * @param employer
+     * @return list of jobs
+     */
     public List<Job> findByEmployer(Employer employer){
         return repository.findByEmployer(employer);
     }
 
+
+    /**
+     * Get a list of jobs by status
+     * @param status
+     * @return list of jobs
+     */
     public List<Job> findByStatus(String status){
         return repository.findByStatus(status);
     }
 
+
+    /**
+     * Saves Job
+     * @param job
+     */
     public void saveJob(Job job){
         repository.save(job);
     }

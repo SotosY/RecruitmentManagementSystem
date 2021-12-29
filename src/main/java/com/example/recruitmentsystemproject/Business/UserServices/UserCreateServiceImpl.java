@@ -19,6 +19,11 @@ public class UserCreateServiceImpl implements UserCreateService{
         this.passwordEncoder = passwordEncoder;
     }
 
+
+    /**
+     * Saves User
+     * @param user
+     */
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -13,6 +13,10 @@ public class ApplicationCreateServiceImpl implements ApplicationCreateService {
         this.applicationRepo = applicationRepo;
     }
 
+    /**
+     * Save Application
+     * @param application
+     */
     @Override
     public void saveApplication(Application application) {
         applicationRepo.saveApplication(application);

@@ -64,6 +64,7 @@ public class EmployerController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    // POST Request - Registers an Employer
     @PostMapping("/register/e")
     public String registerEmployer(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
 
@@ -113,6 +114,7 @@ public class EmployerController {
         }
     }
 
+    // GET Request - Returns to Employer's dashboard
     @GetMapping("/employer/dashboard")
     public ResponseEntity<?> employerDashboard() {
 
@@ -128,6 +130,7 @@ public class EmployerController {
         return ResponseEntity.ok(employer);
     }
 
+    // GET Request - Returns to Employer's profile
     @GetMapping("/employer/profile")
     public Optional<Employer> employerProfile() {
 
@@ -142,6 +145,7 @@ public class EmployerController {
         return employer;
     }
 
+    // POST Request - Saves Employer's profile details
     @PostMapping("/employer/profile/save")
     public String saveEmployerProfileDetails(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
 
@@ -194,8 +198,7 @@ public class EmployerController {
         }
     }
 
-
-
+    // GET Request - Returns Employer's create new vacancy page
     @GetMapping("/employer/vacancies")
     public Job employerVacancy() {
         Job job = new Job();
@@ -205,6 +208,7 @@ public class EmployerController {
         return job;
     }
 
+    // POST Request - Saves Employer's new vacancy
     @PostMapping("/employer/vacancy/save")
     public String saveVacancyDetails(@RequestBody ObjectNode data, BindingResult bindingResult) {
 
@@ -270,7 +274,7 @@ public class EmployerController {
         }
     }
 
-
+    // GET Request - Returns to Employer's vacancy history page
     @GetMapping("/employer/vacancy-history")
     public List<Job> employerVacancyHistory() {
 
@@ -288,6 +292,7 @@ public class EmployerController {
         return jobs;
     }
 
+    // GET Request - Returns to Employer's specific vacancy
     @GetMapping("/employer/vacancy-history/{id}")
     public List<Application> getApplicationDetails(@PathVariable Long id) {
         Job job = jobReadService.findById(id).get();
@@ -295,6 +300,7 @@ public class EmployerController {
         return application;
     }
 
+    // POST Request - Accepts an applicant
     @PostMapping("/employer/vacancy-history/accept")
     public String acceptAnApplicant(@RequestBody ObjectNode data) {
         
@@ -308,6 +314,7 @@ public class EmployerController {
         return "redirect:/careers/employer/vacancy-history";
     }
 
+    // POST Request - Accepts an applicant
     @PostMapping("/employer/vacancy-history/reject")
     public String rejectAnApplicant(@RequestBody ObjectNode data) {
 
@@ -321,6 +328,7 @@ public class EmployerController {
         return "redirect:/careers/employer/vacancy-history";
     }
 
+    // GET Request - Download file page
     @GetMapping("/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request){
 

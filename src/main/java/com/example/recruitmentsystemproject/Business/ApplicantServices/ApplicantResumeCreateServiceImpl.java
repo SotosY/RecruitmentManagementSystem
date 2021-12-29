@@ -15,6 +15,10 @@ public class ApplicantResumeCreateServiceImpl implements ApplicantResumeCreateSe
         this.applicantResumeRepo = applicantResumeRepo;
     }
 
+    /**
+     * Saves Applicant Resume
+     * @param applicantResume
+     */
     @Override
     public void saveApplicantResume(ApplicantResume applicantResume) {
         applicantResumeRepo.saveApplicantResume(applicantResume);

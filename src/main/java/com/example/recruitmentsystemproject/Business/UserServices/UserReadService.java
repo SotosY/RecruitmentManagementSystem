@@ -7,9 +7,26 @@ import java.util.Optional;
 
 public interface UserReadService {
 
+    /**
+     * Finds a list of Users
+     * @return User list
+     */
     List<User> findAll();
-    Optional<User> findById(Long id);
-    Optional<User> findByEmail(String email);
 
+
+    /**
+     * Finds a User by ID
+     * @param id
+     * @return User
+     */
+    Optional<User> findById(Long id);
+
+
+    /**
+     * Finds a User by email
+     * @param email
+     * @return User
+     */
+    Optional<User> findByEmail(String email);
 
 }

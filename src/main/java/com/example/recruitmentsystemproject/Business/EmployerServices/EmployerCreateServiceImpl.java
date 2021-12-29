@@ -14,6 +14,10 @@ public class EmployerCreateServiceImpl implements EmployerCreateService{
         this.employerRepo = employerRepo;
     }
 
+    /**
+     * Saves Employer
+     * @param employer
+     */
     @Override
     public void saveEmployer(Employer employer) {
         employerRepo.saveEmployer(employer);

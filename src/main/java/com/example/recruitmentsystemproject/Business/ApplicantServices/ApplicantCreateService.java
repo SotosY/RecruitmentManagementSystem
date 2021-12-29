@@ -5,5 +5,9 @@ import com.example.recruitmentsystemproject.Model.ApplicantResume;
 
 public interface ApplicantCreateService {
 
+    /**
+     * Saves Applicant
+     * @param applicant
+     */
     void saveApplicant(Applicant applicant);
 }

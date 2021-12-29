@@ -17,14 +17,30 @@ public class ApplicantRepo {
         this.repository = repository;
     }
 
+    /**
+     * Find Applicant by ID
+     * @param id
+     * @return Applicant
+     */
     public Optional<Applicant> findById (Long id){
         return repository.findByApplicantId(id);
     }
 
+
+    /**
+     * Find Applicant by User
+     * @param user
+     * @return Applicant
+     */
     public Optional<Applicant> findByUser(User user){
         return repository.findByUser(user);
     }
 
+
+    /**
+     * Save Applicant
+     * @param applicant
+     */
     public void saveApplicant(Applicant applicant) {
         repository.save(applicant);
     }

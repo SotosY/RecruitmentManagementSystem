@@ -74,6 +74,7 @@ public class ApplicantController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    // POST Request - Registers an applicant
     @PostMapping("/register/a")
     public String registerApplicant(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
 
@@ -122,6 +123,7 @@ public class ApplicantController {
         }
     }
 
+    // GET Request - Returns to Applicant's dashboard
     @GetMapping("/applicant/dashboard")
     public ResponseEntity<?> applicantDashboard() {
 
@@ -152,6 +154,7 @@ public class ApplicantController {
        return ResponseEntity.ok(applicant);
     }
 
+    // GET Request - Returns to Applicant's profile
     @GetMapping("/applicant/profile")
     public ApplicantResume applicantProfile() {
 
@@ -171,6 +174,7 @@ public class ApplicantController {
         return applicantResume;
     }
 
+    // POST Request - Saves Applicant's profile details
     @PostMapping("/applicant/profile/save")
     public String saveApplicantProfileDetails(@RequestBody ObjectNode data, BindingResult bindingResult) {
 
@@ -217,12 +221,14 @@ public class ApplicantController {
 
     }
 
+    // GET Request - Returns to job details
     @GetMapping("/applicant/application/job/{id}")
     public Job getJob(@PathVariable Long id) {
         Job job = jobReadService.findById(id).get();
         return job;
     }
 
+    // GET Request - Returns to application form
     @GetMapping("/applicant/application/job/{id}/application")
     public Application getApplication (@PathVariable Long id) {
 
@@ -246,6 +252,7 @@ public class ApplicantController {
         return newApplication;
     }
 
+    // POST Request - Applies to the application
     @PostMapping("/applicant/application/job/apply")
     public String applyApplication(@RequestBody ObjectNode data) {
 
@@ -306,6 +313,7 @@ public class ApplicantController {
         return "redirect:/careers/applicant/application";
     }
 
+    // GET Request - Returns to Applicant's application history
     @GetMapping("/applicant/application-history")
     public List<Application> applicantApplicationHistory() {
 

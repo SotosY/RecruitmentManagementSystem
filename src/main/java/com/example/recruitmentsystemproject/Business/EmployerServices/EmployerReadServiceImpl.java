@@ -17,12 +17,22 @@ public class EmployerReadServiceImpl implements EmployerReadService {
         this.employerRepo = employerRepo;
     }
 
-
+    /**
+     * Find Employer by ID
+     * @param id
+     * @return Employer
+     */
     @Override
     public Optional<Employer> findById(Long id) {
         return employerRepo.findByEmployerId(id);
     }
 
+
+    /**
+     * Find Employer by User
+     * @param user
+     * @return Employer
+     */
     @Override
     public Optional<Employer> findByUser(User user) {
         return employerRepo.findByUser(user);

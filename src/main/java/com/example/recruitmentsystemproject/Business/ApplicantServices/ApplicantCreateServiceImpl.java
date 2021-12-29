@@ -18,6 +18,10 @@ public class ApplicantCreateServiceImpl implements ApplicantCreateService {
         this.applicantRepo = applicantRepo;
     }
 
+    /**
+     * Saves Applicant
+     * @param applicant
+     */
     @Override
     public void saveApplicant(Applicant applicant) {
         applicantRepo.saveApplicant(applicant);

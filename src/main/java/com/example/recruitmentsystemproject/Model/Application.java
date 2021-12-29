@@ -17,21 +17,30 @@ import javax.persistence.*;
 public class Application {
 
     /**
-     * An ID that will identify applicant's resume.
+     * An ID that will identify Application.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "application_id")
     private Long applicationId;
 
+    /**
+     * An Applicant ID that will identify the Applicant
+     */
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "applicantId")
     private Applicant applicant;
 
+    /**
+     * A resume ID that will identify the Applicant Resume
+     */
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "resumeId")
     private ApplicantResume applicantResume;
 
+    /**
+     * A Job ID that will identify the Job
+     */
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "jobId")
     private Job job;

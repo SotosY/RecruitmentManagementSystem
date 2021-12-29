@@ -13,12 +13,53 @@ import java.util.Optional;
 
 public interface ApplicationRepoJPA extends JpaRepository<Application, Long> {
 
+    /**
+     * Finds Application by ID
+     * @param id
+     * @return Application
+     */
     Optional<Application> findByApplicationId(Long id);
+
+
+    /**
+     * Finds Application by Job, Applicant
+     * @param job
+     * @param applicant
+     * @return Application
+     */
     Optional<Application> findByJobAndApplicant(Job job, Applicant applicant);
+
+
+    /**
+     * Finds a list of Applications by Applicant
+     * @param applicant
+     * @return Application list
+     */
     List<Application> findByApplicant(Applicant applicant);
+
+
+    /**
+     * Finds a list of Applications by Job
+     * @param job
+     * @return Application list
+     */
     List<Application> findByJob(Job job);
+
+
+    /**
+     * Finds a list of Application by Application status
+     * @param applicationStatus
+     * @return Application list
+     */
     List<Application> findByApplicationStatus(String applicationStatus);
 
+
+    /**
+     * Updates Application status by Status, Application ID, Applicant
+     * @param status
+     * @param applicationID
+     * @param applicant
+     */
     @Transactional
     @Modifying
     @Query("UPDATE #{#entityName} SET applicationStatus=?1 WHERE applicationId=?2 AND applicant=?3")

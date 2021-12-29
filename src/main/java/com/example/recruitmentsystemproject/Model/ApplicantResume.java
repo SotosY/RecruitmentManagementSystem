@@ -25,6 +25,9 @@ public class ApplicantResume {
     @Column(name = "resume_id")
     private Long resumeId;
 
+    /**
+     * An Applicant ID that will identify the Applicant
+     */
     @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "applicant_id")
     private Applicant applicant;

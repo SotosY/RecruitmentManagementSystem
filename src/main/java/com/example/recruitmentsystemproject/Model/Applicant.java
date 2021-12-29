@@ -25,6 +25,9 @@ public class Applicant {
     @Column(name = "applicant_id")
     private Long applicantId;
 
+    /**
+     * A User ID that will identify the user
+     */
     @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private User user;

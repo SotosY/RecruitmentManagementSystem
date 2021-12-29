@@ -15,6 +15,10 @@ public class JobCreateServiceImpl implements JobCreateService {
         this.jobRepo = jobRepo;
     }
 
+    /**
+     * Saves Job
+     * @param job
+     */
     @Override
     public void saveJob(Job job) {
         jobRepo.saveJob(job);

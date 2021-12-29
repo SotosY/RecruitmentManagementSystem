@@ -20,11 +20,21 @@ public class ApplicantReadServiceImpl implements ApplicantReadService {
         this.applicantRepo = applicantRepo;
     }
 
+    /**
+     * Finds Applicant by ID
+     * @param id
+     * @return applicant
+     */
     @Override
     public Optional<Applicant> findById(Long id) {
         return applicantRepo.findById(id);
     }
 
+    /**
+     * Finds Applicant by User
+     * @param user
+     * @return applicant
+     */
     @Override
     public Optional<Applicant> findByUser(User user) {
         return applicantRepo.findByUser(user);

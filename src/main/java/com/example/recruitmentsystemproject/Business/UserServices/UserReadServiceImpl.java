@@ -18,16 +18,33 @@ public class UserReadServiceImpl implements UserReadService {
         this.userRepo = repository;
     }
 
+
+    /**
+     * Finds a list of Users
+     * @return User list
+     */
     @Override
     public List<User> findAll() {
         return userRepo.findAll();
     }
 
+
+    /**
+     * Finds a User by ID
+     * @param id
+     * @return User
+     */
     @Override
     public Optional<User> findById(Long id) {
         return userRepo.findById(id);
     }
 
+
+    /**
+     * Finds a User by email
+     * @param email
+     * @return User
+     */
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepo.findByEmail(email);

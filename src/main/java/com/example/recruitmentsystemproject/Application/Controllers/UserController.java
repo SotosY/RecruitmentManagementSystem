@@ -34,6 +34,7 @@ public class UserController {
 
     private AuthenticationManager authenticationManager;
 
+    // GET Request - Returns Login page
     @GetMapping("/login")
     public ResponseEntity<?> login() {
 
@@ -59,6 +60,7 @@ public class UserController {
 //        return ResponseEntity.ok().build();
 //    }
 
+    // GET Request - Returns Error Login page
     @GetMapping("/login?error")
     public String loginError() {
         return "login";
@@ -99,16 +101,7 @@ public class UserController {
 //        return ResponseEntity.ok(theUser);
 //    }
 
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
-
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userReadService.findAll();
-    }
-
+    // GET Request - Returns a list of all active jobs
     @GetMapping
     public  List<Job> getAllJobs() {
         return jobReadService.findByStatus("Active");
