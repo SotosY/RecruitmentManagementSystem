@@ -7,6 +7,7 @@ import {registerEmployer} from "../../Services/UserService";
 import {hotjar} from "react-hotjar";
 import {useForm} from "react-hook-form";
 
+// Get Employer Register page
 const EmployerRegister = () => {
 
     const history = useHistory();
@@ -18,6 +19,7 @@ const EmployerRegister = () => {
         formState: {errors},
     } = useForm();
 
+    // Saves Employer's details
     const saveEmployerDetails = (e) => {
 
         const firstName = e.firstName
@@ -28,6 +30,7 @@ const EmployerRegister = () => {
 
         const user = {email, password, firstName, lastName, company}
 
+        // Calls registerEmployer service
         registerEmployer(user)
             .then(res => {
                 console.log("Data added successfully", res.data);
@@ -40,14 +43,18 @@ const EmployerRegister = () => {
             });
     }
 
+    // onSubmit functionality
     const onSubmit = (e) => {
         saveEmployerDetails(e)
     }
 
+    // UseEffect functionality
     useEffect( () => {
-        hotjar.initialize(2738985, 6);
-    }, [] )
 
+        // Initialize Hotjar
+        hotjar.initialize(2738985, 6);
+
+    }, [] )
 
     return (
         <div>

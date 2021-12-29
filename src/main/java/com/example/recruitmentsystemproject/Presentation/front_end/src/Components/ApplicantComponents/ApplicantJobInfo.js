@@ -6,6 +6,7 @@ import {HiOutlineChevronRight} from "react-icons/hi";
 import {HiOutlineChevronDoubleRight} from "react-icons/hi";
 import {hotjar} from "react-hotjar";
 
+// Get Job Details page
 const ApplicantJobInfo = () => {
 
     const [job, setJob] = useState("");
@@ -13,23 +14,34 @@ const ApplicantJobInfo = () => {
     const history = useHistory();
     const getId = location.state;
 
+    // Get Job details
     const getJob = () => {
+
+        // Calls Jobs Details service
         getJobDetails(getId).then((res) => {
             const data = res.data;
             setJob(data)
         })
     }
 
+    // UseEffect functionality
     useEffect( () => {
+
+        // Calls getJob
         getJob();
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [] )
 
+    // Shows Job details
     function handleJobInfo(id){
         history.push({pathname:`/careers/applicant/application/job/${id}/application`,
             state:id})
     }
 
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";

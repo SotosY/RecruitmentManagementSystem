@@ -8,6 +8,7 @@ import {getEmployerDetails, saveEmployerProfileDetails} from "../../Services/Emp
 import {useHistory} from "react-router-dom";
 import {hotjar} from "react-hotjar";
 
+// Get Employer Profile page
 const EmployerProfile = () => {
 
     const [employer, setEmployer] = useState("");
@@ -26,7 +27,10 @@ const EmployerProfile = () => {
 
     const history = useHistory();
 
+    // Get Employer's Profile details
     const getEmployer = () => {
+
+        // Calls getEmployerDetails service
         getEmployerDetails().then((res) => {
             const data = res.data;
             setEmployer(data)
@@ -46,16 +50,24 @@ const EmployerProfile = () => {
             })
     }
 
+    // UseEffect functionality
     useEffect( () => {
+
+        // Calls getEmployer
         getEmployer();
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [] )
 
+    // Saves Employer's Profile details
     const saveEmployerProfile = (e) => {
         e.preventDefault();
 
         const employer = {address, city, country, postcode, contactName, businessType, companyEmail, telephoneNumber, companyProfile}
 
+        // Calls saveEmployerProfileDetails service
         saveEmployerProfileDetails(employer)
             .then(res => {
                 console.log("Data added successfully", res.data);
@@ -68,6 +80,7 @@ const EmployerProfile = () => {
 
     }
 
+    // Updates field functionality
     function handleChange(event) {
         const value = event.target.value;
         setEmployer({
@@ -76,34 +89,28 @@ const EmployerProfile = () => {
         });
     }
 
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";
     }
 
-    function isSet(actualVal, defaultVal){
-        if(typeof actualVal != 'undefined'){
-            return actualVal;
-        }
-        console.log('The actual value is undefined. This is the default one');
-        return defaultVal;
-    }
-
+    // Scroll functionality
     const handleScroll = () => {
         window.scrollTo({top: 0, behavior: "smooth"})
     }
 
+    // Modal close functionality
     const handleClose = () => {
         handleScroll()
         setShow(false);
     }
 
+    // Modal show functionality
     const handleShow = (e) => {
         e.preventDefault();
         setShow(true);
     }
-
-
 
         return (
 

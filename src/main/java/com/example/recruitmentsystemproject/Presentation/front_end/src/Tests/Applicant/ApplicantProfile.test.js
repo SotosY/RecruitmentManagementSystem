@@ -1,7 +1,7 @@
 //Renders page
 import ReactDom from "react-dom";
 import {BrowserRouter} from "react-router-dom";
-import UserLogin from "../../Components/UserLogin";
+import UserLogin from "../../Components/UserComponents/UserLogin";
 import React from "react";
 import ApplicantProfile from "../../Components/ApplicantComponents/ApplicantProfile";
 

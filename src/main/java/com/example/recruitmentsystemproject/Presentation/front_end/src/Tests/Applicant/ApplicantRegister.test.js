@@ -1,6 +1,6 @@
 import ReactDom from "react-dom";
 import {BrowserRouter} from "react-router-dom";
-import Header from "../../Components/Header";
+import Header from "../../Components/UserComponents/Header";
 import React from "react";
 import ApplicantRegister from "../../Components/ApplicantComponents/ApplicantRegister";
 

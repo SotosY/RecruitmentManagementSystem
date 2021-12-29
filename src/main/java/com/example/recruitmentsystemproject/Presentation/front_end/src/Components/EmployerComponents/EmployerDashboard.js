@@ -3,10 +3,15 @@ import '../css/Breadcrumb.css';
 import {Link} from "react-router-dom";
 import {hotjar} from "react-hotjar";
 
+// Get Employer Dashboard page
 class EmployerDashboard extends Component {
 
+    // ComponentDidMount functionality
     async componentDidMount() {
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }
 
     render() {

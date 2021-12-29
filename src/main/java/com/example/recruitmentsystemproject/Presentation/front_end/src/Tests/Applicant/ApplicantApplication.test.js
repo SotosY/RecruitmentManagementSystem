@@ -1,11 +1,11 @@
 //Renders page
 import ReactDom from "react-dom";
 import {BrowserRouter} from "react-router-dom";
-import UserLogin from "../../Components/UserLogin";
+import UserLogin from "../../Components/UserComponents/UserLogin";
 import React from "react";
 import ApplicantApplication from "../../Components/ApplicantComponents/ApplicantApplication";
 import {act, render} from "@testing-library/react";
-import JobListComponent from "../../Components/JobListComponent";
+import JobListComponent from "../../Components/UserComponents/JobListComponent";
 
 let container;
 

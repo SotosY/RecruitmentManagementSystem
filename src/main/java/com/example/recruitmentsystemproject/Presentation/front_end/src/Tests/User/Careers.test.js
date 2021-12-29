@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDom, {unmountComponentAtNode} from 'react-dom';
-import JobListComponent from "../Components/JobListComponent";
+import JobListComponent from "../../Components/UserComponents/JobListComponent";
 import {act, render} from "@testing-library/react";
 import {BrowserRouter} from "react-router-dom";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+import Header from "../../Components/UserComponents/Header";
+import Footer from "../../Components/UserComponents/Footer";
 
 let container;
 

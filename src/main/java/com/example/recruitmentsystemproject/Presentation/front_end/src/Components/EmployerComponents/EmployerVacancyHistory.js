@@ -8,7 +8,7 @@ import {BiSelectMultiple} from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import {hotjar} from "react-hotjar";
 
-
+// Get vacancy history page
 const EmployerVacancyHistory = () => {
 
     const [jobs, setJobs] = useState([]);
@@ -24,8 +24,10 @@ const EmployerVacancyHistory = () => {
     const pageSize = 10;
     const pageCount = jobs? Math.ceil(jobs.length/pageSize) :0;
 
-
+    // Get all vacancies
     const getVacancies = () => {
+
+        // Calls getVacancyHistoryPage service
         getVacancyHistoryPage().then((res) => {
             const data = res.data
             setJobs(data)
@@ -33,11 +35,18 @@ const EmployerVacancyHistory = () => {
         })
     }
 
+    // UseEffect functionality
     useEffect(() => {
+
+        // Calls getVacancies
         getVacancies()
+
+        // Initializes Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [])
 
+    // Filter By functionality
     function search(rows) {
         return rows.filter(
             (row) =>
@@ -45,10 +54,12 @@ const EmployerVacancyHistory = () => {
         );
     }
 
+    // Get column name from a list functionality
     function getColumnName(num) {
         return columns[num]
     }
 
+    // Sort By functionality
     function handleSorting(col){
 
         if (sort === "ASC"){
@@ -68,21 +79,25 @@ const EmployerVacancyHistory = () => {
         }
     }
 
+    // Checked/Unchecked functionality
     function handleChecked(column){
         const checked = filter.includes(column)
         setFilter(prevState => checked ? prevState.filter(sc => sc !== column): [...prevState, column])
     }
 
+    // Checks all boxes functionality
     function handleAllChecked(){
         setFilter(columns)
     }
 
+    // Current page for pagination functionality
     function handlePageClick(data){
         let currentPage = data.selected + 1
         console.log(currentPage)
         pagination(currentPage)
     }
 
+    // Shows application's details
     function handleApplication(id){
         history.push({pathname:`/careers/employer/vacancy-history/${id}`,
             state:id})
@@ -91,6 +106,7 @@ const EmployerVacancyHistory = () => {
     /**
      * Code adapted from tutorial at https://www.youtube.com/watch?v=kEd81ZirrCY
      */
+    // Pagination functionality
     const pagination = (pageNo) => {
 
         const startIndex = (pageNo - 1) * pageSize;
@@ -101,6 +117,7 @@ const EmployerVacancyHistory = () => {
     /**
      * Code adapted from examples at https://stackoverflow.com/questions/58601704/adding-a-icon-to-react-bootstrap-dropdown [Accessed: 20 November 2021]
      */
+    // LineSpacing Icon functionality
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <div
             href=""
@@ -118,6 +135,7 @@ const EmployerVacancyHistory = () => {
     /**
      * Code adapted from examples at https://www.powerupcloud.com/securing-spring-boot-and-react-js-with-spring-security-using-jwt-authentication/ [Accessed: 15 November 2021]
      */
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";

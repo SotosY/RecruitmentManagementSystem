@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Nav, Navbar} from "react-bootstrap";
 import "tailwindcss/tailwind.css";
-import Logo from "./files/cycom_logo.png";
-import './css/Header.css';
+import Logo from "../files/cycom_logo.png";
+import '../css/Header.css';
 
 class Header extends Component {
 

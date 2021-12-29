@@ -6,6 +6,7 @@ import "tailwindcss/tailwind.css";
 import '../css/Application.css';
 import {hotjar} from "react-hotjar";
 
+// Get Applicant Apply page
 const ApplicantApply = () => {
 
     const [application, setApplication] = useState("");
@@ -21,13 +22,14 @@ const ApplicantApply = () => {
     const [url, setUrl] = useState("");
     const location = useLocation();
     const getId = location.state;
-    const history = useHistory();
 
     const genderList = ["Please select a gender", "Male", "Female", "Other"]
-
     const [show, setShow] = useState(false);
 
+    // Get Application form
     const getApplication = () => {
+
+        // Calls getApplicantApply service
         getApplicantApply(getId).then((res) => {
             const data = res.data;
             setApplication(data)
@@ -43,11 +45,13 @@ const ApplicantApply = () => {
         })
     }
 
+    // Apply application
     const applyApplication = (e) => {
         e.preventDefault();
 
-
         const application = {applicationId, dateOfBirth, gender, phoneNumber, education, experience, cv, coverLetter}
+
+        // Calls applyApplicantApplication service
         applyApplicantApplication(application)
             .then(res => {
                 console.log("Data added successfully", res.data);
@@ -59,11 +63,18 @@ const ApplicantApply = () => {
 
     }
 
+    // UseEffect functionality
     useEffect( () => {
+
+        // Calls getApplication
         getApplication();
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [] )
 
+    // Updates a field functionality
     function handleChange(event) {
         const value = event.target.value;
         setApplication({
@@ -72,20 +83,24 @@ const ApplicantApply = () => {
         });
     }
 
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";
     }
 
+    // Scroll functionality
     const handleScroll = () => {
         window.scrollTo({top: 0, behavior: "smooth"})
     }
 
+    // Modal close functionality
     const handleClose = () => {
         handleScroll();
         setShow(false);
     }
 
+    // Modal show functionality
     const handleShow = (e) => {
         e.preventDefault();
         setShow(true);

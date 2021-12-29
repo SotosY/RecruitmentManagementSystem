@@ -11,30 +11,40 @@ import _ from "lodash/fp";
 import {useHistory} from "react-router-dom";
 import {hotjar} from "react-hotjar";
 
+// Get Application page
 const ApplicantApplication = () => {
 
     const [data, setData] = useState([]);
     const [paginatedData, setPaginatedData] = useState([]);
+
     const [query, setQuery] = useState("");
     const [filter, setFilter] = useState(["title"]);
     const [size, setSize] = useState("40px");
     const [sort, setSort] = useState("ASC");
-    const history = useHistory();
 
     const columns = ["jobId", "title", "department", "company", "location", "managedBy" , "expiryDate", "startingDate"]
     const pageSize = 10;
     const pageCount = data? Math.ceil(data.length/pageSize) :0;
 
+    const history = useHistory();
+
+    // UseEffect functionality
     useEffect(() => {
+
+        // Calls getJobs service
         getJobs().then((res => {
                 const data = res.data;
                 setData(data);
                 setPaginatedData(_(data).slice(0).take(pageSize).value());
             }
         ))
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [])
 
+    // Filter by search functionality
     function search(rows) {
         return rows.filter(
             (row) =>
@@ -42,10 +52,12 @@ const ApplicantApplication = () => {
         );
     }
 
+    // Gets column name from list
     function getColumnName(num) {
         return columns[num]
     }
 
+    // Sort By functionality
     function handleSorting(col){
         if (sort === "ASC"){
             const sorted =[...paginatedData].sort((a,b) =>
@@ -62,21 +74,24 @@ const ApplicantApplication = () => {
         }
     }
 
+    // Check/Uncheck boxes functionality
     function handleChecked(column){
         const checked = filter.includes(column)
         setFilter(prevState => checked ? prevState.filter(sc => sc !== column): [...prevState, column])
     }
 
+    // Checks all checkboxes
     function handleAllChecked(){
         setFilter(columns)
     }
 
+    // Sets current page for pagination functionality
     function handlePageClick(data){
         let currentPage = data.selected + 1
-        console.log(currentPage)
         pagination(currentPage)
     }
 
+    // Shows Job's information
     function handleJobInfo(id){
         history.push({pathname:`/careers/applicant/application/job/${id}`,
         state:id})
@@ -85,6 +100,7 @@ const ApplicantApplication = () => {
     /**
      * Code adapted from tutorial at https://www.youtube.com/watch?v=kEd81ZirrCY
      */
+    // Pagination functionality
     const pagination = (pageNo) => {
 
         const startIndex = (pageNo - 1) * pageSize;
@@ -95,6 +111,7 @@ const ApplicantApplication = () => {
     /**
      * Code adapted from examples at https://stackoverflow.com/questions/58601704/adding-a-icon-to-react-bootstrap-dropdown [Accessed: 20 November 2021]
      */
+    // LineSpacing Icon functionality
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <div
             href=""
@@ -112,6 +129,7 @@ const ApplicantApplication = () => {
     /**
      * Code adapted from examples at https://www.powerupcloud.com/securing-spring-boot-and-react-js-with-spring-security-using-jwt-authentication/ [Accessed: 15 November 2021]
      */
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";

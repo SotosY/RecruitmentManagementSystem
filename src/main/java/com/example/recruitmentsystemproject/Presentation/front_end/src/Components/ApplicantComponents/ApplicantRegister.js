@@ -6,6 +6,7 @@ import {registerApplicant} from "../../Services/UserService";
 import {hotjar} from "react-hotjar";
 import {useForm} from "react-hook-form";
 
+// Get Applicant Register Page
 const ApplicantRegister = () => {
 
     const history = useHistory();
@@ -16,6 +17,7 @@ const ApplicantRegister = () => {
         formState: {errors},
     } = useForm();
 
+    // Saves Applicant's details functionality
     const saveApplicantDetails = (e) => {
 
         const firstName = e.firstName
@@ -25,6 +27,7 @@ const ApplicantRegister = () => {
 
         const user = {email, password, firstName, lastName}
 
+        // Calls registerApplicant service
         registerApplicant(user)
             .then(res => {
                 console.log("Data added successfully", res.data);
@@ -37,12 +40,19 @@ const ApplicantRegister = () => {
             });
     }
 
+    // On Submit functionality
     const onSubmit = (e) => {
+
+        // Calls saveApplicantDetails
         saveApplicantDetails(e)
     }
 
+    // UseEffect functionality
     useEffect( () => {
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [] )
 
         return (

@@ -53,12 +53,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         HttpMethod.GET, "index*", "/static/**", "/*.js", "/*.json","/*.ico"
                 ).permitAll()
-//                .antMatchers(HttpMethod.OPTIONS,"/careers/applicant/**").hasAuthority("APPLICANT")
-//                .antMatchers(HttpMethod.OPTIONS,"/careers/employer/**").hasAuthority("EMPLOYER")
-//                .antMatchers("/",
-//                        "/careers",
-//                        "/careers/register/e"
-//                ).permitAll()
+                .antMatchers(HttpMethod.OPTIONS,"/careers/applicant/**").hasAuthority("APPLICANT")
+                .antMatchers(HttpMethod.OPTIONS,"/careers/employer/**").hasAuthority("EMPLOYER")
+                .antMatchers("/",
+                        "/careers",
+                        "/careers/register/e"
+                ).permitAll()
                 .and()
                 .formLogin().loginPage("/careers/login")
                 .successHandler(simpleAuthenticationSuccessHandler())

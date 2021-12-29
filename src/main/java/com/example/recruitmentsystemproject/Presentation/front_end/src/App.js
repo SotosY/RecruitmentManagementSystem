@@ -1,10 +1,10 @@
 import './Components/css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import JobListComponent from "./Components/JobListComponent";
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
-import LoginComponent from "./Components/UserLogin";
+import JobListComponent from "./Components/UserComponents/JobListComponent";
+import Header from "./Components/UserComponents/Header";
+import Footer from "./Components/UserComponents/Footer";
+import LoginComponent from "./Components/UserComponents/UserLogin";
 import ApplicantDashboard from "./Components/ApplicantComponents/ApplicantDashboard";
 import ApplicantProfile from "./Components/ApplicantComponents/ApplicantProfile";
 import ApplicantApplication from "./Components/ApplicantComponents/ApplicantApplication";
@@ -18,10 +18,11 @@ import EmployerProfile from "./Components/EmployerComponents/EmployerProfile";
 import EmployerVacancy from "./Components/EmployerComponents/EmployerVacancy";
 import EmployerVacancyHistory from "./Components/EmployerComponents/EmployerVacancyHistory";
 import EmployerVacancyApplications from "./Components/EmployerComponents/EmployerVacancyApplications";
-import NotFound from "./Components/NotFound";
+import NotFound from "./Components/UserComponents/NotFound";
 
 
 
+// Single Page Application
 function App() {
 
   return (

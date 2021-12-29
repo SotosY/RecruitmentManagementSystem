@@ -4,22 +4,33 @@ import {Link} from "react-router-dom";
 import {getApplicantDashboard} from "../../Services/ApplicantService";
 import {hotjar} from "react-hotjar";
 
+// Get Applicant Dashboard page
 const ApplicantDashboard = () => {
 
     const [applicant, setApplicant] = useState("");
 
+    // Get Applicant
     const getApplicant = () =>{
+
+        // Calls getApplicantDashboard service
         getApplicantDashboard().then((res) =>{
         const data = res.data;
         setApplicant(data)
         })
     }
 
+    //UseEffect functionality
     useEffect( () => {
+
+        // Calls getApplicant
         getApplicant();
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [] )
 
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";

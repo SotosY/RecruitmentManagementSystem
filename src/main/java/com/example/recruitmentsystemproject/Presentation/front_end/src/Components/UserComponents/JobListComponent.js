@@ -1,8 +1,8 @@
 import React, {Component, useState} from 'react';
-import './css/Breadcrumb.css';
+import '../css/Breadcrumb.css';
 import {Table, DropdownButton, ButtonGroup, Dropdown, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {getJobs} from "../Services/UserService";
+import {getJobs} from "../../Services/UserService";
 import _ from "lodash/fp";
 import { hotjar } from 'react-hotjar';
 
@@ -24,8 +24,10 @@ class JobListComponent extends Component {
         }
     }
 
+    // componentDidMount functionality
     async componentDidMount() {
 
+        // Calls getJobs service
         await getJobs()
             .then((res) => {
                 const data = res.data;
@@ -36,13 +38,14 @@ class JobListComponent extends Component {
                 this.handleTables(1)
             });
 
+        // Initialize hotjar
         hotjar.initialize(2738985, 6);
 
         // Add an event
         hotjar.event(this.handleChange);
     }
 
-
+    // Get company functionality
     getCompany() {
         const company = this.state.jobs
             .map(dataItem => dataItem.company) // get all company names
@@ -61,6 +64,7 @@ class JobListComponent extends Component {
         console.log(this.state.groupByCompany)
     }
 
+    // Get title functionality
     getTitle() {
         const title = this.state.jobs
             .map(dataItem => dataItem.title) // get all job title names
@@ -80,6 +84,7 @@ class JobListComponent extends Component {
         console.log(this.state.groupByTitle)
     }
 
+    // Handle table Checked/Unchecked functionality
     handleTables(num) {
         if (num == 1) {
             this.setState({table: this.state.groupByCompany})
@@ -90,10 +95,12 @@ class JobListComponent extends Component {
         }
     }
 
+    // Handle Checked boxes functionality
     handleChecked(num) {
         this.handleTables(num);
     }
 
+    // Handle Checked/Unchecked functionality
     handleChange = () => {
         if (this.state.checked[0] == true) {
             this.setState({checked: [false, true]})
@@ -103,7 +110,6 @@ class JobListComponent extends Component {
     }
 
     render() {
-
         return (
             <main>
                 <section className='section-outside'>

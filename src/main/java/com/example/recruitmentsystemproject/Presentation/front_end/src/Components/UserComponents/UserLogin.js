@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Form} from "react-bootstrap";
-import './css/Login-Register.css';
+import '../css/Login-Register.css';
 import {Link, Redirect, useHistory} from "react-router-dom";
-import {getErrorLogin, getLogin, loginEmployer} from "../Services/UserService";
+import {getErrorLogin, getLogin, loginEmployer} from "../../Services/UserService";
 import {hotjar} from "react-hotjar";
 import axios from "axios";
 
+// Login Page functionality
 const UserLogin = () => {
 
     const [session, setSession] = useState()
@@ -14,23 +15,34 @@ const UserLogin = () => {
     const [roles, setRoles] = useState('');
     const history = useHistory();
 
+    // Get Login form
     const getLoginHeader = () => {
+
+        // Calls getLogin service
         getLogin().then((res) => {
         })
     }
 
+    // UseEffect functionality
     useEffect( () => {
+
+        // Calls getLoginHeader
         getLoginHeader();
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [] )
 
+    // Submit login details
     const loginUser = (e) => {
         e.preventDefault();
 
         const user = new FormData();
         user.append("username",username)
         user.append("password",password)
-        console.log(user)
+
+        // Calls login user functionality
         loginEmployer(user)
             .then(res => {
                     console.log("Data added successfully", res.data);
@@ -42,8 +54,8 @@ const UserLogin = () => {
                 history.push('/careers/applicant/dashboard')
                 // history.push('/careers/login')
             });
-
     }
+
         return (
             <main>
                 <section className='section-outside'>

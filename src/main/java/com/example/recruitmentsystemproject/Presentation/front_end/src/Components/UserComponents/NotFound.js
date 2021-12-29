@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './css/Error.css';
+import '../css/Error.css';
 import {withRouter} from "react-router-dom";
 
 class NotFound extends Component {
@@ -9,12 +9,12 @@ class NotFound extends Component {
         this.goBack = this.goBack.bind(this);
     }
 
+    // Return to previous page functionality
     goBack(){
         this.props.history.goBack();
     }
 
     render() {
-
         return (
             <div>
                 <main className='container'>

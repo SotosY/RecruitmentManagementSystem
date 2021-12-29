@@ -7,9 +7,7 @@ import {useHistory} from "react-router-dom";
 import {getApplicantDetails, saveApplicantProfileDetails} from "../../Services/ApplicantService";
 import {hotjar} from "react-hotjar";
 
-
-
-
+// Get Applicant Profile page
 const ApplicantProfile = () => {
 
     const [applicant, setApplicant] = useState("");
@@ -29,8 +27,10 @@ const ApplicantProfile = () => {
 
     const history = useHistory();
 
-
+    // Get Applicant functionality
     const getApplicant = () => {
+
+        // Calls getApplicantDetails service
         getApplicantDetails().then((res) => {
             const data = res.data;
             setApplicant(data)
@@ -50,16 +50,25 @@ const ApplicantProfile = () => {
             })
     }
 
+    // UseEffect functionality
     useEffect( () => {
+
+        // Calls getApplicant
         getApplicant();
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [] )
 
+    // Saves Applicant details
     const saveApplicantProfile = (e) => {
+
         e.preventDefault();
 
         const applicant = {address, city, country, postcode, dateOfBirth, gender, phoneNumber, education, experience}
 
+        // Calls saveApplicantProfileDetails service
         saveApplicantProfileDetails(applicant)
             .then(res => {
                 console.log("Data added successfully", res.data);
@@ -72,6 +81,7 @@ const ApplicantProfile = () => {
 
     }
 
+    // Updates a field functionality
     function handleChange(event) {
         const value = event.target.value;
         setApplicant({
@@ -80,28 +90,24 @@ const ApplicantProfile = () => {
         });
     }
 
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";
     }
 
-    function isSet(actualVal, defaultVal){
-        if(typeof actualVal != 'undefined'){
-            return actualVal;
-        }
-        console.log('The actual value is undefined. This is the default one');
-        return defaultVal;
-    }
-
+    // Scroll functionality
     const handleScroll = () => {
         window.scrollTo({top: 0, behavior: "smooth"})
     }
 
+    // Modal close functionality
     const handleClose = () => {
         handleScroll();
         setShow(false);
     }
 
+    // Modal show functionality
     const handleShow = (e) => {
         e.preventDefault();
         setShow(true);

@@ -8,6 +8,7 @@ import {BiSelectMultiple} from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import {hotjar} from "react-hotjar";
 
+// Get Applicant Application History page
 const ApplicantApplicationHistory = () => {
 
     const [applications, setApplications] = useState([]);
@@ -16,14 +17,16 @@ const ApplicantApplicationHistory = () => {
     const [filter, setFilter] = useState(["applicationId"]);
     const [size, setSize] = useState("40px");
     const [sort, setSort] = useState("ASC");
-    const history = useHistory();
 
     const columns = ["applicationId", "applyDate", "applicationStatus"]
     const columnName = applications[0] && Object.keys(applications[0])
     const pageSize = 10;
     const pageCount = applications? Math.ceil(applications.length/pageSize) :0;
 
+    // Get applied applications
     const getApplication = () => {
+
+        // Calls getApplicationHistory service
         getApplicationHistory().then((res => {
                 const data = res.data
                 setApplications(data);
@@ -35,16 +38,18 @@ const ApplicantApplicationHistory = () => {
             })
     }
 
+    // UseEffect functionality
     useEffect(() => {
+
+        // Call getApplication
         getApplication()
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [])
 
-
-    function handleSearch(data) {
-        return search(data)
-    }
-
+    // Sort By functionality
     function handleSorting(col){
 
         if (sort === "ASC"){
@@ -62,69 +67,39 @@ const ApplicantApplicationHistory = () => {
         }
     }
 
+    // Checked/Unchecked boxes functionality
     function handleChecked(column){
         const checked = filter.includes(column)
         setFilter(prevState => checked ? prevState?.filter(sc => sc !== column): [...prevState, column])
     }
 
+    // Checks all boxes functionality
     function handleAllChecked(){
         setFilter(columns)
     }
 
+    // Current page pagination functionality
     function handlePageClick(data){
         let currentPage = data.selected + 1
         pagination(currentPage)
     }
 
+    // Get column name from a list
     function getColumnName(num) {
         return columns?.[num]
     }
 
+    // Filter by functionality
     function search(rows) {
 
-        const col = filter;
-        const lastCol = col.length-1
-
-        // switch (col[lastCol]){
-        //     case 'applicationId':
-        //         return rows.filter(
-        //             (row) =>
-        //                 row.applicationId.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
-        //         );
-        //     case 'status':
-        //         return rows.filter(
-        //             (row) =>
-        //                 row.job?.status.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
-        //         );
-        //     case 'title':
-        //         return rows.filter(
-        //             (row) =>
-        //                 row.job?.title.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
-        //         );
-        //     default:
-        //         return rows.filter(
-        //             (row) =>
-        //                 row?.applicationId.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-        //                 row?.job?.status?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-        //                 row?.job?.title?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-        //                 row?.job?.managedBy?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
-        //         );
-        //
-        // }
         return rows.filter(
-            // (row) =>
-            //     row?.applicationId.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-            //     row?.job?.status?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-            //     row?.job?.title?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-            //     row?.job?.managedBy?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
-            //     row?.applyDate.toString().indexOf(query.toLowerCase()) > -1
-
             (row) =>
                 filter.some(column => row[column]?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 )
         );
 
     }
 
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";
@@ -133,6 +108,7 @@ const ApplicantApplicationHistory = () => {
     /**
      * Code adapted from tutorial at https://www.youtube.com/watch?v=kEd81ZirrCY
      */
+    // Pagination functionality
     const pagination = (pageNo) => {
 
         const startIndex = (pageNo - 1) * pageSize;
@@ -143,6 +119,7 @@ const ApplicantApplicationHistory = () => {
     /**
      * Code adapted from examples at https://stackoverflow.com/questions/58601704/adding-a-icon-to-react-bootstrap-dropdown [Accessed: 20 November 2021]
      */
+    // LineSpacing Icon functionality
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <div
             href=""

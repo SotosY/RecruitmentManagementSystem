@@ -2,18 +2,16 @@ import {useHistory, useLocation} from "react-router-dom";
 import {
     acceptAnApplicant,
     getApplicationDetails,
-    getVacancyHistoryPage,
     rejectAnApplicant
 } from "../../Services/EmployerService";
 import _ from "lodash/fp";
 import React, {useEffect, useState} from "react";
 import {MdFormatLineSpacing} from "react-icons/md";
 import {Dropdown, Form, Table} from "react-bootstrap";
-import {BiSelectMultiple} from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import {hotjar} from "react-hotjar";
 
-
+// Get a specific application page
 const EmployerVacancyApplications = () => {
 
     const [applications, setApplications] = useState([]);
@@ -30,8 +28,10 @@ const EmployerVacancyApplications = () => {
     const pageSize = 10;
     const pageCount = applications? Math.ceil(applications.length/pageSize) :0;
 
-
+    // Get Application details
     const getApplications = () => {
+
+        // Calls getApplicationDetails service
         getApplicationDetails(getId).then((res) => {
             const data = res.data
             setApplications(data)
@@ -39,16 +39,20 @@ const EmployerVacancyApplications = () => {
         })
     }
 
+    // UseEffect functionality
     useEffect(() => {
+
+        // Calls getApplications
         getApplications()
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [])
 
+    // Filter By functionality
     function search(rows) {
-
         return rows.filter(
-            // (row) =>
-            //     filter.some(column => row[column]?.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 )
 
                 (row) =>
                     row.applicant?.applicantId.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
@@ -62,10 +66,12 @@ const EmployerVacancyApplications = () => {
         );
     }
 
+    // Get Column name from a list
     function getColumnName(num) {
         return columns[num]
     }
 
+    // Sort By functionality
     function handleSorting(col){
         if (sort === "ASC"){
             const sorted =[...paginatedData].sort((a,b) =>
@@ -82,54 +88,45 @@ const EmployerVacancyApplications = () => {
         }
     }
 
+    // Reload page functionality
     function handleRefreshPage() {
         window.location.reload();
     }
 
+    // Accept an Applicant functionality
     function handleAccept(applicationId, applicantId){
 
         const data = {applicationId,applicantId};
 
+        // Calls acceptAnApplicant service
         acceptAnApplicant(data)
+
+        // Calls handleRefreshPage
         handleRefreshPage()
     }
 
+    // Reject an Applicant functionality
     function handleReject(applicationId, applicantId){
 
         const data = {applicationId,applicantId};
 
+        // Calls rejectAnApplicant service
         rejectAnApplicant(data)
+
+        // Calls handleRefreshPage
         handleRefreshPage()
     }
 
-    function handleChecked(column){
-        const checked = filter.includes(column)
-        setFilter(prevState => checked ? prevState.filter(sc => sc !== column): [...prevState, column])
-    }
-
-    function handleAllChecked(){
-        setFilter(columns)
-    }
-
-    function handleCv(file){
-        history.push(file);
-    }
-
-    function openLink(url, newTab) {
-        newTab
-            ? window.open(url.toString(), "_blank", "noopener noreferrer")
-            : (window.location.href = url);
-    }
-
+    // Current page for pagination functionality
     function handlePageClick(data){
         let currentPage = data.selected + 1
-        console.log(currentPage)
         pagination(currentPage)
     }
 
     /**
      * Code adapted from tutorial at https://www.youtube.com/watch?v=kEd81ZirrCY
      */
+    // Pagination functionality
     const pagination = (pageNo) => {
 
         const startIndex = (pageNo - 1) * pageSize;
@@ -140,6 +137,7 @@ const EmployerVacancyApplications = () => {
     /**
      * Code adapted from examples at https://stackoverflow.com/questions/58601704/adding-a-icon-to-react-bootstrap-dropdown [Accessed: 20 November 2021]
      */
+    // LineSpacing Icon functionality
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <div
             href=""
@@ -157,6 +155,7 @@ const EmployerVacancyApplications = () => {
     /**
      * Code adapted from examples at https://www.powerupcloud.com/securing-spring-boot-and-react-js-with-spring-security-using-jwt-authentication/ [Accessed: 15 November 2021]
      */
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";

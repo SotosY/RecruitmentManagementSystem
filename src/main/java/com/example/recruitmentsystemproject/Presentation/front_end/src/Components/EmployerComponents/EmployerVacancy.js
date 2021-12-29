@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom";
 import {hotjar} from "react-hotjar";
 import {useForm} from "react-hook-form";
 
-
+// Get Employer Vacancy page
 const EmployerVacancy = () => {
 
     const [job, setJob] = useState("");
@@ -21,7 +21,10 @@ const EmployerVacancy = () => {
         reset
     } = useForm();
 
+    // Get Job form
     const getJob = () =>{
+
+        // Calls getVacancyPage service
         getVacancyPage().then((res) => {
             const data = res.data;
             setJob(data)
@@ -29,14 +32,20 @@ const EmployerVacancy = () => {
         })
     }
 
+    // UseEffect functionality
     useEffect( () => {
+
+        // Calls getJob
         getJob();
+
+        // Initialize Hotjar
         hotjar.initialize(2738985, 6);
+
     }, [] )
 
+    // Save Job's details
     const saveJob = (e) => {
 
-        console.log(e)
         const title = e.title
         const department = e.department
         const managedBy = e.managedBy
@@ -53,6 +62,7 @@ const EmployerVacancy = () => {
 
         const job = {jobId, title, department, managedBy, location, salary, activeDate, expiryDate,startingDate, description, requirements, essentialCriteria, desirableCriteria, salaryAndBenefits}
 
+        // Calls saveJobDetails service
         saveJobDetails(job)
             .then((res) => {
                 console.log("Data added succesfully", res.data)
@@ -62,24 +72,29 @@ const EmployerVacancy = () => {
             });
     }
 
+    // onSubmit functionality
     const onSubmit = (e) => {
         saveJob(e)
         handleShow(e)
     }
 
+    // Logout functionality
     function handleLogout() {
         localStorage.clear();
         window.location.href = "/careers/login";
     }
 
+    // Reload page functionality
     function handleRefreshPage() {
         window.location.reload();
     }
 
+    // Scroll functionality
     const handleScroll = () => {
         window.scrollTo({top: 0, behavior: "smooth"})
     }
 
+    // Modal close functionality
     const handleClose = () => {
         handleScroll()
         reset()
@@ -87,8 +102,8 @@ const EmployerVacancy = () => {
         setShow(false)
     }
 
+    // Modal show functionality
     const handleShow = (e) => {
-
         setShow(true);
     }
 
