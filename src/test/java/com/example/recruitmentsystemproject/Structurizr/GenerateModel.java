@@ -9,7 +9,9 @@ import com.structurizr.model.*;
 import com.structurizr.view.*;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Adapted from code example of previous project (Welsh Rowing) [Accessed: 29 December 2021]
+ */
 public class GenerateModel {
 
     public void generateModel() throws Exception {
