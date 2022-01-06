@@ -45,13 +45,21 @@ const UserLogin = () => {
         // Calls login user functionality
         loginEmployer(user)
             .then(res => {
-                    console.log("Data added successfully", res.data);
-                    history.push('/careers/applicant/dashboard')
+                    setRoles(res.data?.roles)
+
+                    if (res.data?.roles === "EMPLOYER"){
+                        history.push('/careers/employer/dashboard')
+                    } else if (res.data?.roles === "APPLICANT") {
+                        history.push('/careers/applicant/dashboard')
+                    } else if (res.data?.roles === null){
+                        history.push('/careers/login')
+                    }
+
+                console.log("Data added successfully", res.data);
             })
 
             .catch(onerror => {
                 console.log('Something went wrong', onerror);
-                history.push('/careers/applicant/dashboard')
                 // history.push('/careers/login')
             });
     }
