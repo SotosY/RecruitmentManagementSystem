@@ -34,31 +34,13 @@ public class UserController {
 
     private AuthenticationManager authenticationManager;
 
+    public static User user = new User();
+
     // GET Request - Returns Login page
     @GetMapping("/login")
     public ResponseEntity<?> login() {
-
-
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        Object principal = authentication.getPrincipal();
-////
-        String session = RequestContextHolder.currentRequestAttributes().getSessionId();
-//        System.out.println(authentication.getName());
-        System.out.println(principal);
-        System.out.println(session);
-//        System.out.println(RequestContextHolder.currentRequestAttributes().getSessionId());
-        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
-
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok("login");
     }
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> registerApplicant(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
-//
-//        return ResponseEntity.ok().build();
-//    }
 
     // GET Request - Returns Error Login page
     @GetMapping("/login?error")
@@ -66,40 +48,12 @@ public class UserController {
         return "login";
     }
 
-//
-    @PostMapping("/login")
-    public String postLogin(@RequestBody ObjectNode data, HttpServletRequest request){
-
-        String email = data.get("username").asText();
-        User user = userReadService.findByEmail(email).get();
-
-        if (user.getRoles()=="APPLICANT"){
-            return "redirect:/applicant/dashboard";
-        } else if (user.getRoles()=="EMPLOYER"){
-            return "redirect:/employer/dashboard";
-        }
-        return "hi";
+    // GET Request - Returns Error Login page
+    @GetMapping("/logout")
+    public ResponseEntity logout() {
+        user = null;
+        return ResponseEntity.ok("logout");
     }
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> postLogin (HttpServletRequest request){
-//
-//        System.out.println(request.getUserPrincipal());
-//
-////
-////        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-////                email, pass
-////        ));
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        Object principal = authentication.getPrincipal();
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        Optional<User> theUser = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
-//
-//
-//        System.out.println(authentication);
-//        return ResponseEntity.ok(theUser);
-//    }
 
     // GET Request - Returns a list of all active jobs
     @GetMapping

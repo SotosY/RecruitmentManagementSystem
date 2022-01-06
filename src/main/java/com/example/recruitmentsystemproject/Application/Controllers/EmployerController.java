@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.recruitmentsystemproject.Application.Controllers.UserController.user;
+
 @RestController
 @RequestMapping("/careers")
 @CrossOrigin(origins="*")
@@ -74,8 +76,6 @@ public class EmployerController {
         String lastName = data.get("lastName").asText();
         String company = data.get("company").asText();
 
-        System.out.println(company);
-
         if (bindingResult.hasErrors()){
             System.out.println("Errors" + bindingResult.getFieldError());
             for (ObjectError oe : bindingResult.getAllErrors()) {
@@ -86,7 +86,6 @@ public class EmployerController {
 
         } else {
 
-            User user = new User();
             Employer employer = new Employer();
 
             user.setEmail(email);
@@ -100,15 +99,6 @@ public class EmployerController {
             employer.setCompany(company);
             employerCreateService.saveEmployer(employer);
 
-
-//            try {
-//                SecurityContextHolder.getContext().setAuthentication(null);
-//                request.login(user.getEmail(), user.getPassword());
-//            } catch (ServletException e) {
-//                System.out.println(e);
-//                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
-//            }
-
             return "redirect:/careers/employer/dashboard";
 
         }
@@ -118,29 +108,16 @@ public class EmployerController {
     @GetMapping("/employer/dashboard")
     public ResponseEntity<?> employerDashboard() {
 
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        System.out.println(principal);
-//
-//        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
+        Optional<Employer> employer = employerReadService.findByUser(user);
 
-        Optional<User> user = userReadService.findByEmail("bob123@hotmail.com");
-        Optional<Employer> employer = employerReadService.findByUser(user.get());
-
-
-        return ResponseEntity.ok(employer);
+        return ResponseEntity.ok(user);
     }
 
     // GET Request - Returns to Employer's profile
     @GetMapping("/employer/profile")
     public Optional<Employer> employerProfile() {
 
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
-//        Optional<Employer> employer = employerReadService.findByUser(user.get());
-
-        Optional<User> user = userReadService.findByEmail("bob123@hotmail.com");
-        Optional<Employer> employer = employerReadService.findByUser(user.get());
+        Optional<Employer> employer = employerReadService.findByUser(user);
 
         return employer;
     }
@@ -170,7 +147,6 @@ public class EmployerController {
 
         } else {
 
-            User user = userReadService.findByEmail("bob123@hotmail.com").get();
             Employer employer = employerReadService.findByUser(user).get();
 
             employer.setAddress(address);
@@ -184,15 +160,6 @@ public class EmployerController {
             employer.setCompanyProfile(companyProfile);
             employerCreateService.saveEmployer(employer);
 
-
-//            try {
-//                SecurityContextHolder.getContext().setAuthentication(null);
-//                request.login(user.getEmail(), user.getPassword());
-//            } catch (ServletException e) {
-//                System.out.println(e);
-//                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
-//            }
-
             return "redirect:/careers/employer/profile";
 
         }
@@ -201,6 +168,7 @@ public class EmployerController {
     // GET Request - Returns Employer's create new vacancy page
     @GetMapping("/employer/vacancies")
     public Job employerVacancy() {
+
         Job job = new Job();
         job.setPostDate(LocalDate.now().toString());
         jobCreateService.saveJob(job);
@@ -212,7 +180,6 @@ public class EmployerController {
     @PostMapping("/employer/vacancy/save")
     public String saveVacancyDetails(@RequestBody ObjectNode data, BindingResult bindingResult) {
 
-        User user = userReadService.findByEmail("bob123@hotmail.com").get();
         Employer employer = employerReadService.findByUser(user).get();
 
         Long jobId = data.get("jobId").asLong();
@@ -260,15 +227,6 @@ public class EmployerController {
             job.setSalaryAndBenefits(salaryAndBenefits);
             jobCreateService.saveJob(job);
 
-
-//            try {
-//                SecurityContextHolder.getContext().setAuthentication(null);
-//                request.login(user.getEmail(), user.getPassword());
-//            } catch (ServletException e) {
-//                System.out.println(e);
-//                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
-//            }
-
             return "redirect:/careers/employer/profile";
 
         }
@@ -278,7 +236,6 @@ public class EmployerController {
     @GetMapping("/employer/vacancy-history")
     public List<Job> employerVacancyHistory() {
 
-        User user = userReadService.findByEmail("bob123@hotmail.com").get();
         Employer employer = employerReadService.findByUser(user).get();
         List<Job> jobs = jobReadService.findByEmployer(employer);
 

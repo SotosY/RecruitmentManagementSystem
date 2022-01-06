@@ -31,6 +31,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.recruitmentsystemproject.Application.Controllers.UserController.user;
+
 @RestController
 @RequestMapping("/careers")
 @CrossOrigin(origins={"http://localhost:3000"}, allowedHeaders = "*", allowCredentials = "true")
@@ -74,6 +76,7 @@ public class ApplicantController {
     @Autowired
     private FileStorageService fileStorageService;
 
+
     // POST Request - Registers an applicant
     @PostMapping("/register/a")
     public String registerApplicant(@RequestBody ObjectNode data, HttpServletRequest request, BindingResult bindingResult) {
@@ -93,7 +96,6 @@ public class ApplicantController {
 
         } else {
 
-            User user = new User();
             Applicant applicant = new Applicant();
             ApplicantResume applicantResume = new ApplicantResume();
 
@@ -127,49 +129,22 @@ public class ApplicantController {
     @GetMapping("/applicant/dashboard")
     public ResponseEntity<?> applicantDashboard() {
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        System.out.println(principal);
-        Optional<User> theUser = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
+        Optional<User> theUser = userReadService.findByEmail(user.getEmail());
 
-        Optional<User> user = userReadService.findByEmail("testing@gmail.com");
+            if (theUser.isPresent()) {
+                return ResponseEntity.ok(user);
+            }
 
-        System.out.println(theUser);
-        System.out.println((principal));
-
-//
-//
-//        if (principal instanceof UserDetailsImpl) {
-//            Optional<User> user = userReadService.findByEmail(((UserDetailsImpl) principal).getUsername());
-//
-//            if (user.isPresent()) {
-//                return ResponseEntity.ok(user);
-//            }
-//        }
-
-//        Optional<User> user = userReadService.findByEmail("sotirisy@hotmail.com");
-        Optional<Applicant> applicant = applicantReadService.findByUser(theUser.get());
-
-
-       return ResponseEntity.ok(applicant);
+       return ResponseEntity.badRequest().body("No user found");
     }
 
     // GET Request - Returns to Applicant's profile
     @GetMapping("/applicant/profile")
     public ApplicantResume applicantProfile() {
 
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//        Optional<User> user = userReadService.findByEmail(((UserDetailsImpl)principal).getUsername());
-//        Optional<Employer> employer = employerReadService.findByUser(user.get());
-
-        Optional<User> user = userReadService.findByEmail("testing@gmail.com");
-        Applicant applicant = applicantReadService.findByUser(user.get()).get();
+        Applicant applicant = applicantReadService.findByUser(user).get();
         ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
-
-//        ApplicantResume applicantResume = new ApplicantResume();
-//        applicantResume.setApplicant(applicant.get());
-//        applicantCreateService.saveApplicantResume(applicantResume);
 
         return applicantResume;
     }
@@ -189,8 +164,6 @@ public class ApplicantController {
         String education = data.get("education").asText();
         String experience = data.get("experience").asText();
 
-
-            User user = userReadService.findByEmail("testing@gmail.com").get();
             Applicant applicant = applicantReadService.findByUser(user).get();
             ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
 
@@ -208,15 +181,6 @@ public class ApplicantController {
             applicantResume.setExperience(experience);
             applicantResumeCreateService.saveApplicantResume(applicantResume);
 
-
-//            try {
-//                SecurityContextHolder.getContext().setAuthentication(null);
-//                request.login(user.getEmail(), user.getPassword());
-//            } catch (ServletException e) {
-//                System.out.println(e);
-//                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
-//            }
-
             return "redirect:/careers/applicant/profile";
 
     }
@@ -232,7 +196,6 @@ public class ApplicantController {
     @GetMapping("/applicant/application/job/{id}/application")
     public Application getApplication (@PathVariable Long id) {
 
-        User user = userReadService.findByEmail("testing@gmail.com").get();
         Applicant applicant = applicantReadService.findByUser(user).get();
         Job job = jobReadService.findById(id).get();
         ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
@@ -256,7 +219,6 @@ public class ApplicantController {
     @PostMapping("/applicant/application/job/apply")
     public String applyApplication(@RequestBody ObjectNode data) {
 
-        User user = userReadService.findByEmail("testing@gmail.com").get();
         Applicant applicant = applicantReadService.findByUser(user).get();
         ApplicantResume applicantResume = applicantResumeReadService.findByApplicant(applicant).get();
 
@@ -302,14 +264,6 @@ public class ApplicantController {
         applicationCreateService.saveApplication(application);
 
 
-//            try {
-//                SecurityContextHolder.getContext().setAuthentication(null);
-//                request.login(user.getEmail(), user.getPassword());
-//            } catch (ServletException e) {
-//                System.out.println(e);
-//                throw new ResponseStatusException(INTERNAL_SERVER_ERROR, "Login was not possible");
-//            }
-
         return "redirect:/careers/applicant/application";
     }
 
@@ -317,7 +271,6 @@ public class ApplicantController {
     @GetMapping("/applicant/application-history")
     public List<Application> applicantApplicationHistory() {
 
-        User user = userReadService.findByEmail("testing@gmail.com").get();
         Applicant applicant = applicantReadService.findByUser(user).get();
         List<Application> application = applicationReadService.findByApplicant(applicant);
         return application;

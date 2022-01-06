@@ -57,10 +57,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS,"/careers/employer/**").hasAuthority("EMPLOYER")
                 .antMatchers("/",
                         "/careers",
-                        "/careers/register/e"
+                        "/careers/register/e",
+                        "/careers/applicant/**",
+                        "/careers/employer/**"
                 ).permitAll()
                 .and()
-                .formLogin().loginPage("/careers/login")
+                .formLogin().loginPage("/careers/login").loginProcessingUrl("/careers/login")
                 .successHandler(simpleAuthenticationSuccessHandler())
                 .permitAll();
     }

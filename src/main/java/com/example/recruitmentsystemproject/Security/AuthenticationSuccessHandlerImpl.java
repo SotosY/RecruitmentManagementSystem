@@ -1,11 +1,14 @@
 package com.example.recruitmentsystemproject.Security;
 
+import com.example.recruitmentsystemproject.Business.UserServices.UserReadService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import static com.example.recruitmentsystemproject.Application.Controllers.UserController.user;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -22,11 +25,19 @@ import java.util.Map;
  */
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
+    @Autowired
+    private UserReadService userReadService;
+
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         handle(httpServletRequest, httpServletResponse, authentication);
+
+        String email = httpServletRequest.getParameter("username");
+        user = userReadService.findByEmail(email).get();
+        httpServletResponse.setContentType(user.getRoles());
+
         clearAuthenticationAttributes(httpServletRequest);
     }
 
@@ -39,6 +50,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         if (response.isCommitted()) {
             return;
         }
+
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
