@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getJobs} from "../../Services/UserService";
+import {getJobs, getLogout} from "../../Services/UserService";
 import {Button, Col, Form, Dropdown, Table, DropdownButton} from "react-bootstrap";
 import '../css/Table.css';
 import "tailwindcss/tailwind.css";
@@ -131,6 +131,7 @@ const ApplicantApplication = () => {
      */
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }

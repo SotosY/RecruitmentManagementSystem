@@ -10,6 +10,7 @@ import {MdFormatLineSpacing} from "react-icons/md";
 import {Dropdown, Form, Table} from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import {hotjar} from "react-hotjar";
+import {getLogout} from "../../Services/UserService";
 
 // Get a specific application page
 const EmployerVacancyApplications = () => {
@@ -157,6 +158,7 @@ const EmployerVacancyApplications = () => {
      */
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }

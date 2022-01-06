@@ -3,6 +3,7 @@ import '../css/Breadcrumb.css';
 import {Link} from "react-router-dom";
 import {getApplicantDashboard} from "../../Services/ApplicantService";
 import {hotjar} from "react-hotjar";
+import {getLogout} from "../../Services/UserService";
 
 // Get Applicant Dashboard page
 const ApplicantDashboard = () => {
@@ -32,6 +33,7 @@ const ApplicantDashboard = () => {
 
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }

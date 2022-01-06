@@ -1,6 +1,6 @@
 {
   "name": "front_end",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",
@@ -11,7 +11,6 @@
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
-    "react-data-table-component": "^7.4.5",
     "react-dom": "^17.0.2",
     "react-hotjar": "^4.0.0",
     "react-icons": "^4.3.1",

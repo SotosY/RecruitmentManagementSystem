@@ -7,6 +7,7 @@ import {MdFormatLineSpacing} from "react-icons/md";
 import {BiSelectMultiple} from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import {hotjar} from "react-hotjar";
+import {getLogout} from "../../Services/UserService";
 
 // Get Applicant Application History page
 const ApplicantApplicationHistory = () => {
@@ -101,6 +102,7 @@ const ApplicantApplicationHistory = () => {
 
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }

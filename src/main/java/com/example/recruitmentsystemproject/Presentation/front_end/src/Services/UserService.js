@@ -26,6 +26,11 @@ export const getLogin = () => {
     return httpClient.get("/login")
 }
 
+// GET Request - Get Logout form
+export const getLogout = () => {
+    return httpClient.get("/logout")
+}
+
 // GET Request - Get Login Error form
 export const getErrorLogin = () => {
     return httpClient.get("/login?error")

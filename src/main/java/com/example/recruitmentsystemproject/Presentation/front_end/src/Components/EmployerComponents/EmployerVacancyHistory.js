@@ -7,6 +7,7 @@ import {Dropdown, Form, Table} from "react-bootstrap";
 import {BiSelectMultiple} from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import {hotjar} from "react-hotjar";
+import {getLogout} from "../../Services/UserService";
 
 // Get vacancy history page
 const EmployerVacancyHistory = () => {
@@ -137,6 +138,7 @@ const EmployerVacancyHistory = () => {
      */
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }

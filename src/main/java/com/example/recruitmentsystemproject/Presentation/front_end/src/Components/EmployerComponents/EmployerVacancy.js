@@ -5,6 +5,7 @@ import '../css/Vacancy.css';
 import {useHistory} from "react-router-dom";
 import {hotjar} from "react-hotjar";
 import {useForm} from "react-hook-form";
+import {getLogout} from "../../Services/UserService";
 
 // Get Employer Vacancy page
 const EmployerVacancy = () => {
@@ -80,6 +81,7 @@ const EmployerVacancy = () => {
 
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }

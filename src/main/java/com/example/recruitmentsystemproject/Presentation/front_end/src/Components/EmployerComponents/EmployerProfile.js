@@ -7,6 +7,7 @@ import "tailwindcss/tailwind.css";
 import {getEmployerDetails, saveEmployerProfileDetails} from "../../Services/EmployerService";
 import {useHistory} from "react-router-dom";
 import {hotjar} from "react-hotjar";
+import {getLogout} from "../../Services/UserService";
 
 // Get Employer Profile page
 const EmployerProfile = () => {
@@ -91,6 +92,7 @@ const EmployerProfile = () => {
 
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }

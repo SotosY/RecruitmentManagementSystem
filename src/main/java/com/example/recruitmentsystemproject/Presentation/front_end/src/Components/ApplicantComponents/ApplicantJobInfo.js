@@ -5,6 +5,7 @@ import {useHistory, useLocation} from "react-router-dom";
 import {HiOutlineChevronRight} from "react-icons/hi";
 import {HiOutlineChevronDoubleRight} from "react-icons/hi";
 import {hotjar} from "react-hotjar";
+import {getLogout} from "../../Services/UserService";
 
 // Get Job Details page
 const ApplicantJobInfo = () => {
@@ -43,6 +44,7 @@ const ApplicantJobInfo = () => {
 
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }

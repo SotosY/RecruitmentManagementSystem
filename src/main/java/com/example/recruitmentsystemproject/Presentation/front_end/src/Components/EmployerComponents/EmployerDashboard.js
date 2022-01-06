@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../css/Breadcrumb.css';
 import {Link} from "react-router-dom";
 import {hotjar} from "react-hotjar";
+import {getLogout} from "../../Services/UserService";
 
 // Get Employer Dashboard page
 class EmployerDashboard extends Component {
@@ -12,6 +13,13 @@ class EmployerDashboard extends Component {
         // Initialize Hotjar
         hotjar.initialize(2738985, 6);
 
+    }
+
+    // Logout functionality
+     handleLogout() {
+        getLogout()
+        localStorage.clear();
+        window.location.href = "/careers/login";
     }
 
     render() {
@@ -25,7 +33,7 @@ class EmployerDashboard extends Component {
                             </ol>
                         </div>
                         <div className='container-button'>
-                            <button type="submit" className="btn btn-secondary" variant="primary" id="submit">LOG OUT</button>
+                            <button type="submit" onClick={this.handleLogout} className="btn btn-secondary" variant="primary" id="submit">LOG OUT</button>
                         </div>
                     </section>
 

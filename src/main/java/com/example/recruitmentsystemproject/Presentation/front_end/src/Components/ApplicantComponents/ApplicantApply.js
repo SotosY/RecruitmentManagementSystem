@@ -5,6 +5,7 @@ import {useHistory, useLocation} from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import '../css/Application.css';
 import {hotjar} from "react-hotjar";
+import {getLogout} from "../../Services/UserService";
 
 // Get Applicant Apply page
 const ApplicantApply = () => {
@@ -85,6 +86,7 @@ const ApplicantApply = () => {
 
     // Logout functionality
     function handleLogout() {
+        getLogout()
         localStorage.clear();
         window.location.href = "/careers/login";
     }
