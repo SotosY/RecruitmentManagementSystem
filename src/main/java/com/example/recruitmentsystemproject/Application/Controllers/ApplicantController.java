@@ -96,21 +96,24 @@ public class ApplicantController {
 
         } else {
 
+            User theUser = new User();
             Applicant applicant = new Applicant();
             ApplicantResume applicantResume = new ApplicantResume();
 
-            user.setEmail(email);
-            user.setPassword(pass);
-            user.setRoles("APPLICANT");
-            userCreateService.saveUser(user);
+            theUser.setEmail(email);
+            theUser.setPassword(pass);
+            theUser.setRoles("APPLICANT");
+            userCreateService.saveUser(theUser);
 
-            applicant.setUser(user);
+            applicant.setUser(theUser);
             applicant.setFirstName(firstName);
             applicant.setLastName(lastName);
             applicantCreateService.saveApplicant(applicant);
 
             applicantResume.setApplicant(applicant);
             applicantResumeCreateService.saveApplicantResume(applicantResume);
+
+            user = userReadService.findByEmail(email).get();
 
 //            try {
 //                SecurityContextHolder.getContext().setAuthentication(null);

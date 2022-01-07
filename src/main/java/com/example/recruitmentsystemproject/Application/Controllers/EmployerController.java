@@ -86,18 +86,21 @@ public class EmployerController {
 
         } else {
 
+            User theUser = new User();
             Employer employer = new Employer();
 
-            user.setEmail(email);
-            user.setPassword(pass);
-            user.setRoles("EMPLOYER");
-            userCreateService.saveUser(user);
+            theUser.setEmail(email);
+            theUser.setPassword(pass);
+            theUser.setRoles("EMPLOYER");
+            userCreateService.saveUser(theUser);
 
-            employer.setUser(user);
+            employer.setUser(theUser);
             employer.setFirstName(firstName);
             employer.setLastName(lastName);
             employer.setCompany(company);
             employerCreateService.saveEmployer(employer);
+
+            user = userReadService.findByEmail(email).get();
 
             return "redirect:/careers/employer/dashboard";
 
