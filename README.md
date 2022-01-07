@@ -96,7 +96,7 @@ NOTE: MySQL connection should have these settings below:
 
 #### Step 5: Start the back-end server
 ```bash
-  java -jar target/recruitment-system-project-2.1.0-SNAPSHOT.jar
+  java -jar target/recruitment-system-project-2.1.1-SNAPSHOT.jar
 ```
 
 #### Step 6: Run the remaining lines of the `recruitment_system.sql` script. (As seen below)
