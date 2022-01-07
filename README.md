@@ -42,6 +42,14 @@ Click on the link below to see the prototype:
 https://tx7lr4.axshare.com
 
 
+## Architecture
+- [C4 Model - Context Diagram](https://git.cardiff.ac.uk/c1847017/recruitement_system/-/blob/main/src/main/resources/ArchitectureDiagrams/c4_level_1.jpg)
+- [C4 Model - Container Diagram](https://git.cardiff.ac.uk/c1847017/recruitement_system/-/blob/main/src/main/resources/ArchitectureDiagrams/c4_level_2.jpg)
+- [C4 Model - Component Diagram](https://structurizr.com/share/71432/aca6e278-8743-4f83-bbf1-2fc9479db556/diagrams#components)
+- [Project Architecture Diagram](https://git.cardiff.ac.uk/c1847017/recruitement_system/-/blob/main/src/main/resources/ArchitectureDiagrams/project_architecture_diagram.jpg)
+- [Database Architecture Diagram](https://git.cardiff.ac.uk/c1847017/recruitement_system/-/blob/main/src/main/resources/ArchitectureDiagrams/database_architecture.diagram.png)
+
+
 ## How to build/start/run/compile the project
 
 #### The project was build/start/run/compile successfuly using:
@@ -56,6 +64,8 @@ https://tx7lr4.axshare.com
 #### To build/start/run/compile the project please follow the steps below:
 
 HINT - You can also use the "How to build, run, compile the project.mp4" video for help.
+- [Deployment video](https://git.cardiff.ac.uk/c1847017/recruitement_system/-/blob/main/src/main/resources/ArchitectureDiagrams/database_architecture.diagram.png)
+
 
 #### Step 1: Clone the repository
 ```bash
@@ -86,7 +96,7 @@ NOTE: MySQL connection should have these settings below:
 
 #### Step 5: Start the back-end server
 ```bash
-  java -jar target/recruitment-system-project-2.0.0-SNAPSHOT.jar
+  java -jar target/recruitment-system-project-2.1.0-SNAPSHOT.jar
 ```
 
 #### Step 6: Run the remaining lines of the `recruitment_system.sql` script. (As seen below)
@@ -395,7 +405,7 @@ React Hook Form is a small library that takes care of form validation, state man
 user data. React Hook Form was used to add form validation functionality to all the fields
 where user input was needed on the system. React Hook Form library was very easy to implement
 using the useForm hook which works with forms. React Hook Form library validates a form with
-a reduced number of re-render and is considered more performant.
+a reduced number of re-render, adds a security layer and is considered more performant.
 
 #### Community Resources:
 
