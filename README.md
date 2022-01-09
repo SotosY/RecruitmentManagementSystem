@@ -174,6 +174,16 @@ NOTE: MariaDB connection should have these settings below:
 
 Once the server is running, the website can be accessed from http://localhost:3000/careers.
 
+- You are able to login as an Applicant using:
+	
+	  Email: applicant@hotmail.com
+	  Password: password
+
+- You are able to login as an Employer using:
+	
+	  Email: employer@hotmail.com
+	  Password: password
+
 
 ## Documentation
 
@@ -457,7 +467,7 @@ addition, it was used for testing purposes on the development phase.
 
 4. If recruitment_system.sql script is run:
 
-- You able to login as an Applicant using:
+- You are able to login as an Applicant using:
 	
 	  Email: applicant@hotmail.com
 	  Password: password
