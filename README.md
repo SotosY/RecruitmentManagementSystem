@@ -1,4 +1,3 @@
-
 # Recruitment System
 
 This is the Recruitment System. It is a web application that allows employers(companies) to 
@@ -432,11 +431,11 @@ addition, it was used for testing purposes on the development phase.
 
 1. Spring Boot is used for the backend of the system and acts as an API.
 
+- Spring Boot project was created using Spring Initializr approach on Intellij IDEA
+
 - Spring Features used:
 
       Spring Profiles, Spring Data JPA, Spring Security
-
- - Spring Boot project was created using Spring Initializr approach on Intellij IDEA
 
 2. Data is stored in MariaDB database.
 
@@ -448,6 +447,11 @@ addition, it was used for testing purposes on the development phase.
       Password: comsc
 
 3. React is used for the frontend of the Recruitment system and interacts with the backend using Axios.
+
+- React was created using Create React App approach
+```bash
+  npx create-react-app front_end
+```
 
 - React codebase (frontend) can be found inside the Presentation Layer of the project.
 
