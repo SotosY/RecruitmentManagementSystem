@@ -17,12 +17,12 @@ FOR EACH ROW BEGIN
 END//
   DELIMITER ;
   
-INSERT INTO USER (email, is_active, password, roles) VALUES('sotirisy@hotmail.com', TRUE, 'password456343456', 'APPLICANT');
-INSERT INTO USER (email, is_active, password, roles) VALUES('pavlospavlides@outlook.com', TRUE, 'Iamascientistpassword', 'APPLICANT');
-INSERT INTO USER (email, is_active, password, roles) VALUES('arisapeitou@gmail.com', TRUE, 'PASSWORD123pass', 'APPLICANT');
-INSERT INTO USER (email, is_active, password, roles) VALUES('aris223y@outlook.com', TRUE, 'password456343456', 'EMPLOYER');
-INSERT INTO USER (email, is_active, password, roles) VALUES('bob123@hotmail.com', TRUE, 'Iamascientistpassword', 'EMPLOYER');
-INSERT INTO USER (email, is_active, password, roles) VALUES('afis45@outlook.com', TRUE, 'PASSWORD123pass', 'EMPLOYER');
+INSERT INTO USER (email, is_active, password, roles) VALUES('applicant@hotmail.com', TRUE, '$2a$10$FK.cGmuYhcdo1ELXMrq/1.QukdhX89HD0gpaI2N8m3N8LIIKRwXyK', 'APPLICANT');
+INSERT INTO USER (email, is_active, password, roles) VALUES('pavlospavlides@outlook.com', TRUE, '$2a$10$FK.cGmuYhcdo1ELXMrq/1.QukdhX89HD0gpaI2N8m3N8LIIKRwXyK', 'APPLICANT');
+INSERT INTO USER (email, is_active, password, roles) VALUES('arisapeitou@gmail.com', TRUE, '$2a$10$FK.cGmuYhcdo1ELXMrq/1.QukdhX89HD0gpaI2N8m3N8LIIKRwXyK', 'APPLICANT');
+INSERT INTO USER (email, is_active, password, roles) VALUES('aris223y@outlook.com', TRUE, '$2a$10$FK.cGmuYhcdo1ELXMrq/1.QukdhX89HD0gpaI2N8m3N8LIIKRwXyK', 'EMPLOYER');
+INSERT INTO USER (email, is_active, password, roles) VALUES('employer@hotmail.com', TRUE, '$2a$10$FK.cGmuYhcdo1ELXMrq/1.QukdhX89HD0gpaI2N8m3N8LIIKRwXyK', 'EMPLOYER');
+INSERT INTO USER (email, is_active, password, roles) VALUES('afis45@outlook.com', TRUE, '$2a$10$FK.cGmuYhcdo1ELXMrq/1.QukdhX89HD0gpaI2N8m3N8LIIKRwXyK', 'EMPLOYER');
 
 INSERT INTO APPLICANT (user_id, first_name, last_name, phone_number, address, country, city, postcode, date_of_birth, gender) VALUES(1, 'Sotiris', 'Yiallourides', '993443563', 'Agia Paraskevi', 'Cyprus', 'Nicosia', '2054', '1999-09-03', 'Male');
 INSERT INTO APPLICANT (user_id, first_name, last_name, phone_number, address, country, city, postcode, date_of_birth, gender) VALUES(2, 'Pavlos', 'Pavlides', '932533563', 'Agia Thekla', 'Cyprus', 'Larnaca', '2324', '1993-09-16', 'Male');

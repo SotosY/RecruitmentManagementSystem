@@ -64,7 +64,7 @@ https://tx7lr4.axshare.com
 #### To build/start/run/compile the project please follow the steps below:
 
 HINT - You can also use the "How to build, run, compile the project.mp4" video for help.
-- [Deployment video](https://git.cardiff.ac.uk/c1847017/recruitement_system/-/blob/main/src/main/resources/ArchitectureDiagrams/database_architecture.diagram.png)
+- [Deployment video](https://git.cardiff.ac.uk/c1847017/recruitement_system/-/blob/main/src/main/resources/DeploymentVideo/How%20to%20build,%20run,%20compile%20the%20project.mp4)
 
 
 #### Step 1: Clone the repository
