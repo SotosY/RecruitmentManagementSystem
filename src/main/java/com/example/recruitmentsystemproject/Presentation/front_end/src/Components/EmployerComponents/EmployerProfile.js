@@ -58,7 +58,7 @@ const EmployerProfile = () => {
         getEmployer();
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [] )
 
@@ -135,7 +135,7 @@ const EmployerProfile = () => {
                 </section>
 
                 <Form>
-                    <div className='container-md' style={{width:"90%", marginTop:"40px"}}>
+                    <div tabIndex="0" className='container-md' style={{width:"90%", marginTop:"40px"}}>
                         <Row className="mx-3 mt-4 mb-3">
                             <div className="column_picture">
                                 <Form.Group controlId="formPic" >
@@ -168,7 +168,7 @@ const EmployerProfile = () => {
                     </div >
 
                     <h2 className="h2_profile_font" >Personal Details</h2>
-                    <div className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
+                    <div tabIndex="0" className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_50" controlId="col_address_country">
                                 <Form.Label>Address:</Form.Label>
@@ -198,7 +198,7 @@ const EmployerProfile = () => {
 
                     <h2 className="h2_profile_font">Company Details</h2>
 
-                    <div className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
+                    <div tabIndex="0" className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_50"  controlId="col_contactName_companyEmail">
                                 <Form.Label>Contact Name:</Form.Label>

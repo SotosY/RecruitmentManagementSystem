@@ -11,7 +11,7 @@ class EmployerDashboard extends Component {
     async componentDidMount() {
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }
 

@@ -46,7 +46,7 @@ const ApplicantApplicationHistory = () => {
         getApplication()
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [])
 
@@ -124,6 +124,7 @@ const ApplicantApplicationHistory = () => {
     // LineSpacing Icon functionality
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <div
+            tabIndex="0"
             href=""
             ref={ref}
             onClick={e => {
@@ -191,7 +192,7 @@ const ApplicantApplicationHistory = () => {
                         </div>
                         <div className="input-btn">
                             <Dropdown onSelect={eventKey => setSize(eventKey)}>
-                                <BiSelectMultiple className={"btn-actions"} size="16%" style={{marginLeft:"55%",float:"left", display:"inline-block"}} onClick={handleAllChecked}/>
+                                <BiSelectMultiple tabIndex="0" className={"btn-actions"} size="16%" style={{marginLeft:"55%",float:"left", display:"inline-block"}} onClick={handleAllChecked}/>
                                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components" ></Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item eventKey="40px">
@@ -210,7 +211,7 @@ const ApplicantApplicationHistory = () => {
                     </div>
                 </div>
                 <div className="container-md">
-                    <Table  striped bordered hover size="sm" id="sortTable">
+                    <Table  tabIndex="0" striped bordered hover size="sm" id="sortTable">
                         <thead>
                             <tr>
                             {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
@@ -230,14 +231,14 @@ const ApplicantApplicationHistory = () => {
                                 <th className="th">
                                     Managed By
                                 </th>
-                                <th className="th" onClick={() => handleSorting(getColumnName(1))}>
+                                <th style={{textAlign:"right"}} className="th" onClick={() => handleSorting(getColumnName(1))}>
                                     Apply Date
                                     <i className={`-sort-${sort.toLowerCase()}`}></i>
                                 </th>
                                 <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}>
                                     Expiry Date
                                 </th>
-                                <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(2))}>
+                                <th style={{textAlign:"left", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(2))}>
                                     Application Status
                                     <i className={`-sort-${sort.toLowerCase()}`}></i>
                                 </th>
@@ -246,15 +247,15 @@ const ApplicantApplicationHistory = () => {
                         <tbody style={{lineHeight: size}}>
                         { paginatedData &&
                             search(paginatedData).map(row =>
-                            <tr key={row.applicationId}>
+                            <tr tabIndex="0" key={row.applicationId}>
                                 <td style={{textAlign:"right", paddingRight:"10px"}}>{row.applicationId}</td>
                                 <td>{row.job?.status}</td>
                                 <td>{row.job?.title}</td>
                                 <td>{row.job?.company}</td>
                                 <td>{row.job?.managedBy}</td>
-                                <td>{row.applyDate}</td>
-                                <td>{row.job?.expiryDate}</td>
-                                <td style={{textAlign:"right", paddingRight:"10px"}}>{row.applicationStatus}</td>
+                                <td style={{textAlign:"right"}}>{row.applyDate}</td>
+                                <td style={{textAlign:"right"}}>{row.job?.expiryDate}</td>
+                                <td style={{textAlign:"left", paddingRight:"10px"}}>{row.applicationStatus}</td>
                             </tr>)}
                         </tbody>
                     </Table>

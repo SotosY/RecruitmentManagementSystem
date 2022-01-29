@@ -52,7 +52,7 @@ const EmployerRegister = () => {
     useEffect( () => {
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [] )
 

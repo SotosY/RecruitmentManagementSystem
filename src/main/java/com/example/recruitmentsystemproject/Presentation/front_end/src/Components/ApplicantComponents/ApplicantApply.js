@@ -71,7 +71,7 @@ const ApplicantApply = () => {
         getApplication();
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [] )
 
@@ -131,7 +131,7 @@ const ApplicantApply = () => {
 
                 <Form>
                     <div className='container-md' style={{width:"80%", marginTop:"100px"}}>
-                        <div className="container-md" style={{width:"500px"}}>
+                        <div tabIndex="0" className="container-md" style={{width:"500px"}}>
                             <Row className="mx-3 mt-4 mb-3">
                                 <Form.Group controlId="col_lastname_password">
                                     <Form.Label>First Name:</Form.Label>
@@ -172,7 +172,7 @@ const ApplicantApply = () => {
                     </div>
 
                     <h2 className="h2_profile_font" >Experience & Education Details</h2>
-                    <div className='container-md' style={{width:"80%", marginTop:"20px", borderTop: "1px solid #B5DC10"}}>
+                    <div tabIndex="0" className='container-md' style={{width:"80%", marginTop:"20px", borderTop: "1px solid #B5DC10"}}>
                         <div className="container-md" style={{width:"500px"}}>
                             <Row className="mx-3 mt-4">
                                 <Form.Group className="mt-4"  controlId="col_company_prof">
@@ -186,7 +186,7 @@ const ApplicantApply = () => {
                     </div>
 
                     <h2 className="h2_profile_font" >CV & Cover Letter</h2>
-                    <div className='container-md' style={{width:"80%", marginTop:"20px", borderTop: "1px solid #B5DC10"}}>
+                    <div tabIndex="0" className='container-md' style={{width:"80%", marginTop:"20px", borderTop: "1px solid #B5DC10"}}>
                         <div className="container-md" style={{width:"500px"}}>
                             <Row className="mx-3 mt-4">
                                 <Form.Group controlId="formFile" className="mt-4">

@@ -40,7 +40,7 @@ const ApplicantApplication = () => {
         ))
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [])
 
@@ -114,6 +114,7 @@ const ApplicantApplication = () => {
     // LineSpacing Icon functionality
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <div
+            tabIndex="0"
             href=""
             ref={ref}
             onClick={e => {
@@ -203,7 +204,7 @@ const ApplicantApplication = () => {
                             </div>
                             <div className="input-btn">
                                 <Dropdown onSelect={eventKey => setSize(eventKey)}>
-                                    <BiSelectMultiple className={"btn-actions"} size="16%" style={{marginLeft:"55%",float:"left", display:"inline-block"}} onClick={handleAllChecked}/>
+                                    <BiSelectMultiple tabIndex="0" className={"btn-actions"} size="16%" style={{marginLeft:"55%",float:"left", display:"inline-block"}} onClick={handleAllChecked}/>
                                             <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components" ></Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Dropdown.Item eventKey="40px">
@@ -221,7 +222,7 @@ const ApplicantApplication = () => {
                             </div>
 
                         </div>
-                            <Table  striped bordered hover size="sm" id="sortTable">
+                            <Table tabIndex="0" striped bordered hover size="sm" id="sortTable">
                                 <thead>
                                     <tr>
                                         {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
@@ -260,7 +261,7 @@ const ApplicantApplication = () => {
                                 <tbody style={{lineHeight: size}}>
                                 { paginatedData &&
                                     search(paginatedData).map(row =>
-                                    <tr key={row.jobId} onClick={() => handleJobInfo(row.jobId)}>
+                                    <tr key={row.jobId} role="button" onClick={() => handleJobInfo(row.jobId)} tabIndex="0">
                                         <td style={{textAlign:"right", paddingRight:"10px"}}>{row.jobId}</td>
                                         <td>{row.title}</td>
                                         <td>{row.department}</td>

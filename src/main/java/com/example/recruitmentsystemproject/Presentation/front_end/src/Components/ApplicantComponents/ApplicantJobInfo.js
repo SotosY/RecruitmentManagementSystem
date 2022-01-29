@@ -32,7 +32,7 @@ const ApplicantJobInfo = () => {
         getJob();
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [] )
 
@@ -81,31 +81,31 @@ const ApplicantJobInfo = () => {
 
                         </div>
                         <div className="mt-3" style={{textAlign:"left"}}>
-                            <div className="inline">
+                            <div tabIndex="0" className="inline">
                                 <h1 className="h2-title" style={{marginLeft:"10px"}}>ID:</h1>
                                 <h2 className="h2-value" style={{marginLeft:"10px"}}>{job.jobId}</h2>
                             </div>
-                            <div className="inline">
+                            <div tabIndex="0" className="inline">
                                 <h1 className="h2-title">Company:</h1>
                                 <h2 className="h2-value">{job.company}</h2>
                             </div>
-                            <div className="inline">
+                            <div tabIndex="0" className="inline">
                                 <h1 className="h2-title">Salary:</h1>
                                 <h2 className="h2-value">€{job.salary}</h2>
                             </div>
-                            <div className="inline">
+                            <div tabIndex="0" className="inline">
                                 <h1 className="h2-title">Starting Date:</h1>
                                 <h2 className="h2-value">{job.startingDate}</h2>
                             </div>
-                            <div className="inline">
+                            <div tabIndex="0" className="inline">
                                 <h1 className="h2-title">Location:</h1>
                                 <h2 className="h2-value">{job.location}</h2>
                             </div>
-                            <div className="inline">
+                            <div tabIndex="0" className="inline">
                                 <h1 className="h2-title">Managed By:</h1>
                                 <h2 className="h2-value">{job.managedBy}</h2>
                             </div>
-                            <div className="container-md">
+                            <div tabIndex="0" className="container-md">
                                 <h1 className="h2-title" style={{marginTop:"50px",fontSize:"18px", textAlign:"left", color:"#B5DC10"}}>JOB DESCRIPTION</h1>
                                 <div className="container-md" style={{borderTop:"solid #B5DC10 1px", height:"auto"}}>
                                     <p>{job.description}</p>

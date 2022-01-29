@@ -40,7 +40,7 @@ const EmployerVacancy = () => {
         getJob();
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [] )
 
@@ -130,7 +130,7 @@ const EmployerVacancy = () => {
 
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <div className='container-md' style={{width:"90%", marginTop:"40px"}}>
-                        <div className="inline" style={{width:"100%"}}>
+                        <div tabIndex="0" className="inline" style={{width:"100%"}}>
                                     <div className="inline" style={{width:"20px", marginLeft:"26px"}}>
                                         <Form.Label style={{width:"max-content"}}>Job ID:</Form.Label>
                                     </div>
@@ -145,7 +145,7 @@ const EmployerVacancy = () => {
 
                     <h2 style={{marginTop:"80px"}} className="h2_profile_font">Job Details</h2>
 
-                    <div className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
+                    <div tabIndex="0" className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_50"  controlId="col_contactName_companyEmail">
                                 <Form.Label>Job Title:</Form.Label>
@@ -255,7 +255,7 @@ const EmployerVacancy = () => {
 
                     <h2 style={{marginTop:"80px"}} className="h2_profile_font">Job Description & Requirements</h2>
 
-                    <div className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
+                    <div tabIndex="0" className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
                         <Row className="mx-3 mt-4">
                             <Form.Group   controlId="col_companyProfile">
                                 <Form.Label>Description:</Form.Label>
@@ -290,7 +290,7 @@ const EmployerVacancy = () => {
 
                     <h2 style={{marginTop:"80px"}} className="h2_profile_font">Job Criteria & Benefits</h2>
 
-                    <div className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
+                    <div tabIndex="0" className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
                         <Row className="mx-3 mt-4">
                             <Form.Group className="column_50"  controlId="col_contactName_companyEmail">
                                 <Form.Label>Essential Criteria:</Form.Label>

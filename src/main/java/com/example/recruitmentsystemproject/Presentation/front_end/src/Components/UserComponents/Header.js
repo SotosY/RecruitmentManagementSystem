@@ -14,6 +14,7 @@ class Header extends Component {
                             <Navbar.Brand href="#home">
                                 <img
                                     src= {Logo}
+                                    alt="Cycom Business Solutions Ltd logo"
                                     width="280"
                                     height="130"
                                     className="d-inline-block align-top"

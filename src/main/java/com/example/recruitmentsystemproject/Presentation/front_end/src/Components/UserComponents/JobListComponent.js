@@ -39,7 +39,7 @@ class JobListComponent extends Component {
             });
 
         // Initialize hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
         // Add an event
         hotjar.event(this.handleChange);
@@ -132,20 +132,22 @@ class JobListComponent extends Component {
                 <div className='container'>
                     <div className="mainbody">
 
-                        <div align="center" className="mt-5">
+                        <div label="Job Title" align="center" className="mt-5">
 
-                            <h1 className="inline" style={{color:"#B5DC10"}}>
+                            <h1 className="inline" label="Group By:" style={{color:"#B5DC10"}}>
                                 Group By:
                             </h1>
 
-                            <Form.Check label="Job Title"
+                            <Form.Check id="job_title"
+                                        label="Job Title"
                                         className="inline"
                                         onClick={() => this.handleChecked(2)}
                                         onChange={this.handleChange}
                                         checked={this.state.checked[0]}
                                         />
 
-                            <Form.Check label="Company"
+                            <Form.Check id="company"
+                                        label="Company"
                                         className="inline"
                                         onClick={() => this.handleChecked(1)}
                                         onChange={this.handleChange}
@@ -153,7 +155,7 @@ class JobListComponent extends Component {
                                         />
                         </div>
 
-                        <Table striped bordered hover id="sortTable" style={{width:"60%", marginLeft:"20%", marginTop:"30px"}}>
+                        <Table tabIndex="0" striped bordered hover id="sortTable" style={{width:"60%", marginLeft:"20%", marginTop:"30px"}}>
                             <thead>
                                 <tr>
                                     <th>{this.state.title[0]}</th>
@@ -164,7 +166,7 @@ class JobListComponent extends Component {
                                 {
                                     this.state.table.map(
                                         position =>
-                                            <tr key = {position.id} >
+                                            <tr tabIndex="0" key = {position.id} >
                                                 <td>{position.item1}</td>
                                                 <td style={{textAlign:"center", width:"30%"}}>{position.item2}</td>
                                             </tr>

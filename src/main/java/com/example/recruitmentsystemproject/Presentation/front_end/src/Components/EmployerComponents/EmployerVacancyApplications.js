@@ -47,7 +47,7 @@ const EmployerVacancyApplications = () => {
         getApplications()
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [])
 
@@ -141,6 +141,7 @@ const EmployerVacancyApplications = () => {
     // LineSpacing Icon functionality
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <div
+            tabIndex="0"
             href=""
             ref={ref}
             onClick={e => {
@@ -220,7 +221,7 @@ const EmployerVacancyApplications = () => {
                             {/*            onChange={(e) => {{handleChecked(getColumnName(7))}*/}
                             {/*            } } />*/}
                         </div>
-                        <div className="input-btn">
+                        <div role="button" className="input-btn">
                             <Dropdown onSelect={eventKey => setSize(eventKey)}>
                                 {/*<BiSelectMultiple className={"btn-actions"} size="16%" style={{marginLeft:"55%",float:"left", display:"inline-block"}} onClick={handleAllChecked}/>*/}
                                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components" ></Dropdown.Toggle>
@@ -240,7 +241,7 @@ const EmployerVacancyApplications = () => {
                         </div>
 
                     </div>
-                        <Table  striped bordered hover size="sm" id="sortTable">
+                        <Table  tabIndex="0" striped bordered hover size="sm" id="sortTable">
                             <thead>
                                 <tr>
                                 {/*<tr>{data[0] && columns.map((heading) => <th>{heading}</th>)}</tr>*/}
@@ -265,10 +266,10 @@ const EmployerVacancyApplications = () => {
                                     <th className="th">
                                         CV
                                     </th>
-                                    <th style={{textAlign:"right", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}>
+                                    <th style={{textAlign:"left", paddingRight:"10px", borderLeft: "lightgray solid 0.5px"}}>
                                         Cover Letter
                                     </th>
-                                    <th style={{textAlign:"right", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(7))}>
+                                    <th style={{textAlign:"left", paddingRight:"10px",borderLeft: "lightgray solid 1px", borderRight: "lightgray solid 1px"}} onClick={() => handleSorting(getColumnName(7))}>
                                         Status
                                         <i className={`-sort-${sort.toLowerCase()}`}></i>
                                     </th>
@@ -280,15 +281,15 @@ const EmployerVacancyApplications = () => {
                             <tbody style={{lineHeight: size}}>
                             { paginatedData &&
                             search(paginatedData).map(row =>
-                                <tr key={row.applicant?.applicantId}>
+                                <tr tabIndex="0" key={row.applicant?.applicantId}>
                                     <td style={{textAlign:"right", paddingRight:"10px"}}>{row.applicant?.applicantId}</td>
                                     <td>{row.applicant?.firstName}</td>
                                     <td>{row.applicant?.lastName}</td>
                                     <td>{row.applicant?.user?.email}</td>
-                                    <td>{row.applicant?.dateOfBirth}</td>
+                                    <td style={{textAlign:"right", paddingRight:"10px"}}>{row.applicant?.dateOfBirth}</td>
                                     <td><a href={row.applicantResume?.cv} target="_blank" rel="nore" style={{color:"#B5DC10"}}>{row.applicantResume?.cv}</a></td>
-                                    <td style={{textAlign:"right", paddingRight:"10px"}}><a href={row.applicantResume?.coverLetter} target="_blank" rel="nore" style={{color:"#B5DC10"}}>{row.applicantResume?.coverLetter}</a></td>
-                                    <td style={{textAlign:"right", paddingRight:"10px"}}>{row.applicationStatus}</td>
+                                    <td style={{textAlign:"left", paddingRight:"10px"}}><a href={row.applicantResume?.coverLetter} target="_blank" rel="nore" style={{color:"#B5DC10"}}>{row.applicantResume?.coverLetter}</a></td>
+                                    <td style={{textAlign:"left", paddingRight:"10px"}}>{row.applicationStatus}</td>
                                     <td align="center">
 
                                         <button

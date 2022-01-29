@@ -58,7 +58,7 @@ const ApplicantProfile = () => {
         getApplicant();
 
         // Initialize Hotjar
-        hotjar.initialize(2738985, 6);
+        hotjar.initialize(2805905, 6);
 
     }, [] )
 
@@ -136,7 +136,7 @@ const ApplicantProfile = () => {
                     </section>
 
                     <Form>
-                        <div className='container-md' style={{width:"90%", marginTop:"40px"}}>
+                        <div tabIndex="0" className='container-md' style={{width:"90%", marginTop:"40px"}}>
                             <Row className="mx-3 mt-4 mb-3">
                                 <div className="column_picture">
                                     <Form.Group controlId="formPic" >
@@ -162,7 +162,7 @@ const ApplicantProfile = () => {
                         </div>
 
                         <h2 className="h2_profile_font" >Personal Details</h2>
-                        <div className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
+                        <div tabIndex="0" className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
                             <Row className="mx-3 mt-4">
                                 <Form.Group className="column_50" controlId="col_address_country">
                                     <Form.Label>Address:</Form.Label>
@@ -211,7 +211,7 @@ const ApplicantProfile = () => {
                         </div>
 
                         <h2 className="h2_profile_font">Experience & Education Details</h2>
-                        <div className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
+                        <div tabIndex="0" className='container-md' style={{width:"90%", borderTop: "1px solid #B5DC10"}}>
                             <Form.Group className="mx-3 mt-4"  controlId="col_company_prof">
                                 <Form.Label>Education: (Optional)</Form.Label>
                                 <Form.Control className="textarea_box" as="textarea" type="text" placeholder="Say few things about your education..." value={applicant.education} onChange={(e) => {setEducation(e.target.value); handleChange(e)}} />
